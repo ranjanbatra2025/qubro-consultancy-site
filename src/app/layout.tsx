@@ -7,14 +7,14 @@ import Link from "next/link";
 const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "500", "700", "900"],
-  display: "swap", // Ensures font swapping to prevent CLS
+  display: "swap",
 });
 
 // Dynamically import Header to ensure it's client-side only
-const Header = dynamic(() => import("./Header"), )
+const Header = dynamic(() => import("./Header"));
 
 // Dynamically import BackToTopButton to ensure it's client-side only
-const BackToTopButton = dynamic(() => import("./components/BackToTopButton"),)
+const BackToTopButton = dynamic(() => import("./components/BackToTopButton"));
 
 export default function RootLayout({
   children,
@@ -55,21 +55,6 @@ export default function RootLayout({
                   </svg>
                 </a>
               ))}
-            </div>
-
-            {/* Newsletter Signup */}
-            <div className="mb-8">
-              <h3 className="text-xl font-semibold text-white mb-4">Stay Updated</h3>
-              <div className="flex justify-center gap-4 max-w-md mx-auto">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="w-full px-4 py-2 rounded-full bg-neutral-800/50 border border-neutral-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                <button className="px-6 py-2 bg-gradient-to-r from-blue-500 to-fuchsia-500 rounded-full text-white font-semibold ripple glow">
-                  Subscribe
-                </button>
-              </div>
             </div>
 
             {/* Footer Links and Copyright */}

@@ -1,25 +1,30 @@
 'use client';
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const slides = [
     {
-      image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop",
-      text: "Empowering the Future with AI",
+      image: "/images/genai-applications.png",
+      text: "Empowering the Future with Generative AI",
+      link: "/services#generative-ai",
     },
     {
-      image: "https://images.unsplash.com/photo-1551288049-b4f3c35d2f86?q=80&w=2070&auto=format&fit=crop",
-      text: "Transforming Data into Insights",
+      image: "/images/ai-chatbots.png",
+      text: "Conversational Excellence with AI Chatbots",
+      link: "/services#ai-chatbots",
     },
     {
-      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop",
-      text: "Innovate with Intelligent Agents",
+      image: "/images/agentic-ai.png",
+      text: "Innovate with Agentic AI Systems",
+      link: "/services#agentic-ai",
     },
     {
-      image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=2070&auto=format&fit=crop",
-      text: "Driving Growth Through Strategy",
+      image: "/images/data-science.png",
+      text: "Unlock Insights with Data Science",
+      link: "/services#data-science",
     },
   ];
   const testimonials = [
@@ -53,7 +58,7 @@ export default function Home() {
   return (
     <>
       {/* Hero Section with Image Carousel */}
-      <section className="relative min-h-[90vh] bg-neutral-950 overflow-hidden">
+      <section className="relative min-h-[90vh] bg-neutral-950 overflow-hidden pt-16">
         <div className="absolute inset-0 -z-10 opacity-30">
           <div className="absolute inset-0 particle-bg" style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 800'%3E%3Cfilter id='a'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.05' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23a)' opacity='.1'/%3E%3Ccircle cx='200' cy='200' r='10' fill='%23ffffff' opacity='.3'/%3E%3Ccircle cx='600' cy='600' r='15' fill='%23ffffff' opacity='.2'/%3E%3Ccircle cx='400' cy='300' r='8' fill='%23ffffff' opacity='.25'/%3E%3C/svg%3E")`,
@@ -64,34 +69,34 @@ export default function Home() {
           <div
             key={index}
             className={`absolute inset-0 transition-opacity duration-1000 ${
-              index === currentSlide ? "opacity-100" : "opacity-0"
+              index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
             }`}
           >
             <div
               className="w-full h-full bg-cover bg-center"
               style={{ backgroundImage: `url(${slide.image})` }}
             >
-              <div className="absolute inset-0 bg-black/60"></div>
-              <div className="flex flex-col items-center justify-center h-full text-center px-4">
-                <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 animate-[fadeIn_1s_ease-out]">
+              <div className="absolute inset-0 bg-black/50"></div>
+              <div className="relative flex flex-col items-center justify-center h-full text-center px-4 z-20">
+                <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 animate-[fadeIn_1s_ease-out] text-shadow">
                   {slide.text}
                 </h1>
-                <p className="text-xl md:text-2xl text-neutral-200 max-w-3xl animate-[fadeIn_1.2s_ease-out]">
+                <p className="text-xl md:text-2xl text-white max-w-3xl animate-[fadeIn_1.2s_ease-out] text-shadow">
                   Qubro Consulting empowers startups and enterprises to harness the transformative power of Generative AI, Agentic Systems, and advanced Data Engineering.
                 </p>
                 <div className="mt-8 flex gap-4">
-                  <a
-                    href="/services"
-                    className="inline-block bg-gradient-to-r from-blue-600 via-purple-600 to-fuchsia-500 text-white py-3 px-8 rounded-full text-xl font-semibold shadow hover:scale-105 hover:shadow-lg transition-all duration-200 animate-[fadeIn_1.4s_ease-out]"
+                  <Link
+                    href={slide.link}
+                    className="inline-block bg-gradient-to-r from-blue-600 via-purple-600 to-fuchsia-500 text-white py-3 px-8 rounded-full text-xl font-semibold shadow hover:scale-105 hover:shadow-lg transition-all duration-200 animate-[fadeIn_1.4s_ease-out] z-30"
                   >
-                    Explore Our Services
-                  </a>
-                  <a
+                    Explore This Service
+                  </Link>
+                  <Link
                     href="/about"
-                    className="inline-block border border-white text-white py-3 px-8 rounded-full text-xl font-semibold hover:bg-white hover:text-purple-700 transition-all duration-200 animate-[fadeIn_1.6s_ease-out]"
+                    className="inline-block border border-white text-white py-3 px-8 rounded-full text-xl font-semibold hover:bg-white hover:text-purple-700 transition-all duration-200 animate-[fadeIn_1.6s_ease-out] z-30"
                   >
                     Learn More
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -117,15 +122,15 @@ export default function Home() {
             <div className="lg:w-1/2">
               <ul className="space-y-4">
                 {[
-                  { name: "Digital Strategy", icon: "M12 2v2m0 16v2m10-10h-2M4 12H2m15.364-6.364l1.414 1.414M5.636 18.364l-1.414 1.414m0-12.728l1.414-1.414M18.364 18.364l-1.414-1.414" },
-                  { name: "Data & AI Solutions", icon: "M4 7v10h16V7M4 7l8-4 8 4M4 7H3m17 0h1m-9 8v4" },
-                  { name: "Design & Creative", icon: "M9.75 17L9 20l-4 1 1-4L9.75 17zM15.25 17l3.75-1-1-4-3.75 1zM12 13l-4-4 4-4 4 4-4 4z" },
-                  { name: "Product Development", icon: "M12 20h9M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4z" },
-                  { name: "Digital Marketing", icon: "M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 01-6 0V5a3 3 0 016 0v8z" },
+                  { name: "Agentic AI Applications", icon: "M10 20l4-16m4 4l4 4-4 4m-12-4l-4-4 4-4m-2 8h16", link: "/services#agentic-ai" },
+                  { name: "Generative AI Applications", icon: "M12 2v2m0 16v2m10-10h-2M4 12H2m15.364-6.364l1.414 1.414M5.636 18.364l-1.414 1.414m0-12.728l1.414-1.414M18.364 18.364l-1.414-1.414", link: "/services#generative-ai" },
+                  { name: "AI Chatbots/RAG Systems", icon: "M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 01-6 0V5a3 3 0 016 0v8z", link: "/services#ai-chatbots" },
+                  { name: "Data Science", icon: "M4 7v10h16V7M4 7l8-4 8 4M4 7H3m17 0h1m-9 8v4", link: "/services#data-science" },
                 ].map((item, index) => (
                   <li
                     key={index}
-                    className="p-4 bg-neutral-950/50 backdrop-blur-md border border-neutral-800 rounded-lg hover:scale-105 transition-transform duration-300 group animate-[fadeIn_1.6s_ease-out]"
+                    className="p-4 bg-neutral-950/50 backdrop-blur-md border border-neutral-800 rounded-lg hover:scale-110 transition-transform duration-300 group animate-[fadeIn_1.6s_ease-out] cursor-pointer"
+                    onClick={() => window.location.href = item.link}
                   >
                     <div className="flex items-center gap-3">
                       <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -154,11 +159,8 @@ export default function Home() {
             <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-neutral-950 to-transparent z-10"></div>
             <div className="flex animate-marquee whitespace-nowrap">
               {[
-                { src: "https://upload.wikimedia.org/wikipedia/commons/8/8e/Google_2015_logo.svg", alt: "Google logo" },
-                { src: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg", alt: "Amazon logo" },
-                { src: "https://upload.wikimedia.org/wikipedia/commons/1/1b/IBM_logo.svg", alt: "IBM logo" },
-                { src: "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg", alt: "Microsoft logo" },
-                { src: "https://upload.wikimedia.org/wikipedia/commons/1/1a/Adobe_logo.svg", alt: "Adobe logo" },
+                { src: "/images/seo-harbour.webp", alt: "SEO Harbour logo" },
+                { src: "/images/launchpal-ai.webp", alt: "LaunchPal AI logo" },
               ].map((logo, index) => (
                 <img
                   key={index}
@@ -168,11 +170,8 @@ export default function Home() {
                 />
               ))}
               {[
-                { src: "https://upload.wikimedia.org/wikipedia/commons/8/8e/Google_2015_logo.svg", alt: "Google logo" },
-                { src: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg", alt: "Amazon logo" },
-                { src: "https://upload.wikimedia.org/wikipedia/commons/1/1b/IBM_logo.svg", alt: "IBM logo" },
-                { src: "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg", alt: "Microsoft logo" },
-                { src: "https://upload.wikimedia.org/wikipedia/commons/1/1a/Adobe_logo.svg", alt: "Adobe logo" },
+                { src: "/images/seo-harbour.webp", alt: "SEO Harbour logo" },
+                { src: "/images/launchpal-ai.webp", alt: "LaunchPal AI logo" },
               ].map((logo, index) => (
                 <img
                   key={`duplicate-${index}`}
@@ -195,6 +194,18 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="p-6 bg-neutral-950/50 backdrop-blur-md border border-neutral-800 rounded-lg hover:scale-105 transition-transform duration-300 animate-[fadeIn_1.2s_ease-out]">
               <div className="flex justify-center mb-4">
+                <svg className="w-8 h-8 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4m-12-4l-4-4 4-4m-2 8h16" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-semibold text-purple-400 mb-4">Agentic AI</h3>
+              <p className="text-neutral-300 mb-4">
+                Deploy intelligent agents that autonomously make decisions, optimize processes, and drive efficiency across your operations.
+              </p>
+              <a href="/services#agentic-ai" className="text-purple-400 font-semibold hover:underline">Learn More</a>
+            </div>
+            <div className="p-6 bg-neutral-950/50 backdrop-blur-md border border-neutral-800 rounded-lg hover:scale-105 transition-transform duration-300 animate-[fadeIn_1.4s_ease-out]">
+              <div className="flex justify-center mb-4">
                 <svg className="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.364l-.707-.707m12.728 12.728l-.707.707M3 21l1.5-1.5m-.793-7.5h1.586m7.5-7.5V3m4.243 5.757l.707-.707M12 17v4" />
                 </svg>
@@ -204,18 +215,6 @@ export default function Home() {
                 Leverage cutting-edge GenAI to create innovative content, automate workflows, and enhance customer experiences with tailored solutions.
               </p>
               <a href="/services#generative-ai" className="text-blue-400 font-semibold hover:underline">Learn More</a>
-            </div>
-            <div className="p-6 bg-neutral-950/50 backdrop-blur-md border border-neutral-800 rounded-lg hover:scale-105 transition-transform duration-300 animate-[fadeIn_1.4s_ease-out]">
-              <div className="flex justify-center mb-4">
-                <svg className="w-8 h-8 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4m-12-4l-4-4 4-4m-2 8h16" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-semibold text-purple-400 mb-4">Agentic Systems</h3>
-              <p className="text-neutral-300 mb-4">
-                Deploy intelligent agents that autonomously make decisions, optimize processes, and drive efficiency across your operations.
-              </p>
-              <a href="/services#agentic-systems" className="text-purple-400 font-semibold hover:underline">Learn More</a>
             </div>
             <div className="p-6 bg-neutral-950/50 backdrop-blur-md border border-neutral-800 rounded-lg hover:scale-105 transition-transform duration-300 animate-[fadeIn_1.6s_ease-out]">
               <div className="flex justify-center mb-4">
@@ -242,15 +241,15 @@ export default function Home() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="animate-[fadeIn_1.2s_ease-out]">
-              <p className="text-5xl font-bold text-blue-400 animate-[countUp_2s_ease-out] inline-block">50+</p>
+              <p className="text-5xl font-bold text-blue-400 animate-[countUp_2s_ease-out] inline-block">5+</p>
               <p className="text-neutral-300 mt-2">AI Projects Delivered</p>
             </div>
             <div className="animate-[fadeIn_1.4s_ease-out]">
-              <p className="text-5xl font-bold text-purple-400 animate-[countUp_2s_ease-out] inline-block">10+</p>
+              <p className="text-5xl font-bold text-purple-400 animate-[countUp_2s_ease-out] inline-block">3+</p>
               <p className="text-neutral-300 mt-2">Industries Served</p>
             </div>
             <div className="animate-[fadeIn_1.6s_ease-out]">
-              <p className="text-5xl font-bold text-fuchsia-400 animate-[countUp_2s_ease-out] inline-block">95%</p>
+              <p className="text-5xl font-bold text-fuchsia-400 animate-[countUp_2s_ease-out] inline-block">100%</p>
               <p className="text-neutral-300 mt-2">Client Satisfaction</p>
             </div>
           </div>
@@ -266,37 +265,43 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="relative rounded-lg overflow-hidden shadow-xl group animate-[fadeIn_1.2s_ease-out]">
               <img
-                src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop"
+                src="/images/ai-chatbots.png"
                 alt="AI-Driven Customer Support"
                 className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
-                <h3 className="text-2xl font-semibold text-white mb-2">AI-Driven Customer Support</h3>
-                <p className="text-neutral-300">Deployed a GenAI chatbot for a retail giant, improving response times by 70%.</p>
+                <h3 className="text-2xl font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2 text-shadow">
+                  AI-Driven Customer Support
+                </h3>
+                <p className="text-white text-shadow">Deployed a GenAI chatbot for a retail giant, improving response times by 70%.</p>
                 <a href="/work#project1" className="mt-4 text-blue-400 font-semibold hover:underline">View Project</a>
               </div>
             </div>
             <div className="relative rounded-lg overflow-hidden shadow-xl group animate-[fadeIn_1.4s_ease-out]">
               <img
-                src="https://images.unsplash.com/photo-1551288049-b4f3c35d2f86?q=80&w=2070&auto=format&fit=crop"
+                src="/images/data-science.png"
                 alt="Data Pipeline Optimization"
                 className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
-                <h3 className="text-2xl font-semibold text-white mb-2">Data Pipeline Optimization</h3>
-                <p className="text-neutral-300">Built a scalable data pipeline for a fintech firm, reducing processing time by 50%.</p>
+                <h3 className="text-2xl font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2 text-shadow">
+                  Data Pipeline Optimization
+                </h3>
+                <p className="text-white text-shadow">Built a scalable data pipeline for a fintech firm, reducing processing time by 50%.</p>
                 <a href="/work#project2" className="mt-4 text-blue-400 font-semibold hover:underline">View Project</a>
               </div>
             </div>
             <div className="relative rounded-lg overflow-hidden shadow-xl group animate-[fadeIn_1.6s_ease-out]">
               <img
-                src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop"
+                src="/images/agentic-ai.png"
                 alt="Agentic Workflow Automation"
                 className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
-                <h3 className="text-2xl font-semibold text-white mb-2">Agentic Workflow Automation</h3>
-                <p className="text-neutral-300">Implemented autonomous agents for a logistics company, boosting efficiency by 40%.</p>
+                <h3 className="text-2xl font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2 text-shadow">
+                  Agentic Workflow Automation
+                </h3>
+                <p className="text-white text-shadow">Implemented autonomous agents for a logistics company, boosting efficiency by 40%.</p>
                 <a href="/work#project3" className="mt-4 text-blue-400 font-semibold hover:underline">View Project</a>
               </div>
             </div>
@@ -310,7 +315,7 @@ export default function Home() {
           <div
             className="w-full h-full bg-cover bg-center"
             style={{
-              backgroundImage: "url('https://images.unsplash.com/photo-1551288049-b4f3c35d2f86?q=80&w=2070&auto=format&fit=crop')",
+              backgroundImage: "url('/images/data-science.png')",
             }}
           />
         </div>
@@ -393,6 +398,9 @@ export default function Home() {
         @keyframes float {
           0%, 100% { transform: translateY(0); }
           50% { transform: translateY(-20px); }
+        }
+        .text-shadow {
+          text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         }
       `}</style>
     </>
