@@ -31,11 +31,11 @@ export default function Services() {
             {/* Generative AI */}
             <div className="p-8 bg-neutral-950/50 backdrop-blur-md border border-neutral-800 rounded-2xl shadow-xl hover:scale-105 transition-transform duration-300 animate-[fadeIn_0.8s_ease-out]">
               <div className="flex justify-center mb-4">
-                <svg className="w-10 h-10 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.364l-.707-.707m12.728 12.728l-.707.707M3 21l1.5-1.5m-.793-7.5h1.586m7.5-7.5V3m4.243 5.757l.707-.707M12 17v4" />
+                <svg className="w-10 h-10 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0 M6 12h2m8 0h2m-6-6v2m0 8v2m-4.24-4.24l1.42 1.42m4.24-4.24l-1.42 1.42m0 4.24l1.42-1.42m-4.24 0l-1.42-1.42" />
                 </svg>
               </div>
-              <h2 className="text-3xl font-bold text-blue-400 mb-4">Generative AI</h2>
+              <h2 className="text-3xl font-bold text-neutral-100 mb-4 text-shadow-none">Generative AI</h2>
               <p className="text-neutral-300 mb-6">
                 Harness the power of Generative AI to create dynamic content, personalize customer experiences, and automate complex workflows. Our solutions include AI-driven content generation, synthetic data creation, and advanced model fine-tuning.
               </p>
@@ -51,11 +51,11 @@ export default function Services() {
             {/* Agentic Systems */}
             <div className="p-8 bg-neutral-950/50 backdrop-blur-md border border-neutral-800 rounded-2xl shadow-xl hover:scale-105 transition-transform duration-300 animate-[fadeIn_0.9s_ease-out]">
               <div className="flex justify-center mb-4">
-                <svg className="w-10 h-10 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4m-12-4l-4-4 4-4m-2 8h16" />
+                <svg className="w-10 h-10 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0 M8 8.5l1.5 1.5m6 0l1.5-1.5m-9 7l1.5-1.5m6 0l1.5 1.5 M6 12a6 6 0 0 0 3-5.196M15 6.804A6 6 0 0 0 18 12m0 0a6 6 0 0 0-3 5.196m-6 0A6 6 0 0 0 6 12" />
                 </svg>
               </div>
-              <h2 className="text-3xl font-bold text-purple-400 mb-4">Agentic Systems</h2>
+              <h2 className="text-3xl font-bold text-neutral-100 mb-4 text-shadow-none">Agentic Systems</h2>
               <p className="text-neutral-300 mb-6">
                 Deploy intelligent, autonomous agents that optimize decision-making and streamline operations. Our Agentic Systems enable real-time adaptability and efficiency across industries like finance, healthcare, and logistics.
               </p>
@@ -71,11 +71,11 @@ export default function Services() {
             {/* Data Engineering */}
             <div className="p-8 bg-neutral-950/50 backdrop-blur-md border border-neutral-800 rounded-2xl shadow-xl hover:scale-105 transition-transform duration-300 animate-[fadeIn_1s_ease-out]">
               <div className="flex justify-center mb-4">
-                <svg className="w-10 h-10 text-fuchsia-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 7v10h16V7M4 7l8-4 8 4M4 7H3m17 0h1m-9 8v4" />
+                <svg className="w-10 h-10 text-fuchsia-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 12h14m-7-7v14m-7-7l2-2m0 4l-2-2m12-2l-2 2m0-4l2 2" />
                 </svg>
               </div>
-              <h2 className="text-3xl font-bold text-fuchsia-400 mb-4">Data Engineering</h2>
+              <h2 className="text-3xl font-bold text-neutral-100 mb-4 text-shadow-none">Data Engineering</h2>
               <p className="text-neutral-300 mb-6">
                 Build scalable data architectures and pipelines to power AI and analytics. Our Data Engineering services include ETL pipelines, cloud-native solutions, and real-time data processing for actionable insights.
               </p>
@@ -91,11 +91,11 @@ export default function Services() {
             {/* Digital Marketing */}
             <div className="p-8 bg-neutral-950/50 backdrop-blur-md border border-neutral-800 rounded-2xl shadow-xl hover:scale-105 transition-transform duration-300 animate-[fadeIn_1.1s_ease-out]">
               <div className="flex justify-center mb-4">
-                <svg className="w-10 h-10 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 01-6 0V5a3 3 0 016 0v8zM8 14H6m0 0H4m2 0v3a1 1 0 001 1h4" />
+                <svg className="w-10 h-10 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l4-4 4 4m-4 12l4 4 4-4m-8-8h12m-2 4c1.5 0 2.5-1 2.5-2.5s-1-2.5-2.5-2.5m-5 0c-1.5 0-2.5 1-2.5 2.5s1 2.5 2.5 2.5" />
                 </svg>
               </div>
-              <h2 className="text-3xl font-bold text-cyan-400 mb-4">Digital Marketing</h2>
+              <h2 className="text-3xl font-bold text-neutral-100 mb-4 text-shadow-none">Digital Marketing</h2>
               <p className="text-neutral-300 mb-6">
                 Amplify your brand’s reach with data-driven digital marketing strategies. We offer AI-powered advertising, SEO optimization, and content marketing to engage audiences and drive conversions.
               </p>
@@ -111,11 +111,11 @@ export default function Services() {
             {/* Product Development */}
             <div className="p-8 bg-neutral-950/50 backdrop-blur-md border border-neutral-800 rounded-2xl shadow-xl hover:scale-105 transition-transform duration-300 animate-[fadeIn_1.2s_ease-out]">
               <div className="flex justify-center mb-4">
-                <svg className="w-10 h-10 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.75 17L9 20l-4 1 1-4L9.75 17zM15.25 17l3.75-1-1-4-3.75 1zM12 13l-4-4 4-4 4 4-4 4z" />
+                <svg className="w-10 h-10 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4l2 4h8l-2 4 2 4h-8l-2 4-2-4H4l2-4-2-4h8l2-4z M9 12a3 3 0 1 0 6 0 3 3 0 0 0-6 0" />
                 </svg>
               </div>
-              <h2 className="text-3xl font-bold text-pink-400 mb-4">Product Development</h2>
+              <h2 className="text-3xl font-bold text-neutral-100 mb-4 text-shadow-none">Product Development</h2>
               <p className="text-neutral-300 mb-6">
                 Transform ideas into market-ready products with our end-to-end development services. We specialize in rapid prototyping, agile development, and AI-integrated product solutions.
               </p>

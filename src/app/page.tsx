@@ -78,7 +78,7 @@ export default function Home() {
             >
               <div className="absolute inset-0 bg-black/50"></div>
               <div className="relative flex flex-col items-center justify-center h-full text-center px-4 z-20">
-                <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 animate-[fadeIn_1s_ease-out] text-shadow">
+                <h1 className="text-5xl md:text-7xl font-bold text-[#0ed2f7] mb-6 animate-[fadeIn_1s_ease-out] text-shadow shadow-glow">
                   {slide.text}
                 </h1>
                 <p className="text-xl md:text-2xl text-white max-w-3xl animate-[fadeIn_1.2s_ease-out] text-shadow">
@@ -87,7 +87,7 @@ export default function Home() {
                 <div className="mt-8 flex gap-4">
                   <Link
                     href={slide.link}
-                    className="inline-block bg-gradient-to-r from-blue-600 via-purple-600 to-fuchsia-500 text-white py-3 px-8 rounded-full text-xl font-semibold shadow hover:scale-105 hover:shadow-lg transition-all duration-200 animate-[fadeIn_1.4s_ease-out] z-30"
+                    className="inline-block bg-gradient-to-r from-blue-600 via-purple-600 to-fuchsia-500 text-white py-3 px-8 rounded-full text-xl font-semibold shadow hover:scale-105 hover:shadow-lg hover:text-white transition-all duration-200 animate-[fadeIn_1.4s_ease-out] z-30"
                   >
                     Explore This Service
                   </Link>
@@ -107,12 +107,12 @@ export default function Home() {
       {/* What We Do Section */}
       <section className="py-20 bg-neutral-900">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-4xl md:text-5xl font-bold text-center text-white mb-16 animate-[fadeIn_1s_ease-out]">
+          <h2 className="text-4xl md:text-5xl font-bold text-center text-[#0ed2f7] mb-16 animate-[fadeIn_1s_ease-out] shadow-glow">
             What We Do
           </h2>
           <div className="flex flex-col lg:flex-row gap-12">
             <div className="lg:w-1/2">
-              <h3 className="text-3xl md:text-4xl font-bold text-white mb-6 animate-[fadeIn_1.2s_ease-out]">
+              <h3 className="text-3xl md:text-4xl font-bold text-[#0ed2f7] mb-6 animate-[fadeIn_1.2s_ease-out] shadow-glow">
                 Qubro Consulting elevates the customer experience for the world’s most-admired brands.
               </h3>
               <p className="text-xl text-neutral-200 mb-8 animate-[fadeIn_1.4s_ease-out]">
@@ -122,10 +122,26 @@ export default function Home() {
             <div className="lg:w-1/2">
               <ul className="space-y-4">
                 {[
-                  { name: "Agentic AI Applications", icon: "M10 20l4-16m4 4l4 4-4 4m-12-4l-4-4 4-4m-2 8h16", link: "/services#agentic-ai" },
-                  { name: "Generative AI Applications", icon: "M12 2v2m0 16v2m10-10h-2M4 12H2m15.364-6.364l1.414 1.414M5.636 18.364l-1.414 1.414m0-12.728l1.414-1.414M18.364 18.364l-1.414-1.414", link: "/services#generative-ai" },
-                  { name: "AI Chatbots/RAG Systems", icon: "M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 01-6 0V5a3 3 0 016 0v8z", link: "/services#ai-chatbots" },
-                  { name: "Data Science", icon: "M4 7v10h16V7M4 7l8-4 8 4M4 7H3m17 0h1m-9 8v4", link: "/services#data-science" },
+                  {
+                    name: "Agentic AI Applications",
+                    icon: "M12 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0 M8 8.5l1.5 1.5m6 0l1.5-1.5m-9 7l1.5-1.5m6 0l1.5 1.5 M6 12a6 6 0 0 0 3-5.196M15 6.804A6 6 0 0 0 18 12m0 0a6 6 0 0 0-3 5.196m-6 0A6 6 0 0 0 6 12",
+                    link: "/services#agentic-ai",
+                  },
+                  {
+                    name: "Generative AI Applications",
+                    icon: "M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0 M6 12h2m8 0h2m-6-6v2m0 8v2m-4.24-4.24l1.42 1.42m4.24-4.24l-1.42 1.42m0 4.24l1.42-1.42m-4.24 0l-1.42-1.42",
+                    link: "/services#generative-ai",
+                  },
+                  {
+                    name: "AI Chatbots/RAG Systems",
+                    icon: "M4 8h16M4 8l4-4m0 8l-4-4m4 4v8m4-8h8m-4-4v8m0-4h-4",
+                    link: "/services#ai-chatbots",
+                  },
+                  {
+                    name: "Data Science",
+                    icon: "M21 21l-5-5m-2 0a7 7 0 1 0-7-7 7 7 0 0 0 7 7zm-7-3h3m-3-3h6",
+                    link: "/services#data-science",
+                  },
                 ].map((item, index) => (
                   <li
                     key={index}
@@ -151,7 +167,7 @@ export default function Home() {
       {/* Company Logos Ticker */}
       <section className="py-16 bg-neutral-950 overflow-hidden relative">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-12 animate-[fadeIn_1s_ease-out]">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-[#0ed2f7] mb-12 animate-[fadeIn_1s_ease-out] shadow-glow">
             Companies We’ve Worked With
           </h2>
           <div className="relative">
@@ -160,24 +176,24 @@ export default function Home() {
             <div className="flex animate-marquee whitespace-nowrap">
               {[
                 { src: "/images/seo-harbour.webp", alt: "SEO Harbour logo" },
-                { src: "/images/launchpal-ai.webp", alt: "LaunchPal AI logo" },
+                { src: "/images/launchpal-ai.png", alt: "LaunchPal AI logo" },
               ].map((logo, index) => (
                 <img
                   key={index}
                   src={logo.src}
                   alt={logo.alt}
-                  className="h-12 mx-8 grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition duration-300"
+                  className="h-16 mx-8 animate-[logoGlowPulse_2s_ease-in-out_infinite] shadow-glow-logo hover:grayscale-0 hover:opacity-100 transition duration-300"
                 />
               ))}
               {[
                 { src: "/images/seo-harbour.webp", alt: "SEO Harbour logo" },
-                { src: "/images/launchpal-ai.webp", alt: "LaunchPal AI logo" },
+                { src: "/launchpal-ai.png", alt: "LaunchPal AI logo" },
               ].map((logo, index) => (
                 <img
                   key={`duplicate-${index}`}
                   src={logo.src}
                   alt={logo.alt}
-                  className="h-12 mx-8 grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition duration-300"
+                  className="h-16 mx-8 animate-[logoGlowPulse_2s_ease-in-out_infinite] shadow-glow-logo hover:grayscale-0 hover:opacity-100 transition duration-300"
                 />
               ))}
             </div>
@@ -188,17 +204,17 @@ export default function Home() {
       {/* Value Proposition Grid (Our Expertise) */}
       <section className="py-20 bg-neutral-900">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-4xl md:text-5xl font-bold text-center text-white mb-16 animate-[fadeIn_1s_ease-out]">
+          <h2 className="text-4xl md:text-5xl font-bold text-center text-[#0ed2f7] mb-16 animate-[fadeIn_1s_ease-out] shadow-glow">
             Our Expertise
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="p-6 bg-neutral-950/50 backdrop-blur-md border border-neutral-800 rounded-lg hover:scale-105 transition-transform duration-300 animate-[fadeIn_1.2s_ease-out]">
               <div className="flex justify-center mb-4">
                 <svg className="w-8 h-8 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4m-12-4l-4-4 4-4m-2 8h16" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0 M8 8.5l1.5 1.5m6 0l1.5-1.5m-9 7l1.5-1.5m6 0l1.5 1.5 M6 12a6 6 0 0 0 3-5.196M15 6.804A6 6 0 0 0 18 12m0 0a6 6 0 0 0-3 5.196m-6 0A6 6 0 0 0 6 12" />
                 </svg>
               </div>
-              <h3 className="text-2xl font-semibold text-purple-400 mb-4">Agentic AI</h3>
+              <h3 className="text-2xl font-semibold text-[#0ed2f7] mb-4 shadow-glow">Agentic AI</h3>
               <p className="text-neutral-300 mb-4">
                 Deploy intelligent agents that autonomously make decisions, optimize processes, and drive efficiency across your operations.
               </p>
@@ -207,10 +223,10 @@ export default function Home() {
             <div className="p-6 bg-neutral-950/50 backdrop-blur-md border border-neutral-800 rounded-lg hover:scale-105 transition-transform duration-300 animate-[fadeIn_1.4s_ease-out]">
               <div className="flex justify-center mb-4">
                 <svg className="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.364l-.707-.707m12.728 12.728l-.707.707M3 21l1.5-1.5m-.793-7.5h1.586m7.5-7.5V3m4.243 5.757l.707-.707M12 17v4" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0 M6 12h2m8 0h2m-6-6v2m0 8v2m-4.24-4.24l1.42 1.42m4.24-4.24l-1.42 1.42m0 4.24l1.42-1.42m-4.24 0l-1.42-1.42" />
                 </svg>
               </div>
-              <h3 className="text-2xl font-semibold text-blue-400 mb-4">Generative AI</h3>
+              <h3 className="text-2xl font-semibold text-[#0ed2f7] mb-4 shadow-glow">Generative AI</h3>
               <p className="text-neutral-300 mb-4">
                 Leverage cutting-edge GenAI to create innovative content, automate workflows, and enhance customer experiences with tailored solutions.
               </p>
@@ -219,10 +235,10 @@ export default function Home() {
             <div className="p-6 bg-neutral-950/50 backdrop-blur-md border border-neutral-800 rounded-lg hover:scale-105 transition-transform duration-300 animate-[fadeIn_1.6s_ease-out]">
               <div className="flex justify-center mb-4">
                 <svg className="w-8 h-8 text-fuchsia-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 7v10h16V7M4 7l8-4 8 4M4 7H3m17 0h1m-9 8v4" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 12h14m-7-7v14m-7-7l2-2m0 4l-2-2m12-2l-2 2m0-4l2 2" />
                 </svg>
               </div>
-              <h3 className="text-2xl font-semibold text-fuchsia-400 mb-4">Data Engineering</h3>
+              <h3 className="text-2xl font-semibold text-[#0ed2f7] mb-4 shadow-glow">Data Engineering</h3>
               <p className="text-neutral-300 mb-4">
                 Build robust data pipelines and architectures to unlock actionable insights and power AI-driven decision-making.
               </p>
@@ -236,7 +252,7 @@ export default function Home() {
       <section className="py-20 bg-neutral-950 relative overflow-hidden">
         <div className="absolute inset-0 -z-10 opacity-20 bg-gradient-to-br from-blue-900/50 via-purple-900/50 to-fuchsia-900/50 animate-[pulse_15s_ease-in-out_infinite]"></div>
         <div className="max-w-7xl mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-12 animate-[fadeIn_1s_ease-out]">
+          <h2 className="text-4xl md:text-5xl font-bold text-[#0ed2f7] mb-12 animate-[fadeIn_1s_ease-out] shadow-glow">
             Our Impact
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -259,7 +275,7 @@ export default function Home() {
       {/* Featured Projects Section */}
       <section className="py-20 bg-neutral-900">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-4xl md:text-5xl font-bold text-center text-white mb-16 animate-[fadeIn_1s_ease-out]">
+          <h2 className="text-4xl md:text-5xl font-bold text-center text-[#0ed2f7] mb-16 animate-[fadeIn_1s_ease-out] shadow-glow">
             Featured Projects
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -270,10 +286,10 @@ export default function Home() {
                 className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
-                <h3 className="text-2xl font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2 text-shadow">
+                <h3 className="text-2xl font-semibold text-[#0ed2f7] bg-black/30 inline-block mb-2 text-shadow shadow-glow">
                   AI-Driven Customer Support
                 </h3>
-                <p className="text-white text-shadow">Deployed a GenAI chatbot for a retail giant, improving response times by 70%.</p>
+                <p className="text-neutral-300 text-shadow">Deployed a GenAI chatbot for a retail giant, improving response times by 70%.</p>
                 <a href="/work#project1" className="mt-4 text-blue-400 font-semibold hover:underline">View Project</a>
               </div>
             </div>
@@ -284,10 +300,10 @@ export default function Home() {
                 className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
-                <h3 className="text-2xl font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2 text-shadow">
+                <h3 className="text-2xl font-semibold text-[#0ed2f7] bg-black/30 inline-block mb-2 text-shadow shadow-glow">
                   Data Pipeline Optimization
                 </h3>
-                <p className="text-white text-shadow">Built a scalable data pipeline for a fintech firm, reducing processing time by 50%.</p>
+                <p className="text-neutral-300 text-shadow">Built a scalable data pipeline for a fintech firm, reducing processing time by 50%.</p>
                 <a href="/work#project2" className="mt-4 text-blue-400 font-semibold hover:underline">View Project</a>
               </div>
             </div>
@@ -298,10 +314,10 @@ export default function Home() {
                 className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
-                <h3 className="text-2xl font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2 text-shadow">
+                <h3 className="text-2xl font-semibold text-[#0ed2f7] bg-black/30 inline-block mb-2 text-shadow shadow-glow">
                   Agentic Workflow Automation
                 </h3>
-                <p className="text-white text-shadow">Implemented autonomous agents for a logistics company, boosting efficiency by 40%.</p>
+                <p className="text-neutral-300 text-shadow">Implemented autonomous agents for a logistics company, boosting efficiency by 40%.</p>
                 <a href="/work#project3" className="mt-4 text-blue-400 font-semibold hover:underline">View Project</a>
               </div>
             </div>
@@ -320,7 +336,7 @@ export default function Home() {
           />
         </div>
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-4xl md:text-5xl font-bold text-center text-white mb-16 animate-[fadeIn_1s_ease-out]">
+          <h2 className="text-4xl md:text-5xl font-bold text-center text-[#0ed2f7] mb-16 animate-[fadeIn_1s_ease-out] shadow-glow">
             What Our Clients Say
           </h2>
           <div className="flex flex-col items-center">
@@ -344,9 +360,9 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 via-purple-600 to-fuchsia-600">
+      <section className="py-20 bg-neutral-900">
         <div className="max-w-7xl mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 animate-[fadeIn_1s_ease-out]">
+          <h2 className="text-4xl md:text-5xl font-bold text-[#0ed2f7] mb-6 animate-[fadeIn_1s_ease-out] shadow-glow">
             Ready to Transform Your Business?
           </h2>
           <p className="text-xl text-neutral-200 max-w-2xl mx-auto mb-10 animate-[fadeIn_1.2s_ease-out]">
@@ -355,7 +371,7 @@ export default function Home() {
           <div className="flex gap-4 justify-center">
             <a
               href="/contact"
-              className="inline-block bg-white/10 backdrop-blur-md border border-white/20 text-white py-3 px-8 rounded-full text-xl font-semibold shadow hover:scale-105 hover:shadow-lg transition-all duration-200 animate-[fadeIn_1.4s_ease-out]"
+              className="inline-block bg-gradient-to-r from-blue-600 via-purple-600 to-fuchsia-500 text-white py-3 px-8 rounded-full text-xl font-semibold shadow hover:scale-105 hover:shadow-lg hover:text-white transition-all duration-200 animate-[fadeIn_1.4s_ease-out]"
             >
               Get in Touch
             </a>
@@ -386,6 +402,10 @@ export default function Home() {
           from { transform: scale(0.8); opacity: 0; }
           to { transform: scale(1); opacity: 1; }
         }
+        @keyframes logoGlowPulse {
+          0%, 100% { box-shadow: 0 0 8px rgba(14, 210, 247, 0.6), 0 0 12px rgba(14, 210, 247, 0.4); }
+          50% { box-shadow: 0 0 12px rgba(14, 210, 247, 0.8), 0 0 16px rgba(14, 210, 247, 0.6); }
+        }
         .animate-marquee {
           animation: marquee 25s linear infinite;
         }
@@ -401,6 +421,12 @@ export default function Home() {
         }
         .text-shadow {
           text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .shadow-glow {
+          text-shadow: 0 0 8px rgba(14, 210, 247, 0.6), 0 0 12px rgba(14, 210, 247, 0.4);
+        }
+        .shadow-glow-logo {
+          box-shadow: 0 0 8px rgba(14, 210, 247, 0.6), 0 0 12px rgba(14, 210, 247, 0.4);
         }
       `}</style>
     </>
