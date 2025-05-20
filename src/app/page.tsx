@@ -1,434 +1,660 @@
 'use client';
-import React, { useState, useEffect } from "react";
-import Link from "next/link";
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { motion, AnimatePresence } from 'framer-motion';
 
-export default function Home() {
+const Home: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const [isNavOpen, setIsNavOpen] = useState(false);
+
   const slides = [
     {
-      image: "/images/genai-applications.png",
-      text: "Empowering the Future with Generative AI",
-      link: "/services#generative-ai",
+      image: '/images/hero1.png',
+      text: 'Empowering with Generative AI',
+      link: '/services#generative-ai',
     },
     {
-      image: "/images/ai-chatbots.png",
-      text: "Conversational Excellence with AI Chatbots",
-      link: "/services#ai-chatbots",
+      image: '/images/hero2.png',
+      text: 'Excellence in AI Chatbots',
+      link: '/services#ai-chatbots',
     },
     {
-      image: "/images/agentic-ai.png",
-      text: "Innovate with Agentic AI Systems",
-      link: "/services#agentic-ai",
+      image: '/images/hero3.png',
+      text: 'Innovating Agentic AI Systems',
+      link: '/services#agentic-ai',
     },
     {
-      image: "/images/data-science.png",
-      text: "Unlock Insights with Data Science",
-      link: "/services#data-science",
+      image: '/images/hero4.png',
+      text: 'Insights via Data Science',
+      link: '/services#data-science',
     },
   ];
+
   const testimonials = [
     {
-      quote: "Qubro transformed our data infrastructure, enabling real-time AI-driven insights that doubled our operational efficiency.",
-      author: "Jane Doe, CTO, TechStartup",
+      quote: 'Qubro’s AI solutions doubled our efficiency with real-time insights.',
+      author: 'Jane Doe, CTO, TechStartup',
     },
     {
-      quote: "Their AI agents have streamlined our operations, saving us countless hours and resources.",
-      author: "Mark Wilson, COO, FinCorp",
+      quote: 'Their AI agents streamlined our workflows, saving countless hours.',
+      author: 'Mark Wilson, COO, FinCorp',
     },
     {
-      quote: "Working with Qubro was a game-changer—our digital marketing ROI has never been higher.",
-      author: "Emily Chen, CMO, BrandX",
+      quote: 'Qubro transformed our marketing ROI with cutting-edge AI.',
+      author: 'Emily Chen, CMO, BrandX',
     },
+  ];
+
+  const logos = [
+    { src: '/logos/logo.webp', alt: 'Qubro Partner 1 logo' },
+    { src: '/logos/logo2.webp', alt: 'Qubro Partner 2 logo' },
+    { src: '/logos/logo.webp', alt: 'Qubro Partner 3 logo' },
+    { src: '/logos/logo2.webp', alt: 'Qubro Partner 4 logo' },
   ];
 
   useEffect(() => {
     const slideInterval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 5000);
+    }, 6000);
     const testimonialInterval = setInterval(() => {
       setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
-    }, 7000);
+    }, 8000);
     return () => {
       clearInterval(slideInterval);
       clearInterval(testimonialInterval);
     };
   }, [slides.length, testimonials.length]);
 
+  const navLinks = ['Home', 'Services', 'About', 'Contact'];
+
   return (
     <>
-      {/* Hero Section with Image Carousel */}
-      <section className="relative min-h-[90vh] bg-space-blue overflow-hidden pt-16">
-        <div className="absolute inset-0 -z-10 opacity-30">
-          <div className="absolute inset-0 particle-bg" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 800'%3E%3Cfilter id='a'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.05' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23a)' opacity='.1'/%3E%3Ccircle cx='200' cy='200' r='10' fill='%23F1F5F9' opacity='.3'/%3E%3Ccircle cx='600' cy='600' r='15' fill='%23F1F5F9' opacity='.2'/%3E%3Ccircle cx='400' cy='300' r='8' fill='%23F1F5F9' opacity='.25'/%3E%3C/svg%3E")`,
-            backgroundSize: 'cover',
-          }}></div>
-        </div>
-        {slides.map((slide, index) => (
-          <div
-            key={index}
-            className={`absolute inset-0 transition-opacity duration-1000 ${
-              index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
-            }`}
+      {/* Navbar */}
+      <nav className="fixed top-0 left-0 w-full bg-midnight/95 backdrop-blur-md z-50 shadow-glow">
+        <div className="max-w-7xl mx-auto px-4 flex items-center justify-between py-4">
+          <Link href="/" className="flex items-center text-xl md:text-2xl font-bold text-white font-manrope relative group hover:bg-gradient-to-r hover:from-teal-custom hover:via-purple-light hover:to-purple-deep hover:text-transparent hover:bg-clip-text transition-all duration-300">
+            <svg className="w-8 h-8 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="10" stroke="url(#grad)" strokeWidth="2"/>
+              <path d="M8 16 Q12 8 16 16" stroke="url(#grad)" strokeWidth="2"/>
+              <defs>
+                <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style={{stopColor: '#59c173'}}/>
+                  <stop offset="50%" style={{stopColor: '#a17fe0'}}/>
+                  <stop offset="100%" style={{stopColor: '#5d26c1'}}/>
+                </linearGradient>
+              </defs>
+            </svg>
+            Qubro Consultancy
+            <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-gradient-to-r from-teal-custom via-purple-light to-purple-deep transition-all duration-300 group-hover:w-full"></span>
+          </Link>
+          <div className="hidden md:flex items-center gap-8">
+            {navLinks.map((item) => (
+              <Link
+                key={item}
+                href={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
+                className="text-white relative group hover:bg-gradient-to-r hover:from-teal-custom hover:via-purple-light hover:to-purple-deep hover:text-transparent hover:bg-clip-text transition-all duration-300"
+              >
+                {item}
+                <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-gradient-to-r from-teal-custom via-purple-light to-purple-deep transition-all duration-300 group-hover:w-full"></span>
+              </Link>
+            ))}
+          </div>
+          <button
+            className="md:hidden text-white focus:outline-none"
+            onClick={() => setIsNavOpen(!isNavOpen)}
           >
-            <div
-              className="w-full h-full bg-cover bg-center"
-              style={{ backgroundImage: `url(${slide.image})` }}
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d={isNavOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'}
+              />
+            </svg>
+          </button>
+        </div>
+        {isNavOpen && (
+          <div className="md:hidden bg-midnight/95 px-4 py-6">
+            {navLinks.map((item) => (
+              <Link
+                key={item}
+                href={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
+                className="block text-white py-2 relative group hover:bg-gradient-to-r hover:from-teal-custom hover:via-purple-light hover:to-purple-deep hover:text-transparent hover:bg-clip-text transition-all duration-300"
+                onClick={() => setIsNavOpen(false)}
+              >
+                {item}
+                <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-gradient-to-r from-teal-custom via-purple-light to-purple-deep transition-all duration-300 group-hover:w-full"></span>
+              </Link>
+            ))}
+          </div>
+        )}
+      </nav>
+
+      {/* Hero Section with Full-Size Image Carousel */}
+      <section className="relative h-screen bg-midnight overflow-hidden pt-16">
+        <div className="absolute inset-0 -z-10 particle-bg animate-float"></div>
+        <AnimatePresence>
+          {slides.map((slide, index) => (
+            <motion.div
+              key={index}
+              className={`absolute inset-0 transition-opacity duration-1000 ${
+                index === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+              }`}
+              initial={{ opacity: 0, scale: 1.1 }}
+              animate={{ opacity: index === currentSlide ? 1 : 0, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.1 }}
+              transition={{ duration: 1 }}
             >
-              <div className="absolute inset-0 bg-black/50"></div>
-              <div className="relative flex flex-col items-center justify-center h-full text-center px-4 z-20">
-                <h1 className="text-5xl md:text-7xl font-bold text-off-white px-2 py-1 inline-block mb-6 animate-[fadeIn_1s_ease-out] text-shadow shadow-glow">
-                  {slide.text}
-                </h1>
-                <p className="text-xl md:text-2xl text-off-white max-w-3xl animate-[fadeIn_1.2s_ease-out] text-shadow">
-                  Qubro Consulting empowers startups and enterprises to harness the transformative power of Generative AI, Agentic Systems, and advanced Data Engineering.
-                </p>
-                <div className="mt-8 flex gap-4">
-                  <Link
-                    href={slide.link}
-                    className="inline-block bg-gradient-to-r from-teal-400 via-violet-400 to-coral-400 text-off-white py-3 px-8 rounded-full text-xl font-semibold shadow hover:scale-105 hover:shadow-lg transition-all duration-200 animate-[fadeIn_1.4s_ease-out] z-30"
+              <div className="relative w-full h-full">
+                <motion.img
+                  src={slide.image}
+                  alt={slide.text}
+                  className="w-full h-full object-cover"
+                  style={{ minHeight: '100vh', objectPosition: 'center' }}
+                  initial={{ y: 0 }}
+                  animate={{ y: [0, -20, 0] }}
+                  transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/40 to-black/60"></div>
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-30">
+                  <motion.h1
+                    className="text-4xl sm:text-5xl font-bold text-white font-manrope mb-16 shadow-glow"
+                    initial={{ y: 20, opacity: 0, letterSpacing: '-0.05em' }}
+                    animate={{ y: 0, opacity: 1, letterSpacing: '0em' }}
+                    transition={{ delay: 0.2, duration: 0.8 }}
                   >
-                    Explore This Service
-                  </Link>
-                  <Link
-                    href="/about"
-                    className="inline-block border border-off-white text-off-white py-3 px-8 rounded-full text-xl font-semibold hover:bg-off-white hover:text-space-blue transition-all duration-200 animate-[fadeIn_1.6s_ease-out] z-30"
+                    <span className="highlight-outline">{slide.text}</span>
+                  </motion.h1>
+                  <motion.p
+                    className="text-xl md:text-2xl text-blue-violet max-w-3xl mt-4"
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.4, duration: 0.8 }}
                   >
-                    Learn More
-                  </Link>
+                    <span className="highlight-outline">Qubro Consulting drives innovation with AI and data solutions.</span>
+                  </motion.p>
+                  <motion.div
+                    className="mt-8 flex gap-4"
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.6, duration: 0.8 }}
+                  >
+                    <Link
+                      href={slide.link}
+                      className="relative inline-block bg-gradient-to-r from-teal-custom via-purple-light to-purple-deep text-white py-3 px-8 rounded-full text-lg font-semibold shadow-lg hover:scale-105 hover:shadow-pulse transition-all duration-300 ripple"
+                    >
+                      Explore This Service
+                    </Link>
+                    <Link
+                      href="/about"
+                      className="relative inline-block bg-gradient-to-r from-teal-custom via-purple-light to-purple-deep text-white py-3 px-8 rounded-full text-lg font-semibold shadow-lg hover:scale-105 hover:shadow-pulse transition-all duration-300 ripple"
+                    >
+                      Learn More
+                    </Link>
+                  </motion.div>
                 </div>
               </div>
-            </div>
-          </div>
-        ))}
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </section>
 
       {/* What We Do Section */}
-      <section className="py-20 bg-navy-dark">
+      <section className="py-32 bg-midnight relative">
+        <div className="absolute inset-0 -z-10 opacity-10 particle-bg animate-pulse"></div>
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-4xl md:text-5xl font-bold text-center text-off-white px-2 py-1 inline-block mb-16 animate-[fadeIn_1s_ease-out] shadow-glow">
-            What We Do
-          </h2>
-          <div className="flex flex-col lg:flex-row gap-12">
-            <div className="lg:w-1/2">
-              <h3 className="text-3xl md:text-4xl font-bold text-off-white px-2 py-1 inline-block mb-6 animate-[fadeIn_1.2s_ease-out] shadow-glow">
-                Qubro Consulting elevates the customer experience for the world’s most-admired brands.
+          <motion.h2
+            className="text-5xl font-bold text-center text-white font-manrope mb-16 shadow-glow"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            Our Expertise
+          </motion.h2>
+          <div className="flex flex-col lg:flex-row gap-12 mt-16">
+            <motion.div
+              className="lg:w-1/2"
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <h3 className="text-4xl font-bold text-white font-manrope mb-6 shadow-glow">
+                Elevating Brands with AI
               </h3>
-              <p className="text-xl text-off-white mb-8 animate-[fadeIn_1.4s_ease-out]">
-                We design and deploy digital products and AI agents that drive customer engagement and a more efficient enterprise.
+              <p className="text-xl text-blue-violet">
+                We craft AI-driven solutions to boost engagement and efficiency.
               </p>
-            </div>
-            <div className="lg:w-1/2">
+            </motion.div>
+            <motion.div
+              className="lg:w-1/2"
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
               <ul className="space-y-4">
                 {[
                   {
-                    name: "Agentic AI Applications",
-                    icon: "M12 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0 M8 8.5l1.5 1.5m6 0l1.5-1.5m-9 7l1.5-1.5m6 0l1.5 1.5 M6 12a6 6 0 0 0 3-5.196M15 6.804A6 6 0 0 0 18 12m0 0a6 6 0 0 0-3 5.196m-6 0A6 6 0 0 0 6 12",
-                    link: "/services#agentic-ai",
+                    name: 'Agentic AI Applications',
+                    icon: 'M12 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0 M8 8.5l1.5 1.5m6 0l1.5-1.5m-9 7l1.5-1.5m6 0l1.5 1.5',
+                    link: '/services#agentic-ai',
                   },
                   {
-                    name: "Generative AI Applications",
-                    icon: "M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0 M6 12h2m8 0h2m-6-6v2m0 8v2m-4.24-4.24l1.42 1.42m4.24-4.24l-1.42 1.42m0 4.24l1.42-1.42m-4.24 0l-1.42-1.42",
-                    link: "/services#generative-ai",
+                    name: 'Generative AI Applications',
+                    icon: 'M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0 M6 12h2m8 0h2m-6-6v2m0 8v2',
+                    link: '/services#generative-ai',
                   },
                   {
-                    name: "AI Chatbots/RAG Systems",
-                    icon: "M4 8h16M4 8l4-4m0 8l-4-4m4 4v8m4-8h8m-4-4v8m0-4h-4",
-                    link: "/services#ai-chatbots",
+                    name: 'AI Chatbots/RAG Systems',
+                    icon: 'M4 8h16M4 8l4-4m0 8l-4-4m4 4v8m4-8h8m-4-4v8m0-4h-4',
+                    link: '/services#ai-chatbots',
                   },
                   {
-                    name: "Data Science",
-                    icon: "M21 21l-5-5m-2 0a7 7 0 1 0-7-7 7 7 0 0 0 7 7zm-7-3h3m-3-3h6",
-                    link: "/services#data-science",
+                    name: 'Data Science',
+                    icon: 'M21 21l-5-5m-2 0a7 7 0 1 0-7-7 7 7 0 0 0 7 7zm-7-3h3m-3-3h6',
+                    link: '/services#data-science',
                   },
                 ].map((item, index) => (
-                  <li
+                  <motion.li
                     key={index}
-                    className="p-4 bg-space-blue/50 backdrop-blur-md border border-navy-dark rounded-lg hover:scale-110 transition-transform duration-300 group animate-[fadeIn_1.6s_ease-out] cursor-pointer"
+                    className="p-4 card-glass rounded-lg hover:scale-105 transition-transform duration-300 cursor-pointer group"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.2, duration: 0.8 }}
+                    whileHover={{ scale: 1.05, rotateX: 5, rotateY: 5 }}
+                    whileTap={{ scale: 0.95 }}
                     onClick={() => window.location.href = item.link}
                   >
                     <div className="flex items-center gap-3">
-                      <svg className="w-6 h-6 text-cyan-bright" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <svg
+                        className="w-6 h-6 text-teal-custom"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={item.icon} />
                       </svg>
-                      <span className="text-xl font-semibold text-cyan-bright group-hover:bg-gradient-to-r group-hover:from-teal-400 group-hover:to-coral-400 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
+                      <span className="text-xl font-semibold text-white group-hover:text-cyan-300 transition-all duration-300">
                         {item.name}
                       </span>
                     </div>
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* Company Logos Ticker */}
-      <section className="py-16 bg-space-blue overflow-hidden relative">
+      <section className="py-32 bg-midnight relative overflow-hidden">
+        <div className="absolute inset-0 -z-10 opacity-10 particle-bg animate-pulse"></div>
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-off-white px-2 py-1 inline-block mb-12 animate-[fadeIn_1s_ease-out] shadow-glow">
-            Companies We’ve Worked With
-          </h2>
+          <motion.h2
+            className="text-4xl font-bold text-center text-white font-manrope mb-12 shadow-glow"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            Trusted by Leading Brands
+          </motion.h2>
           <div className="relative">
-            <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-space-blue to-transparent z-10"></div>
-            <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-space-blue to-transparent z-10"></div>
-            <div className="flex animate-marquee whitespace-nowrap">
-              {[
-                { src: "/images/seo-harbour.webp", alt: "SEO Harbour logo" },
-                { src: "/images/launchpal-ai.png", alt: "LaunchPal AI logo" },
-              ].map((logo, index) => (
-                <img
+            <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-midnight to-transparent z-10"></div>
+            <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-midnight to-transparent z-10"></div>
+            <motion.div
+              className="flex animate-marquee whitespace-nowrap"
+              animate={{ x: ['0%', '-50%'] }}
+              transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
+            >
+              {logos.map((logo, index) => (
+                <motion.img
                   key={index}
                   src={logo.src}
                   alt={logo.alt}
-                  className="h-16 mx-8 animate-[logoGlowPulse_2s_ease-in-out_infinite] shadow-glow-logo hover:grayscale-0 hover:opacity-100 transition duration-300"
+                  className="h-16 mx-8 animate-pulse-glow hover:grayscale-0 hover:opacity-100 transition duration-300"
+                  whileHover={{ scale: 1.1, rotateY: 10 }}
                 />
               ))}
-              {[
-                { src: "/images/seo-harbour.webp", alt: "SEO Harbour logo" },
-                { src: "/images/launchpal-ai.png", alt: "LaunchPal AI logo" },
-              ].map((logo, index) => (
-                <img
+              {logos.map((logo, index) => (
+                <motion.img
                   key={`duplicate-${index}`}
                   src={logo.src}
                   alt={logo.alt}
-                  className="h-16 mx-8 animate-[logoGlowPulse_2s_ease-in-out_infinite] shadow-glow-logo hover:grayscale-0 hover:opacity-100 transition duration-300"
+                  className="h-16 mx-8 animate-pulse-glow hover:grayscale-0 hover:opacity-100 transition duration-300"
+                  whileHover={{ scale: 1.1, rotateY: 10 }}
                 />
               ))}
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Value Proposition Grid (Our Expertise) */}
-      <section className="py-20 bg-navy-dark">
+      {/* Value Proposition Grid */}
+      <section className="py-32 bg-midnight relative">
+        <div className="absolute inset-0 -z-10 opacity-10 particle-bg animate-pulse"></div>
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-4xl md:text-5xl font-bold text-center text-off-white px-2 py-1 inline-block mb-16 animate-[fadeIn_1s_ease-out] shadow-glow">
-            Our Expertise
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="p-6 bg-space-blue/50 backdrop-blur-md border border-navy-dark rounded-lg hover:scale-105 transition-transform duration-300 animate-[fadeIn_1.2s_ease-out]">
-              <div className="flex justify-center mb-4">
-                <svg className="w-8 h-8 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0 M8 8.5l1.5 1.5m6 0l1.5-1.5m-9 7l1.5-1.5m6 0l1.5 1.5 M6 12a6 6 0 0 0 3-5.196M15 6.804A6 6 0 0 0 18 12m0 0a6 6 0 0 0-3 5.196m-6 0A6 6 0 0 0 6 12" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-semibold text-off-white px-2 py-1 inline-block mb-4 shadow-glow">Agentic AI</h3>
-              <p className="text-off-white mb-4">
-                Deploy intelligent agents that autonomously make decisions, optimize processes, and drive efficiency across your operations.
-              </p>
-              <a href="/services#agentic-ai" className="text-violet-400 font-semibold hover:underline">Learn More</a>
-            </div>
-            <div className="p-6 bg-space-blue/50 backdrop-blur-md border border-navy-dark rounded-lg hover:scale-105 transition-transform duration-300 animate-[fadeIn_1.4s_ease-out]">
-              <div className="flex justify-center mb-4">
-                <svg className="w-8 h-8 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0 M6 12h2m8 0h2m-6-6v2m0 8v2m-4.24-4.24l1.42 1.42m4.24-4.24l-1.42 1.42m0 4.24l1.42-1.42m-4.24 0l-1.42-1.42" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-semibold text-off-white px-2 py-1 inline-block mb-4 shadow-glow">Generative AI</h3>
-              <p className="text-off-white mb-4">
-                Leverage cutting-edge GenAI to create innovative content, automate workflows, and enhance customer experiences with tailored solutions.
-              </p>
-              <a href="/services#generative-ai" className="text-teal-400 font-semibold hover:underline">Learn More</a>
-            </div>
-            <div className="p-6 bg-space-blue/50 backdrop-blur-md border border-navy-dark rounded-lg hover:scale-105 transition-transform duration-300 animate-[fadeIn_1.6s_ease-out]">
-              <div className="flex justify-center mb-4">
-                <svg className="w-8 h-8 text-coral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 12h14m-7-7v14m-7-7l2-2m0 4l-2-2m12-2l-2 2m0-4l2 2" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-semibold text-off-white px-2 py-1 inline-block mb-4 shadow-glow">Data Engineering</h3>
-              <p className="text-off-white mb-4">
-                Build robust data pipelines and architectures to unlock actionable insights and power AI-driven decision-making.
-              </p>
-              <a href="/services#data-engineering" className="text-coral-400 font-semibold hover:underline">Learn More</a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Our Impact Section */}
-      <section className="py-20 bg-space-blue relative overflow-hidden">
-        <div className="absolute inset-0 -z-10 opacity-20 bg-gradient-to-br from-teal-900/50 via-violet-900/50 to-coral-900/50 animate-[pulse_15s_ease-in-out_infinite]"></div>
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-center text-off-white px-2 py-1 inline-block mb-12 animate-[fadeIn_1s_ease-out] shadow-glow">
-            Our Impact
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="animate-[fadeIn_1.2s_ease-out]">
-              <p className="text-5xl font-bold text-cyan-bright animate-[countUp_2s_ease-out] inline-block">5+</p>
-              <p className="text-off-white mt-2">AI Projects Delivered</p>
-            </div>
-            <div className="animate-[fadeIn_1.4s_ease-out]">
-              <p className="text-5xl font-bold text-violet-400 animate-[countUp_2s_ease-out] inline-block">3+</p>
-              <p className="text-off-white mt-2">Industries Served</p>
-            </div>
-            <div className="animate-[fadeIn_1.6s_ease-out]">
-              <p className="text-5xl font-bold text-coral-400 animate-[countUp_2s_ease-out] inline-block">100%</p>
-              <p className="text-off-white mt-2">Client Satisfaction</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Projects Section */}
-      <section className="py-20 bg-navy-dark">
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-4xl md:text-5xl font-bold text-center text-off-white px-2 py-1 inline-block mb-16 animate-[fadeIn_1s_ease-out] shadow-glow">
-            Featured Projects
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="relative rounded-lg overflow-hidden shadow-xl group animate-[fadeIn_1.2s_ease-out]">
-              <img
-                src="/images/ai-chatbots.png"
-                alt="AI-Driven Customer Support"
-                className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
-                <h3 className="text-2xl font-semibold text-cyan-bright mb-2 text-shadow shadow-glow">
-                  AI-Driven Customer Support
-                </h3>
-                <p className="text-off-white text-shadow">Deployed a GenAI chatbot for a retail giant, improving response times by 70%.</p>
-                <a href="/work#project1" className="mt-4 text-teal-400 font-semibold hover:underline">View Project</a>
-              </div>
-            </div>
-            <div className="relative rounded-lg overflow-hidden shadow-xl group animate-[fadeIn_1.4s_ease-out]">
-              <img
-                src="/images/data-science.png"
-                alt="Data Pipeline Optimization"
-                className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
-                <h3 className="text-2xl font-semibold text-cyan-bright mb-2 text-shadow shadow-glow">
-                  Data Pipeline Optimization
-                </h3>
-                <p className="text-off-white text-shadow">Built a scalable data pipeline for a fintech firm, reducing processing time by 50%.</p>
-                <a href="/work#project2" className="mt-4 text-teal-400 font-semibold hover:underline">View Project</a>
-              </div>
-            </div>
-            <div className="relative rounded-lg overflow-hidden shadow-xl group animate-[fadeIn_1.6s_ease-out]">
-              <img
-                src="/images/agentic-ai.png"
-                alt="Agentic Workflow Automation"
-                className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
-                <h3 className="text-2xl font-semibold text-cyan-bright mb-2 text-shadow shadow-glow">
-                  Agentic Workflow Automation
-                </h3>
-                <p className="text-off-white text-shadow">Implemented autonomous agents for a logistics company, boosting efficiency by 40%.</p>
-                <a href="/work#project3" className="mt-4 text-teal-400 font-semibold hover:underline">View Project</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonial Slider */}
-      <section className="py-20 bg-navy-dark relative overflow-hidden">
-        <div className="absolute inset-0 -z-10 opacity-10">
-          <div
-            className="w-full h-full bg-cover bg-center"
-            style={{
-              backgroundImage: "url('/images/data-science.png')",
-            }}
-          />
-        </div>
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-4xl md:text-5xl font-bold text-center text-off-white px-2 py-1 inline-block mb-16 animate-[fadeIn_1s_ease-out] shadow-glow">
-            What Our Clients Say
-          </h2>
-          <div className="flex flex-col items-center">
-            {testimonials.map((testimonial, index) => (
-              <div
+          <motion.h2
+            className="text-5xl font-bold text-center text-white font-manrope mb-16 shadow-glow"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            Why Choose Us
+          </motion.h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            {[
+              {
+                title: 'Agentic AI',
+                desc: 'Autonomous agents for optimized processes.',
+                icon: 'M12 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0 M8 8.5l1.5 1.5m6 0l1.5-1.5m-9 7l1.5-1.5m6 0l1.5 1.5',
+                link: '/services#agentic-ai',
+                color: 'text-teal-custom',
+              },
+              {
+                title: 'Generative AI',
+                desc: 'Innovative content and workflow automation.',
+                icon: 'M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0 M6 12h2m8 0h2m-6-6v2m0 8v2',
+                link: '/services#generative-ai',
+                color: 'text-purple-light',
+              },
+              {
+                title: 'Data Engineering',
+                desc: 'Robust pipelines for actionable insights.',
+                icon: 'M5 12h14m-7-7v14m-7-7l2-2m0 4l-2-2m12-2l-2 2m0-4l2 2',
+                link: '/services#data-engineering',
+                color: 'text-purple-deep',
+              },
+            ].map((item, index) => (
+              <motion.div
                 key={index}
-                className={`max-w-2xl text-center transition-opacity duration-1000 ${
-                  index === currentTestimonial ? "opacity-100" : "opacity-0 absolute"
-                }`}
+                className="p-6 card-glass rounded-lg hover:scale-105 transition-transform duration-300"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.2, duration: 0.8 }}
+                whileHover={{ scale: 1.05, rotateX: 5, rotateY: 5 }}
               >
-                <p className="text-xl text-off-white italic animate-[fadeIn_1.2s_ease-out]">
-                  "{testimonial.quote}"
-                </p>
-                <p className="mt-4 text-neutral-400 font-semibold animate-[fadeIn_1.4s_ease-out]">
-                  — {testimonial.author}
-                </p>
-              </div>
+                <div className="flex justify-center mb-4">
+                  <svg
+                    className={`w-8 h-8 ${item.color}`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={item.icon} />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-semibold text-white font-manrope mb-4 shadow-glow">{item.title}</h3>
+                <p className="text-blue-violet mb-4">{item.desc}</p>
+                <a
+                  href={item.link}
+                  className="relative inline-block bg-gradient-to-r from-teal-custom via-purple-light to-purple-deep text-white py-2 px-4 rounded-full text-base font-semibold shadow-lg hover:scale-105 hover:shadow-pulse transition-all duration-300 ripple"
+                >
+                  Learn More
+                </a>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-navy-dark">
+      {/* Our Impact Section */}
+      <section className="py-32 bg-gradient-to-br from-midnight to-dark-blue relative overflow-hidden">
+        <div className="absolute inset-0 -z-10 opacity-10 particle-bg animate-pulse"></div>
         <div className="max-w-7xl mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-off-white px-2 py-1 inline-block mb-6 animate-[fadeIn_1s_ease-out] shadow-glow">
-            Ready to Transform Your Business?
-          </h2>
-          <p className="text-xl text-off-white max-w-2xl mx-auto mb-10 animate-[fadeIn_1.2s_ease-out]">
-            Partner with Qubro Consulting to unlock the full potential of AI and data engineering.
-          </p>
-          <div className="flex gap-4 justify-center">
+          <motion.h2
+            className="text-5xl font-bold text-white font-manrope mb-12 shadow-glow"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            Our Impact
+          </motion.h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            {[
+              { value: '5+', label: 'AI Projects Delivered', color: 'text-white' },
+              { value: '3+', label: 'Industries Served', color: 'text-white' },
+              { value: '100%', label: 'Client Satisfaction', color: 'text-white' },
+            ].map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.2, duration: 0.8 }}
+              >
+                <p className={`text-5xl font-bold ${item.color} animate-count-up`}>{item.value}</p>
+                <p className="text-violet-400 mt-2">{item.label}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Projects Section */}
+      <section className="py-32 bg-midnight relative">
+        <div className="absolute inset-0 -z-10 opacity-10 particle-bg animate-pulse"></div>
+        <div className="max-w-7xl mx-auto px-4">
+          <motion.h2
+            className="text-5xl font-bold text-center text-white font-manrope mb-16 shadow-glow"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            Featured Projects
+          </motion.h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+            {[
+              {
+                image: '/images/hero1.png',
+                title: 'AI-Driven Customer Support',
+                desc: 'GenAI chatbot improving response times by 70%.',
+                link: '/work#project1',
+              },
+              {
+                image: '/images/hero2.png',
+                title: 'Data Pipeline Optimization',
+                desc: 'Scalable pipeline reducing processing time by 50%.',
+                link: '/work#project2',
+              },
+              {
+                image: '/images/hero3.png',
+                title: 'Agentic Workflow Automation',
+                desc: 'Autonomous agents boosting efficiency by 40%.',
+                link: '/work#project3',
+              },
+            ].map((project, index) => (
+              <motion.div
+                key={index}
+                className="relative rounded-lg overflow-hidden card-glass group"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.2, duration: 0.8 }}
+                whileHover={{ scale: 1.05, rotateX: 5, rotateY: 5 }}
+              >
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
+                  <h3 className="text-2xl font-semibold text-white font-manrope mb-2 shadow-glow">{project.title}</h3>
+                  <p className="text-blue-violet">{project.desc}</p>
+                  <a
+                    href={project.link}
+                    className="relative inline-block bg-gradient-to-r from-teal-custom via-purple-light to-purple-deep text-white py-2 px-4 rounded-full text-base font-semibold shadow-lg hover:scale-105 hover:shadow-pulse transition-all duration-300 ripple mt-4"
+                  >
+                    Learn More
+                  </a>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonial Slider */}
+      <section className="py-32 bg-midnight relative overflow-hidden">
+        <div
+          className="absolute inset-0 -z-10 opacity-10 bg-cover bg-center"
+          style={{ backgroundImage: "url('/images/testimonial-bg.jpg')" }}
+        ></div>
+        <div className="max-w-7xl mx-auto px-4">
+          <motion.h2
+            className="text-5xl font-bold text-center text-white font-manrope mb-16 shadow-glow"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            Client Testimonials
+          </motion.h2>
+          <AnimatePresence>
+            {testimonials.map((testimonial, index) => (
+              <motion.div
+                key={index}
+                className={`max-w-2xl text-center mx-auto transition-opacity duration-1000 ${
+                  index === currentTestimonial ? 'opacity-100' : 'opacity-0 absolute'
+                }`}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: index === currentTestimonial ? 1 : 0, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.8 }}
+              >
+                <p className="text-xl text-blue-violet italic font-manrope">"{testimonial.quote}"</p>
+                <p className="mt-4 text-white/60 font-semibold">— {testimonial.author}</p>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-32 bg-gradient-to-br from-midnight to-dark-blue relative">
+        <div className="absolute inset-0 -z-10 opacity-10 particle-bg animate-pulse"></div>
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <motion.h2
+            className="text-5xl font-bold text-white font-manrope mb-6 shadow-glow"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            Transform Your Business
+          </motion.h2>
+          <motion.p
+            className="text-xl text-blue-violet max-w-2xl mx-auto mb-10"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            Partner with Qubro to unlock AI-driven innovation.
+          </motion.p>
+          <motion.div
+            className="flex gap-4 justify-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
             <a
               href="/contact"
-              className="inline-block bg-gradient-to-r from-teal-400 via-violet-400 to-coral-400 text-off-white py-3 px-8 rounded-full text-xl font-semibold shadow hover:scale-105 hover:shadow-lg transition-all duration-200 animate-[fadeIn_1.4s_ease-out]"
+              className="relative inline-block bg-gradient-to-r from-teal-custom via-purple-light to-purple-deep text-white py-3 px-8 rounded-full text-lg font-semibold shadow-lg hover:scale-105 hover:shadow-pulse transition-all duration-300 ripple"
             >
               Get in Touch
             </a>
             <a
               href="/work"
-              className="inline-block bg-transparent border border-off-white text-off-white py-3 px-8 rounded-full text-xl font-semibold hover:bg-off-white hover:text-space-blue transition-all duration-200 animate-[fadeIn_1.6s_ease-out]"
+              className="relative inline-block bg-gradient-to-r from-teal-custom via-purple-light to-purple-deep text-white py-3 px-8 rounded-full text-lg font-semibold shadow-lg hover:scale-105 hover:shadow-pulse transition-all duration-300 ripple"
             >
               View Our Work
             </a>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       <style jsx>{`
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
+        @keyframes float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-20px); }
         }
         @keyframes marquee {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
         }
         @keyframes pulse {
-          0%, 100% { opacity: 0.2; }
-          50% { opacity: 0.4; }
+          0%, 100% { opacity: 0.1; }
+          50% { opacity: 0.2; }
         }
         @keyframes countUp {
           from { transform: scale(0.8); opacity: 0; }
           to { transform: scale(1); opacity: 1; }
         }
-        @keyframes logoGlowPulse {
-          0%, 100% { box-shadow: 0 0 8px rgba(34, 211, 238, 0.6), 0 0 12px rgba(34, 211, 238, 0.4); }
-          50% { box-shadow: 0 0 12px rgba(34, 211, 238, 0.8), 0 0 16px rgba(34, 211, 238, 0.6); }
+        @keyframes pulseGlow {
+          0%, 100% { box-shadow: 0 0 10px rgba(89, 193, 115, 0.4); }
+          50% { box-shadow: 0 0 20px rgba(89, 193, 115, 0.6); }
+        }
+        @keyframes shadowPulse {
+          0%, 100% { box-shadow: 0 0 15px rgba(89, 193, 115, 0.5); }
+          50% { box-shadow: 0 0 25px rgba(89, 193, 115, 0.8); }
         }
         .animate-marquee {
-          animation: marquee 25s linear infinite;
+          animation: marquee 30s linear infinite;
         }
         .animate-marquee:hover {
           animation-play-state: paused;
         }
         .particle-bg {
-          animation: float 20s ease-in-out infinite;
-        }
-        @keyframes float {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-20px); }
-        }
-        .text-shadow {
-          text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 800'%3E%3Cfilter id='a'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.05' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23a)' opacity='.1'/%3E%3Ccircle cx='200' cy='200' r='10' fill='%23FFFFFF' opacity='.3'/%3E%3Ccircle cx='600' cy='600' r='15' fill='%23FFFFFF' opacity='.2'/%3E%3Ccircle cx='400' cy='300' r='8' fill='%23FFFFFF' opacity='.25'/%3E%3C/svg%3E");
+          background-size: cover;
         }
         .shadow-glow {
-          text-shadow: 0 0 8px rgba(241, 245, 249, 0.6), 0 0 12px rgba(241, 245, 249, 0.4);
+          box-shadow: 0 0 10px rgba(255, 255, 255, 0.6), 0 0 15px rgba(89, 193, 115, 0.4);
         }
-        .shadow-glow-logo {
-          box-shadow: 0 0 8px rgba(34, 211, 238, 0.6), 0 0 12px rgba(34, 211, 238, 0.4);
+        .card-glass {
+          background: rgba(30, 41, 59, 0.5);
+          backdrop-filter: blur(8px);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .shadow-pulse {
+          animation: shadowPulse 1.5s ease-in-out infinite;
+        }
+        .ripple::after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 0;
+          height: 0;
+          background: rgba(255, 255, 255, 0.3);
+          border-radius: 50%;
+          transform: translate(-50%, -50%);
+          transition: width 0.6s, height 0.6s;
+        }
+        .ripple:active::after {
+          width: 300px;
+          height: 300px;
+        }
+        .highlight-outline {
+          -webkit-text-stroke: 0.5px white;
+          text-stroke: 0.5px white;
+          paint-order: stroke fill;
         }
       `}</style>
     </>
   );
-}
+};
+
+export default Home;
