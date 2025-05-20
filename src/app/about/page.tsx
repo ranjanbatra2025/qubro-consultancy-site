@@ -2,6 +2,24 @@
 import React from "react";
 
 export default function AboutPage() {
+  const headingStyle = {
+    color: 'white', // #FFFFFF
+    backgroundColor: '#7B68EE', // purple
+    padding: '0.2em 0.4em', // Add some padding to make the background visible
+    borderRadius: '4px', // Optional: for rounded corners on the background
+    display: 'inline', // To make the background only wrap the text
+  };
+
+  // For block-level headings that should still take full width but have styled text
+  const blockHeadingStyle = {
+    color: 'white',
+    backgroundColor: '#7B68EE',
+    padding: '0.2em 0.4em',
+    borderRadius: '4px',
+    display: 'inline-block', // Allows padding and respects width of text, but can be centered if parent is text-center
+  };
+
+
   return (
     <div key="about-page">
       {/* Header Section with Image */}
@@ -22,7 +40,7 @@ export default function AboutPage() {
           <div className="absolute inset-0 bg-black/20"></div>
           <div className="flex flex-col items-center justify-center h-full text-center px-4">
             <h1 className="text-5xl md:text-7xl font-bold text-[#0ed2f7] mb-6 animate-[fadeIn_0.5s_ease-out_glowPulse_2s_ease-in-out_infinite] shadow-glow will-change-transform">
-              A global team of teams, powered by AI.
+              <span style={blockHeadingStyle}>A global team of teams, powered by AI.</span>
             </h1>
             <p className="text-xl md:text-2xl text-neutral-200 max-w-3xl animate-[fadeIn_0.7s_ease-out] text-shadow-header">
               We unite human expertise with advanced AI capabilities to create extraordinary client outcomes. Our teams leverage artificial intelligence to amplify their craft, while maintaining the human-centered design that defines both our digital experiences and our culture.
@@ -35,7 +53,7 @@ export default function AboutPage() {
       <section className="py-20 bg-neutral-900">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-4xl md:text-5xl font-bold text-center text-[#0ed2f7] mb-16 animate-[fadeIn_0.5s_ease-out_glowPulse_2s_ease-in-out_infinite] shadow-glow will-change-transform">
-            Qubro Consultancy at a Glance
+            <span style={blockHeadingStyle}>Qubro Consultancy at a Glance</span>
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="flex flex-col items-center text-center animate-[fadeIn_0.7s_ease-out]">
@@ -93,7 +111,7 @@ export default function AboutPage() {
       <section className="py-20 bg-neutral-950">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-4xl md:text-5xl font-bold text-center text-[#0ed2f7] mb-16 animate-[fadeIn_0.5s_ease-out_glowPulse_2s_ease-in-out_infinite] shadow-glow will-change-transform">
-            Trusted Long-Term Partners
+            <span style={blockHeadingStyle}>Trusted Long-Term Partners</span>
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
@@ -118,7 +136,7 @@ export default function AboutPage() {
           <div className="flex flex-col lg:flex-row gap-12">
             <div className="lg:w-1/2">
               <h2 className="text-4xl md:text-5xl font-bold text-[#0ed2f7] mb-6 animate-[fadeIn_0.5s_ease-out_glowPulse_2s_ease-in-out_infinite] shadow-glow will-change-transform">
-                Accelerating Time to Value
+                <span style={headingStyle}>Accelerating Time to Value</span>
               </h2>
               <p className="text-xl text-neutral-200 mb-6 animate-[fadeIn_0.7s_ease-out] text-shadow">
                 When it comes to building software, quality and speed matter. Because let's face it — software can't impact the bottom line if it's not in customers' hands.
@@ -166,7 +184,7 @@ export default function AboutPage() {
       <section className="py-20 bg-neutral-950">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-[#0ed2f7] mb-8 animate-[fadeIn_0.5s_ease-out_glowPulse_2s_ease-in-out_infinite] shadow-glow will-change-transform">
-            And we continue to help our clients build even stronger teams.
+            <span style={blockHeadingStyle}>And we continue to help our clients build even stronger teams.</span>
           </h2>
           <blockquote className="max-w-2xl mx-auto italic text-neutral-200 animate-[fadeIn_0.7s_ease-out] text-shadow">
             "Qubro’s AI-driven solutions have revolutionized our workflows, enabling us to scale faster than ever before."
@@ -179,7 +197,7 @@ export default function AboutPage() {
       <section className="py-20 bg-neutral-900">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-4xl md:text-5xl font-bold text-center text-[#0ed2f7] mb-16 animate-[fadeIn_0.5s_ease-out_glowPulse_2s_ease-in-out_infinite] shadow-glow will-change-transform">
-            Partner Certifications
+            <span style={blockHeadingStyle}>Partner Certifications</span>
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
@@ -202,12 +220,12 @@ export default function AboutPage() {
       <section className="py-20 bg-neutral-950">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-4xl md:text-5xl font-bold text-center text-[#0ed2f7] mb-12 animate-[fadeIn_0.5s_ease-out_glowPulse_2s_ease-in-out_infinite] shadow-glow will-change-transform">
-            Our Leadership
+            <span style={blockHeadingStyle}>Our Leadership</span>
           </h2>
           {/* Executive Leadership */}
           <div className="mb-16">
             <h3 className="text-3xl font-semibold text-center text-[#0ed2f7] mb-8 animate-[fadeIn_0.7s_ease-out_glowPulse_2s_ease-in-out_infinite] shadow-glow will-change-transform">
-              Executive Leadership
+              <span style={blockHeadingStyle}>Executive Leadership</span>
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
               <div className="p-6 bg-neutral-950/50 backdrop-blur-md border border-neutral-800 rounded-lg hover:scale-105 transition-transform duration-300 animate-[fadeIn_0.8s_ease-out]">
@@ -231,7 +249,7 @@ export default function AboutPage() {
           {/* Service Line Leadership */}
           <div>
             <h3 className="text-3xl font-semibold text-center text-[#0ed2f7] mb-8 animate-[fadeIn_1s_ease-out_glowPulse_2s_ease-in-out_infinite] shadow-glow will-change-transform">
-              Service Line Leadership
+              <span style={blockHeadingStyle}>Service Line Leadership</span>
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
               <div className="p-6 bg-neutral-950/50 backdrop-blur-md border border-neutral-800 rounded-lg hover:scale-105 transition-transform duration-300 animate-[fadeIn_1.1s_ease-out]">
@@ -267,7 +285,7 @@ export default function AboutPage() {
       <section className="py-20 bg-neutral-900">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-[#0ed2f7] mb-6 animate-[fadeIn_0.5s_ease-out_glowPulse_2s_ease-in-out_infinite] shadow-glow will-change-transform">
-            Partner with Qubro Today
+            <span style={blockHeadingStyle}>Partner with Qubro Today</span>
           </h2>
           <p className="text-xl text-neutral-200 max-w-2xl mx-auto mb-10 animate-[fadeIn_0.7s_ease-out] text-shadow">
             Let’s transform your business with cutting-edge AI and data solutions.
@@ -299,6 +317,11 @@ export default function AboutPage() {
           50% { box-shadow: 0 0 12px rgba(14, 210, 247, 0.8), 0 0 16px rgba(14, 210, 247, 0.6); }
         }
         .shadow-glow {
+          /* This class is already on the parent h1/h2/h3, so the span's background won't affect this text-shadow.
+             If the original text color (#0ed2f7) was important for the glow, that is now overridden by white text.
+             The glow will now be on white text if the span's style is applied, or on #0ed2f7 if not.
+             Given the request, the text itself should be white. The glowPulse animation might look different.
+          */
           text-shadow: 0 0 8px rgba(14, 210, 247, 0.6), 0 0 12px rgba(14, 210, 247, 0.4);
         }
         .subtle-glow {

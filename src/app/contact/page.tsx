@@ -9,6 +9,15 @@ export default function ContactPage() {
   const formRef = useRef<HTMLFormElement>(null);
   const newsletterFormRef = useRef<HTMLFormElement>(null);
 
+  // Style for headings: white text, purple background
+  const headingTextStyle = {
+    color: 'white',
+    backgroundColor: '#7B68EE', // purple
+    padding: '0.2em 0.4em',    // padding around the text
+    borderRadius: '4px',       // optional: rounded corners
+    display: 'inline-block',   // ensure background wraps text and allows centering
+  };
+
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setStatus(null);
@@ -64,7 +73,7 @@ export default function ContactPage() {
     }
 
     try {
-      const response = await fetch("https://formspree.io/f/xyyqwyap", {
+      const response = await fetch("https://formspree.io/f/xyyqwyap", { // Assuming same endpoint for newsletter
         method: "POST",
         body: formData,
         headers: {
@@ -96,8 +105,9 @@ export default function ContactPage() {
             backgroundSize: 'cover',
           }}></div>
         </div>
-        <h1 className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-fuchsia-400 mb-6 animate-[fadeIn_1s_ease-out]">
-          Contact Qubro Consulting
+        <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-[fadeIn_1s_ease-out]">
+          {/* Removed: bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-fuchsia-400 */}
+          <span style={headingTextStyle}>Contact Qubro Consulting</span>
         </h1>
         <p className="text-xl md:text-2xl text-neutral-200 max-w-3xl px-4 animate-[fadeIn_1.2s_ease-out]">
           Ready to accelerate your AI adoption or solve a pressing data challenge? Connect with our team today.
@@ -108,7 +118,10 @@ export default function ContactPage() {
       <section className="py-20 bg-neutral-900">
         <div className="max-w-7xl mx-auto px-4">
           <div className="max-w-lg mx-auto bg-neutral-950/50 backdrop-blur-md border border-neutral-800 rounded-2xl py-10 px-8 shadow-xl">
-            <h2 className="text-3xl font-bold text-white mb-6 text-center">Send Us a Message</h2>
+            <h2 className="text-3xl font-bold mb-6 text-center">
+              {/* Removed: text-white */}
+              <span style={headingTextStyle}>Send Us a Message</span>
+            </h2>
             <form
               ref={formRef}
               className="space-y-6"
@@ -173,7 +186,10 @@ export default function ContactPage() {
       {/* Social Media Section */}
       <section className="py-20 bg-neutral-950">
         <div className="max-w-7xl mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 animate-[fadeIn_1s_ease-out]">Connect With Us</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 animate-[fadeIn_1s_ease-out]">
+            {/* Removed: text-white */}
+            <span style={headingTextStyle}>Connect With Us</span>
+          </h2>
           <p className="text-xl text-neutral-200 mb-12 max-w-3xl mx-auto animate-[fadeIn_1.2s_ease-out]">
             Follow us on social media for the latest updates on AI, data engineering, and innovation.
           </p>
@@ -194,7 +210,7 @@ export default function ContactPage() {
             </a>
             <a href="https://x.com/qubro" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform duration-300">
               <img
-                src="https://upload.wikimedia.org/wikipedia/commons/6/60/X_logo_2023_%28white%29.png"
+                src="https://upload.wikimedia.org/wikipedia/commons/6/60/X_logo_2023_%28white%29.png" // White X logo for dark backgrounds
                 alt="X logo"
                 className="h-12 max-w-[48px] grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition"
               />
@@ -220,7 +236,10 @@ export default function ContactPage() {
       {/* Newsletter Section */}
       <section className="py-20 bg-neutral-900">
         <div className="max-w-7xl mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 animate-[fadeIn_1s_ease-out]">Newsletter</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 animate-[fadeIn_1s_ease-out]">
+            {/* Removed: text-white */}
+            <span style={headingTextStyle}>Newsletter</span>
+          </h2>
           <p className="text-xl text-neutral-200 mb-12 max-w-3xl mx-auto animate-[fadeIn_1.2s_ease-out]">
             Stay in the loop. Get the latest insights on growth and transformation.
           </p>
