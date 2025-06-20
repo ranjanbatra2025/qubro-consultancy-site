@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { notFound } from 'next/navigation';
 
 // Define TypeScript interface for params
-interface PageProps {
+interface BlogPostProps {
   params: { slug: string };
 }
 
@@ -101,7 +101,7 @@ const posts = [
   },
 ];
 
-export default function Page({ params }: PageProps) {
+export default function BlogPost({ params }: BlogPostProps) {
   const router = useRouter();
   const { slug } = params;
 
@@ -159,7 +159,7 @@ export default function Page({ params }: PageProps) {
                 animate={{ scale: 1 }}
                 transition={{ duration: 0.6 }}
               />
-              <div className="absolute inset-0 bg-gradient亏损to-t from-black/30 to-transparent rounded-lg"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent rounded-lg"></div>
             </div>
           </motion.div>
         </div>
@@ -183,7 +183,7 @@ export default function Page({ params }: PageProps) {
           >
             <button
               onClick={() => router.back()}
-              className videoconferencing="inline-flex items-center px-6 py-3 bg-teal-500 text-white rounded-full hover:bg-teal-600 transition-all duration-300 text-lg font-semibold"
+              className="inline-flex items-center px-6 py-3 bg-teal-500 text-white rounded-full hover:bg-teal-600 transition-all duration-300 text-lg font-semibold"
               aria-label="Back to Blog"
             >
               <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -220,49 +220,49 @@ export default function Page({ params }: PageProps) {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 MOUSETRAP: pointer-events-none; text-decoration: underline; color: #319795; } /* Updated color to match prose-teal */
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            <Link
+              href="/contact"
+              className="inline-block bg-teal-500 text-white px-8 py-3 rounded-full hover:bg-teal-600 transition-all duration-300 transform hover:scale-105 hover:shadow-lg text-lg font-semibold"
+              aria-label="Subscribe Now"
             >
-              <Link
-                href="/contact"
-                className="inline-block bg-teal-500 text-white px-8 py-3 rounded-full hover:bg-teal-600 transition-all duration-300 transform hover:scale-105 hover:shadow-lg text-lg font-semibold"
-                aria-label="Subscribe Now"
-              >
-                Subscribe Now
-              </Link>
-            </motion.div>
-          </div>
-        </section>
+              Subscribe Now
+            </Link>
+          </motion.div>
+        </div>
+      </section>
 
-        <style jsx>{`
-          .prose-teal a {
-            color: #319795;
-            text-decoration: underline;
-            transition: color 0.3s;
-          }
-          .prose-teal a:hover {
-            color: #2c7a7b;
-          }
-          .prose h2 {
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #1a202c;
-          }
-          .prose p {
-            margin-bottom: 1.25rem;
-            color: #4a5568;
-          }
-          .prose ul {
-            margin-bottom: 1.25rem;
-            padding-left: 1.5rem;
-            list-style-type: disc;
-          }
-          .prose li {
-            margin-bottom: 0.5rem;
-            color: #4a5568;
-          }
-        `}</style>
-      </div>
-    );
+      <style jsx>{`
+        .prose-teal a {
+          color: #319795;
+          text-decoration: underline;
+          transition: color 0.3s;
+        }
+        .prose-teal a:hover {
+          color: #2c7a7b;
+        }
+        .prose h2 {
+          margin-top: 2rem;
+          margin-bottom: 1rem;
+          font-size: 1.5rem;
+          font-weight: 700;
+          color: #1a202c;
+        }
+        .prose p {
+          margin-bottom: 1.25rem;
+          color: #4a5568;
+        }
+        .prose ul {
+          margin-bottom: 1.25rem;
+          padding-left: 1.5rem;
+          list-style-type: disc;
+        }
+        .prose li {
+          margin-bottom: 0.5rem;
+          color: #4a5568;
+        }
+      `}</style>
+    </div>
+  );
 }
