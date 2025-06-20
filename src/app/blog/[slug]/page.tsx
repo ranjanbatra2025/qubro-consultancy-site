@@ -5,7 +5,12 @@ import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { notFound } from 'next/navigation';
 
-// Sample posts data (same as provided in BlogPage)
+// Define TypeScript interface for params
+interface Params {
+  slug: string;
+}
+
+// Sample posts data (same as in BlogPage and Home)
 const posts = [
   {
     title: 'The Future of Agentic AI in Business Operations',
@@ -96,7 +101,7 @@ const posts = [
   },
 ];
 
-export default function BlogPost({ params }) {
+export default function BlogPost({ params }: { params: Params }) {
   const router = useRouter();
   const { slug } = params;
 
