@@ -6,8 +6,8 @@ import { motion } from 'framer-motion';
 import { notFound } from 'next/navigation';
 
 // Define TypeScript interface for params
-interface Params {
-  slug: string;
+interface BlogPostProps {
+  params: { slug: string };
 }
 
 // Sample posts data (same as in BlogPage and Home)
@@ -101,7 +101,7 @@ const posts = [
   },
 ];
 
-export default function BlogPost({ params }: { params: Params }) {
+export default function BlogPost({ params }: BlogPostProps) {
   const router = useRouter();
   const { slug } = params;
 
