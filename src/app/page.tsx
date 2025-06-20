@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 const Home: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
-  const [isNavOpen, setIsNavOpen] = useState(false);
 
   const slides = [
     {
@@ -33,7 +32,7 @@ const Home: React.FC = () => {
 
   const testimonials = [
     {
-      quote: 'Qubro’s AI solutions doubled our efficiency with real-time insights.',
+      quote: 'Absolute AI’s solutions doubled our efficiency with real-time insights.',
       author: 'Jane Doe, CTO, TechStartup',
     },
     {
@@ -41,7 +40,7 @@ const Home: React.FC = () => {
       author: 'Mark Wilson, COO, FinCorp',
     },
     {
-      quote: 'Qubro transformed our marketing ROI with cutting-edge AI.',
+      quote: 'Absolute AI transformed our marketing ROI with cutting-edge AI.',
       author: 'Emily Chen, CMO, BrandX',
     },
   ];
@@ -56,95 +55,31 @@ const Home: React.FC = () => {
   useEffect(() => {
     const slideInterval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 6000);
+    }, 5000);
     const testimonialInterval = setInterval(() => {
       setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
-    }, 8000);
+    }, 7000);
     return () => {
       clearInterval(slideInterval);
       clearInterval(testimonialInterval);
     };
   }, [slides.length, testimonials.length]);
 
-  const navLinks = ['Home', 'Services', 'About', 'Contact'];
-
   return (
-    <>
-      {/* Navbar */}
-      <nav className="fixed top-0 left-0 w-full bg-midnight/95 backdrop-blur-md z-50 shadow-glow">
-        <div className="max-w-7xl mx-auto px-4 flex items-center justify-between py-4">
-          <Link href="/" className="flex items-center text-xl md:text-2xl font-bold text-white font-manrope relative group hover:bg-gradient-to-r hover:from-teal-custom hover:via-purple-light hover:to-purple-deep hover:text-transparent hover:bg-clip-text transition-all duration-300">
-            <svg className="w-8 h-8 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="12" cy="12" r="10" stroke="url(#grad)" strokeWidth="2"/>
-              <path d="M8 16 Q12 8 16 16" stroke="url(#grad)" strokeWidth="2"/>
-              <defs>
-                <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" style={{stopColor: '#59c173'}}/>
-                  <stop offset="50%" style={{stopColor: '#a17fe0'}}/>
-                  <stop offset="100%" style={{stopColor: '#5d26c1'}}/>
-                </linearGradient>
-              </defs>
-            </svg>
-            Qubro Consultancy
-            <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-gradient-to-r from-teal-custom via-purple-light to-purple-deep transition-all duration-300 group-hover:w-full"></span>
-          </Link>
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((item) => (
-              <Link
-                key={item}
-                href={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
-                className="text-white relative group hover:bg-gradient-to-r hover:from-teal-custom hover:via-purple-light hover:to-purple-deep hover:text-transparent hover:bg-clip-text transition-all duration-300"
-              >
-                {item}
-                <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-gradient-to-r from-teal-custom via-purple-light to-purple-deep transition-all duration-300 group-hover:w-full"></span>
-              </Link>
-            ))}
-          </div>
-          <button
-            className="md:hidden text-white focus:outline-none"
-            onClick={() => setIsNavOpen(!isNavOpen)}
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d={isNavOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'}
-              />
-            </svg>
-          </button>
-        </div>
-        {isNavOpen && (
-          <div className="md:hidden bg-midnight/95 px-4 py-6">
-            {navLinks.map((item) => (
-              <Link
-                key={item}
-                href={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
-                className="block text-white py-2 relative group hover:bg-gradient-to-r hover:from-teal-custom hover:via-purple-light hover:to-purple-deep hover:text-transparent hover:bg-clip-text transition-all duration-300"
-                onClick={() => setIsNavOpen(false)}
-              >
-                {item}
-                <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-gradient-to-r from-teal-custom via-purple-light to-purple-deep transition-all duration-300 group-hover:w-full"></span>
-              </Link>
-            ))}
-          </div>
-        )}
-      </nav>
-
-      {/* Hero Section with Full-Size Image Carousel */}
-      <section className="relative h-screen bg-midnight overflow-hidden pt-16">
-        <div className="absolute inset-0 -z-10 particle-bg animate-float"></div>
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white font-sans">
+      {/* Hero Section with Carousel */}
+      <section id="home" className="relative h-screen overflow-hidden">
         <AnimatePresence>
           {slides.map((slide, index) => (
             <motion.div
               key={index}
-              className={`absolute inset-0 transition-opacity duration-1000 ${
+              className={`absolute inset-0 ${
                 index === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
               }`}
-              initial={{ opacity: 0, scale: 1.1 }}
+              initial={{ opacity: 0, scale: 1.2 }}
               animate={{ opacity: index === currentSlide ? 1 : 0, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.1 }}
-              transition={{ duration: 1 }}
+              exit={{ opacity: 0, scale: 1.2 }}
+              transition={{ duration: 1.2, ease: 'easeInOut' }}
             >
               <div className="relative w-full h-full">
                 <motion.img
@@ -152,43 +87,43 @@ const Home: React.FC = () => {
                   alt={slide.text}
                   className="w-full h-full object-cover"
                   style={{ minHeight: '100vh', objectPosition: 'center' }}
-                  initial={{ y: 0 }}
-                  animate={{ y: [0, -20, 0] }}
-                  transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+                  initial={{ scale: 1.1 }}
+                  animate={{ scale: 1 }}
+                  transition={{ duration: 10, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut' }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/40 to-black/60"></div>
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-30">
+                <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/60"></div>
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
                   <motion.h1
-                    className="text-4xl sm:text-5xl font-bold text-white font-manrope mb-16 shadow-glow"
-                    initial={{ y: 20, opacity: 0, letterSpacing: '-0.05em' }}
-                    animate={{ y: 0, opacity: 1, letterSpacing: '0em' }}
-                    transition={{ delay: 0.2, duration: 0.8 }}
+                    className="text-4xl sm:text-6xl font-extrabold text-white mb-6 tracking-tight"
+                    initial={{ y: 30, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.3, duration: 0.8 }}
                   >
-                    <span className="highlight-outline">{slide.text}</span>
+                    {slide.text}
                   </motion.h1>
                   <motion.p
-                    className="text-xl md:text-2xl text-blue-violet max-w-3xl mt-4"
-                    initial={{ y: 20, opacity: 0 }}
+                    className="text-xl sm:text-2xl text-gray-100 max-w-3xl mb-8"
+                    initial={{ y: 30, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.4, duration: 0.8 }}
+                    transition={{ delay: 0.5, duration: 0.8 }}
                   >
-                    <span className="highlight-outline">Qubro Consulting drives innovation with AI and data solutions.</span>
+                    Absolute AI drives innovation with cutting-edge AI and data solutions.
                   </motion.p>
                   <motion.div
-                    className="mt-8 flex gap-4"
-                    initial={{ y: 20, opacity: 0 }}
+                    className="flex gap-4"
+                    initial={{ y: 30, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.6, duration: 0.8 }}
+                    transition={{ delay: 0.7, duration: 0.8 }}
                   >
                     <Link
                       href={slide.link}
-                      className="relative inline-block bg-gradient-to-r from-teal-custom via-purple-light to-purple-deep text-white py-3 px-8 rounded-full text-lg font-semibold shadow-lg hover:scale-105 hover:shadow-pulse transition-all duration-300 ripple"
+                      className="bg-teal-500 text-white px-8 py-3 rounded-full hover:bg-teal-600 transition-all duration-300 transform hover:scale-105"
                     >
                       Explore This Service
                     </Link>
                     <Link
                       href="/about"
-                      className="relative inline-block bg-gradient-to-r from-teal-custom via-purple-light to-purple-deep text-white py-3 px-8 rounded-full text-lg font-semibold shadow-lg hover:scale-105 hover:shadow-pulse transition-all duration-300 ripple"
+                      className="bg-transparent border-2 border-white text-white px-8 py-3 rounded-full hover:bg-white hover:text-teal-600 transition-all duration-300 transform hover:scale-105"
                     >
                       Learn More
                     </Link>
@@ -198,221 +133,243 @@ const Home: React.FC = () => {
             </motion.div>
           ))}
         </AnimatePresence>
+        {/* Carousel Navigation */}
+        <div className="absolute bottom-8 left-1/2 transform meaningful-unique-classname-1 flex gap-2 z-20">
+          {slides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`w-3 h-3 rounded-full ${
+                index === currentSlide ? 'bg-teal-500' : 'bg-gray-300'
+              } hover:bg-teal-400 transition-colors`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
+        </div>
       </section>
 
-      {/* What We Do Section */}
-      <section className="py-32 bg-midnight relative">
-        <div className="absolute inset-0 -z-10 opacity-10 particle-bg animate-pulse"></div>
-        <div className="max-w-7xl mx-auto px-4">
+      {/* About Section */}
+      <section id="about" className="container mx-auto px-6 py-20">
+        <div className="max-w-4xl mx-auto text-center space-y-8">
           <motion.h2
-            className="text-5xl font-bold text-center text-white font-manrope mb-16 shadow-glow"
-            initial={{ opacity: 0, y: 20 }}
+            className="text-4xl font-extrabold text-gray-900 tracking-tight"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            Pioneering AI for Your Success
+          </motion.h2>
+          <motion.p
+            className="text-lg text-gray-600 leading-relaxed"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            Absolute AI, based in Halifax, NS, specializes in helping organizations and startups leverage Artificial Intelligence for enhanced efficiency, process optimization, cost reduction, and business diversification.
+          </motion.p>
+          <motion.div
+            className="mt-12"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            <h3 className="text-2xl font-semibold text-gray-900 mb-6">Our Mission</h3>
+            <p className="text-lg text-gray-600 leading-relaxed">
+              We analyze your current processes, identify opportunities for improvement, and manage the deployment of tailored AI solutions—from simple process enhancements to building a fully autonomous agentic workforce.
+            </p>
+            <p className="text-lg text-gray-600 leading-relaxed mt-4">
+              Our expertise spans multiple industries, empowering businesses to stay ahead in the fast-evolving digital landscape with transformative AI solutions.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Feature Cards Section */}
+      <section className="bg-gradient-to-b from-gray-100 to-gray-50 py-20">
+        <div className="container mx-auto px-6">
+          <motion.h2
+            className="text-4xl font-extrabold text-gray-900 text-center mb-12 tracking-tight"
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
             Our Expertise
           </motion.h2>
-          <div className="flex flex-col lg:flex-row gap-12 mt-16">
-            <motion.div
-              className="lg:w-1/2"
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              <h3 className="text-4xl font-bold text-white font-manrope mb-6 shadow-glow">
-                Elevating Brands with AI
-              </h3>
-              <p className="text-xl text-blue-violet">
-                We craft AI-driven solutions to boost engagement and efficiency.
-              </p>
-            </motion.div>
-            <motion.div
-              className="lg:w-1/2"
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              <ul className="space-y-4">
-                {[
-                  {
-                    name: 'Agentic AI Applications',
-                    icon: 'M12 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0 M8 8.5l1.5 1.5m6 0l1.5-1.5m-9 7l1.5-1.5m6 0l1.5 1.5',
-                    link: '/services#agentic-ai',
-                  },
-                  {
-                    name: 'Generative AI Applications',
-                    icon: 'M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0 M6 12h2m8 0h2m-6-6v2m0 8v2',
-                    link: '/services#generative-ai',
-                  },
-                  {
-                    name: 'AI Chatbots/RAG Systems',
-                    icon: 'M4 8h16M4 8l4-4m0 8l-4-4m4 4v8m4-8h8m-4-4v8m0-4h-4',
-                    link: '/services#ai-chatbots',
-                  },
-                  {
-                    name: 'Data Science',
-                    icon: 'M21 21l-5-5m-2 0a7 7 0 1 0-7-7 7 7 0 0 0 7 7zm-7-3h3m-3-3h6',
-                    link: '/services#data-science',
-                  },
-                ].map((item, index) => (
-                  <motion.li
-                    key={index}
-                    className="p-4 card-glass rounded-lg hover:scale-105 transition-transform duration-300 cursor-pointer group"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.2, duration: 0.8 }}
-                    whileHover={{ scale: 1.05, rotateX: 5, rotateY: 5 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => window.location.href = item.link}
-                  >
-                    <div className="flex items-center gap-3">
-                      <svg
-                        className="w-6 h-6 text-teal-custom"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={item.icon} />
-                      </svg>
-                      <span className="text-xl font-semibold text-white group-hover:text-cyan-300 transition-all duration-300">
-                        {item.name}
-                      </span>
-                    </div>
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Company Logos Ticker */}
-      <section className="py-32 bg-midnight relative overflow-hidden">
-        <div className="absolute inset-0 -z-10 opacity-10 particle-bg animate-pulse"></div>
-        <div className="max-w-7xl mx-auto px-4">
-          <motion.h2
-            className="text-4xl font-bold text-center text-white font-manrope mb-12 shadow-glow"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            Trusted by Leading Brands
-          </motion.h2>
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-midnight to-transparent z-10"></div>
-            <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-midnight to-transparent z-10"></div>
-            <motion.div
-              className="flex animate-marquee whitespace-nowrap"
-              animate={{ x: ['0%', '-50%'] }}
-              transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
-            >
-              {logos.map((logo, index) => (
-                <motion.img
-                  key={index}
-                  src={logo.src}
-                  alt={logo.alt}
-                  className="h-16 mx-8 animate-pulse-glow hover:grayscale-0 hover:opacity-100 transition duration-300"
-                  whileHover={{ scale: 1.1, rotateY: 10 }}
-                />
-              ))}
-              {logos.map((logo, index) => (
-                <motion.img
-                  key={`duplicate-${index}`}
-                  src={logo.src}
-                  alt={logo.alt}
-                  className="h-16 mx-8 animate-pulse-glow hover:grayscale-0 hover:opacity-100 transition duration-300"
-                  whileHover={{ scale: 1.1, rotateY: 10 }}
-                />
-              ))}
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Value Proposition Grid */}
-      <section className="py-32 bg-midnight relative">
-        <div className="absolute inset-0 -z-10 opacity-10 particle-bg animate-pulse"></div>
-        <div className="max-w-7xl mx-auto px-4">
-          <motion.h2
-            className="text-5xl font-bold text-center text-white font-manrope mb-16 shadow-glow"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            Why Choose Us
-          </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               {
-                title: 'Agentic AI',
-                desc: 'Autonomous agents for optimized processes.',
-                icon: 'M12 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0 M8 8.5l1.5 1.5m6 0l1.5-1.5m-9 7l1.5-1.5m6 0l1.5 1.5',
-                link: '/services#agentic-ai',
-                color: 'text-teal-custom',
+                title: 'AI Expertise',
+                desc: 'Cutting-edge AI solutions tailored to your needs.',
+                icon: 'https://ext.same-assets.com/2951873307/2178531131.svg',
               },
               {
-                title: 'Generative AI',
-                desc: 'Innovative content and workflow automation.',
-                icon: 'M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0 M6 12h2m8 0h2m-6-6v2m0 8v2',
-                link: '/services#generative-ai',
-                color: 'text-purple-light',
+                title: 'Strategic Focus',
+                desc: 'Driving measurable business outcomes.',
+                icon: 'https://ext.same-assets.com/2951873307/2160258571.svg',
               },
               {
-                title: 'Data Engineering',
-                desc: 'Robust pipelines for actionable insights.',
-                icon: 'M5 12h14m-7-7v14m-7-7l2-2m0 4l-2-2m12-2l-2 2m0-4l2 2',
-                link: '/services#data-engineering',
-                color: 'text-purple-deep',
+                title: 'Client-Centric',
+                desc: 'Solutions designed for your unique challenges.',
+                icon: 'https://ext.same-assets.com/2951873307/1629899335.svg',
+              },
+              {
+                title: 'Proven Results',
+                desc: 'Delivering tangible improvements.',
+                icon: 'https://ext.same-assets.com/2951873307/2636204017.svg',
               },
             ].map((item, index) => (
               <motion.div
                 key={index}
-                className="p-6 card-glass rounded-lg hover:scale-105 transition-transform duration-300"
-                initial={{ opacity: 0, y: 20 }}
+                className="text-center p-8 bg-white rounded-2xl shadow-lg hover:bg-teal-50 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.2, duration: 0.8 }}
-                whileHover={{ scale: 1.05, rotateX: 5, rotateY: 5 }}
               >
-                <div className="flex justify-center mb-4">
-                  <svg
-                    className={`w-8 h-8 ${item.color}`}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={item.icon} />
-                  </svg>
-                </div>
-                <h3 className="text-2xl font-semibold text-white font-manrope mb-4 shadow-glow">{item.title}</h3>
-                <p className="text-blue-violet mb-4">{item.desc}</p>
-                <a
-                  href={item.link}
-                  className="relative inline-block bg-gradient-to-r from-teal-custom via-purple-light to-purple-deep text-white py-2 px-4 rounded-full text-base font-semibold shadow-lg hover:scale-105 hover:shadow-pulse transition-all duration-300 ripple"
-                >
-                  Learn More
-                </a>
+                <img
+                  src={item.icon}
+                  alt={item.title}
+                  className="w-16 h-16 mx-auto mb-4 transition-transform hover:scale-110"
+                />
+                <h4 className="text-xl font-semibold text-gray-900 mb-2">{item.title}</h4>
+                <p className="text-gray-600">{item.desc}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Our Impact Section */}
-      <section className="py-32 bg-gradient-to-br from-midnight to-dark-blue relative overflow-hidden">
-        <div className="absolute inset-0 -z-10 opacity-10 particle-bg animate-pulse"></div>
-        <div className="max-w-7xl mx-auto px-4 text-center">
+      {/* Services Section */}
+      <section id="services" className="py-20">
+        <div className="container mx-auto px-6">
           <motion.h2
-            className="text-5xl font-bold text-white font-manrope mb-12 shadow-glow"
-            initial={{ opacity: 0, y: 20 }}
+            className="text-4xl font-extrabold text-gray-900 text-center mb-4 tracking-tight"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            Our AI Expertise & Solutions
+          </motion.h2>
+          <motion.p
+            className="text-lg text-gray-600 text-center max-w-3xl mx-auto mb-12"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            Comprehensive AI services designed to transform your business operations and drive sustainable growth.
+          </motion.p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                title: 'AI-Driven Efficiency',
+                desc: 'Streamline operations with intelligent automation.',
+                icon: 'https://ext.same-assets.com/2951873307/4107728250.svg',
+                link: '/services#ai-efficiency',
+              },
+              {
+                title: 'Process Refinement',
+                desc: 'Optimize processes using AI analytics.',
+                icon: 'https://ext.same-assets.com/2951873307/2281295613.svg',
+                link: '/services#process-refinement',
+              },
+              {
+                title: 'AI Digital Marketing',
+                desc: 'Implement smart marketing tools.',
+                icon: 'https://ext.same-assets.com/2951873307/2330954298.svg',
+                link: '/services#digital-marketing',
+              },
+              {
+                title: 'AI for Diversification',
+                desc: 'Explore new opportunities with AI insights.',
+                icon: '/images/diversification.svg',
+                link: '/services#diversification',
+              },
+              {
+                title: 'AI Product Development',
+                desc: 'End-to-end AI solution implementation.',
+                icon: 'https://ext.same-assets.com/2951873307/1922649866.svg',
+                link: '/services#product-development',
+              },
+              {
+                title: 'Agentic Workforce',
+                desc: 'Develop autonomous AI agents.',
+                icon: 'https://ext.same-assets.com/2951873307/1913257418.svg',
+                link: '/services#agentic-workforce',
+              },
+            ].map((item, index) => (
+              <motion.div
+                key={index}
+                className="bg-white p-8 rounded-2xl shadow-lg hover:bg-teal-50 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.2, duration: 0.8 }}
+              >
+                <img
+                  src={item.icon}
+                  alt={item.title}
+                  className="w-16 h-16 mx-auto mb-6 transition-transform hover:scale-110"
+                />
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">{item.title}</h3>
+                <p className="text-gray-600 mb-4">{item.desc}</p>
+                <Link
+                  href={item.link}
+                  className="text-teal-500 hover:text-teal-600 font-medium transition-colors"
+                >
+                  Learn More →
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Company Logos Ticker */}
+      <section className="py-20 bg-gradient-to-b from-gray-50 to-gray-100">
+        <div className="container mx-auto px-6">
+          <motion.h2
+            className="text-4xl font-extrabold text-gray-900 text-center mb-12 tracking-tight"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            Trusted by Leading Brands
+          </motion.h2>
+          <div className="relative overflow-hidden">
+            <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-gray-50 to-transparent z-10"></div>
+            <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-gray-50 to-transparent z-10"></div>
+            <motion.div
+              className="flex whitespace-nowrap"
+              animate={{ x: ['0%', '-50%'] }}
+              transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
+            >
+              {logos.map((logo, index) => (
+                <motion.img
+                  key={index}
+                  src={logo.src}
+                  alt={logo.alt}
+                  className="h-20 mx-10 transition-transform hover:scale-110"
+                  whileHover={{ scale: 1.15 }}
+                />
+              ))}
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Impact Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-6 text-center">
+          <motion.h2
+            className="text-4xl font-extrabold text-gray-900 mb-12 tracking-tight"
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
@@ -421,239 +378,285 @@ const Home: React.FC = () => {
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {[
-              { value: '5+', label: 'AI Projects Delivered', color: 'text-white' },
-              { value: '3+', label: 'Industries Served', color: 'text-white' },
-              { value: '100%', label: 'Client Satisfaction', color: 'text-white' },
+              { value: '5+', label: 'AI Projects Delivered' },
+              { value: '3+', label: 'Industries Served' },
+              { value: '100%', label: 'Client Satisfaction' },
             ].map((item, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, scale: 0.8 }}
+                className="p-6 bg-white rounded-2xl shadow-lg hover:bg-teal-50 hover:shadow-2xl transition-all duration-300"
+                initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.2, duration: 0.8 }}
               >
-                <p className={`text-5xl font-bold ${item.color} animate-count-up`}>{item.value}</p>
-                <p className="text-violet-400 mt-2">{item.label}</p>
+                <p className="text-5xl font-extrabold text-teal-600">{item.value}</p>
+                <p className="text-gray-600 mt-2 text-lg">{item.label}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Featured Projects Section */}
-      <section className="py-32 bg-midnight relative">
-        <div className="absolute inset-0 -z-10 opacity-10 particle-bg animate-pulse"></div>
-        <div className="max-w-7xl mx-auto px-4">
+      {/* AI Insights & Company Updates Section with Featured Projects */}
+      <section id="blog" className="py-20">
+        <div className="container mx-auto px-6">
           <motion.h2
-            className="text-5xl font-bold text-center text-white font-manrope mb-16 shadow-glow"
-            initial={{ opacity: 0, y: 20 }}
+            className="text-4xl font-extrabold text-gray-900 text-center mb-4 tracking-tight"
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            Featured Projects
+            AI Insights, Company Updates & Featured Projects
           </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+          <motion.p
+            className="text-lg text-gray-600 text-center max-w-3xl mx-auto mb-12"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            Stay updated with the latest trends in artificial intelligence, industry insights, news, and projects from Absolute AI.
+          </motion.p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
+              {
+                title: 'The Future of Agentic AI in Business Operations',
+                desc: 'Explore how autonomous AI agents are revolutionizing...',
+                category: 'AI Trends',
+                date: 'January 15, 2025',
+                gradient: 'from-teal-500 to-blue-600',
+                icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
+              },
+              {
+                title: 'Absolute AI Expands Services to Maritime Industries',
+                desc: 'Announcing our expansion into maritime AI solutions...',
+                category: 'Company News',
+                date: 'January 10, 2025',
+                gradient: 'from-teal-500 to-orange-600',
+                icon: 'M13 10V3L4 14h7v7l9-11h-7z',
+              },
+              {
+                title: 'Building Intelligent Automation',
+                desc: 'Learn the steps to implement AI-driven automation...',
+                category: 'Technology',
+                date: 'January 5, 2025',
+                gradient: 'from-purple-500 to-indigo-600',
+                icon: 'M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10',
+              },
               {
                 image: '/images/hero1.png',
                 title: 'AI-Driven Customer Support',
                 desc: 'GenAI chatbot improving response times by 70%.',
+                category: 'Featured Project',
+                date: 'December 20, 2024',
+                gradient: 'from-green-500 to-teal-600',
                 link: '/work#project1',
               },
               {
                 image: '/images/hero2.png',
                 title: 'Data Pipeline Optimization',
                 desc: 'Scalable pipeline reducing processing time by 50%.',
+                category: 'Featured Project',
+                date: 'December 15, 2024',
+                gradient: 'from-pink-500 to-rose-600',
                 link: '/work#project2',
               },
               {
                 image: '/images/hero3.png',
                 title: 'Agentic Workflow Automation',
                 desc: 'Autonomous agents boosting efficiency by 40%.',
+                category: 'Featured Project',
+                date: 'December 10, 2024',
+                gradient: 'from-yellow-500 to-orange-600',
                 link: '/work#project3',
               },
-            ].map((project, index) => (
-              <motion.div
+            ].map((item, index) => (
+              <motion.article
                 key={index}
-                className="relative rounded-lg overflow-hidden card-glass group"
-                initial={{ opacity: 0, y: 20 }}
+                className="bg-white rounded-2xl shadow-lg overflow-hidden hover:bg-teal-50 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.2, duration: 0.8 }}
-                whileHover={{ scale: 1.05, rotateX: 5, rotateY: 5 }}
               >
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
-                  <h3 className="text-2xl font-semibold text-white font-manrope mb-2 shadow-glow">{project.title}</h3>
-                  <p className="text-blue-violet">{project.desc}</p>
-                  <a
-                    href={project.link}
-                    className="relative inline-block bg-gradient-to-r from-teal-custom via-purple-light to-purple-deep text-white py-2 px-4 rounded-full text-base font-semibold shadow-lg hover:scale-105 hover:shadow-pulse transition-all duration-300 ripple mt-4"
-                  >
-                    Learn More
-                  </a>
+                <div className={`h-48 bg-gradient-to-br ${item.gradient} flex items-center justify-center`}>
+                  {item.image ? (
+                    <motion.img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover"
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  ) : (
+                    <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={item.icon} />
+                    </svg>
+                  )}
                 </div>
-              </motion.div>
+                <div className="p-6">
+                  <div className="flex items-center gap-2 text-sm text-gray-500 mb-3">
+                    <span>{item.category}</span>
+                    <span>•</span>
+                    <span>{item.date}</span>
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">{item.title}</h3>
+                  <p className="text-gray-600 mb-4">{item.desc}</p>
+                  <Link href={item.link || '/blog'} className="text-teal-500 hover:text-teal-600 font-medium transition-colors">
+                    Learn More →
+                  </Link>
+                </div>
+              </motion.article>
             ))}
           </div>
+          <motion.div
+            className="text-center mt-12"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <Link
+              href="/blog"
+              className="inline-flex items-center gap-2 bg-teal-500 text-white px-8 py-3 rounded-full hover:bg-teal-600 transition-all duration-300 transform hover:scale-105"
+            >
+              View All Posts
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
+          </motion.div>
         </div>
       </section>
 
       {/* Testimonial Slider */}
-      <section className="py-32 bg-midnight relative overflow-hidden">
-        <div
-          className="absolute inset-0 -z-10 opacity-10 bg-cover bg-center"
-          style={{ backgroundImage: "url('/images/testimonial-bg.jpg')" }}
-        ></div>
-        <div className="max-w-7xl mx-auto px-4">
+      <section className="py-20 bg-gradient-to-b from-gray-100 to-gray-50">
+        <div className="container mx-auto px-6">
           <motion.h2
-            className="text-5xl font-bold text-center text-white font-manrope mb-16 shadow-glow"
-            initial={{ opacity: 0, y: 20 }}
+            className="text-4xl font-extrabold text-gray-900 text-center mb-12 tracking-tight"
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
             Client Testimonials
           </motion.h2>
-          <AnimatePresence>
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={index}
-                className={`max-w-2xl text-center mx-auto transition-opacity duration-1000 ${
-                  index === currentTestimonial ? 'opacity-100' : 'opacity-0 absolute'
-                }`}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: index === currentTestimonial ? 1 : 0, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.8 }}
-              >
-                <p className="text-xl text-blue-violet italic font-manrope">"{testimonial.quote}"</p>
-                <p className="mt-4 text-white/60 font-semibold">— {testimonial.author}</p>
-              </motion.div>
-            ))}
-          </AnimatePresence>
+          <div className="relative">
+            <AnimatePresence>
+              {testimonials.map((testimonial, index) => (
+                <motion.div
+                  key={index}
+                  className={`max-w-3xl text-center mx-auto transition-opacity duration-1000 ${
+                    index === currentTestimonial ? 'opacity-100' : 'opacity-0 absolute'
+                  }`}
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={{ opacity: index === currentTestimonial ? 1 : 0, x: 0 }}
+                  exit={{ opacity: 0, x: -30 }}
+                  transition={{ duration: 0.8 }}
+                >
+                  <p className="text-xl text-gray-600 italic">"{testimonial.quote}"</p>
+                  <p className="mt-4 text-gray-500 font-semibold">— {testimonial.author}</p>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+            <div className="flex justify-center gap-2 mt-8">
+              {testimonials.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentTestimonial(index)}
+                  className={`w-3 h-3 rounded-full ${
+                    index === currentTestimonial ? 'bg-teal-500' : 'bg-gray-300'
+                  } hover:bg-teal-400 transition-colors`}
+                  aria-label={`Go to testimonial ${index + 1}`}
+                />
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-32 bg-gradient-to-br from-midnight to-dark-blue relative">
-        <div className="absolute inset-0 -z-10 opacity-10 particle-bg animate-pulse"></div>
-        <div className="max-w-7xl mx-auto px-4 text-center">
+      {/* Contact Section */}
+      <section id="contact" className="bg-gradient-to-br from-teal-800 to-gray-900 text-white py-20">
+        <div className="container mx-auto px-6 text-center">
           <motion.h2
-            className="text-5xl font-bold text-white font-manrope mb-6 shadow-glow"
-            initial={{ opacity: 0, y: 20 }}
+            className="text-4xl font-extrabold mb-6 tracking-tight"
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            Transform Your Business
+            Ready to Transform Your Business?
           </motion.h2>
           <motion.p
-            className="text-xl text-blue-violet max-w-2xl mx-auto mb-10"
-            initial={{ opacity: 0, y: 20 }}
+            className="text-xl mb-12 max-w-3xl mx-auto"
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Partner with Qubro to unlock AI-driven innovation.
+            Let's discuss how Absolute AI can tailor intelligent solutions for your unique challenges.
           </motion.p>
           <motion.div
-            className="flex gap-4 justify-center"
-            initial={{ opacity: 0, y: 20 }}
+            className="flex flex-col md:flex-row justify-center items-center gap-8"
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             <a
-              href="/contact"
-              className="relative inline-block bg-gradient-to-r from-teal-custom via-purple-light to-purple-deep text-white py-3 px-8 rounded-full text-lg font-semibold shadow-lg hover:scale-105 hover:shadow-pulse transition-all duration-300 ripple"
+              href="tel:9027199908"
+              className="flex items-center gap-4 bg-teal-500 hover:bg-teal-600 px-8 py-4 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+              aria-label="Call Absolute AI"
             >
-              Get in Touch
+              <img
+                src="https://ext.same-assets.com/2951873307/1972640405.svg"
+                alt="Phone"
+                className="w-6 h-6"
+              />
+              <div className="text-left">
+                <div className="font-semibold">Call Us</div>
+                <div>902 719 9908</div>
+              </div>
             </a>
             <a
-              href="/work"
-              className="relative inline-block bg-gradient-to-r from-teal-custom via-purple-light to-purple-deep text-white py-3 px-8 rounded-full text-lg font-semibold shadow-lg hover:scale-105 hover:shadow-pulse transition-all duration-300 ripple"
+              href="mailto:info@absoluteai.ca"
+              className="flex items-center gap-4 bg-teal-500 hover:bg-teal-600 px-8 py-4 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+              aria-label="Email Absolute AI"
             >
-              View Our Work
+              <img
+                src="https://ext.same-assets.com/2951873307/963509930.svg"
+                alt="Email"
+                className="w-6 h-6"
+              />
+              <div className="text-left">
+                <div className="font-semibold">Email Us</div>
+                <div>info@absoluteai.ca</div>
+              </div>
+            </a>
+            <a
+              href="mailto:info@absoluteai.ca?subject=Free Consultation Request"
+              className="flex items-center gap-4 bg-orange-500 hover:bg-orange-600 px-8 py-4 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+              aria-label="Schedule a Free Consultation"
+            >
+              <img
+                src="https://ext.same-assets.com/2951873307/806547137.svg"
+                alt="Schedule"
+                className="w-6 h-6"
+              />
+              <span className="font-semibold">Schedule a Free Consultation</span>
             </a>
           </motion.div>
         </div>
       </section>
 
       <style jsx>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-20px); }
-        }
-        @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        @keyframes pulse {
-          0%, 100% { opacity: 0.1; }
-          50% { opacity: 0.2; }
-        }
-        @keyframes countUp {
-          from { transform: scale(0.8); opacity: 0; }
-          to { transform: scale(1); opacity: 1; }
-        }
-        @keyframes pulseGlow {
-          0%, 100% { box-shadow: 0 0 10px rgba(89, 193, 115, 0.4); }
-          50% { box-shadow: 0 0 20px rgba(89, 193, 115, 0.6); }
-        }
-        @keyframes shadowPulse {
-          0%, 100% { box-shadow: 0 0 15px rgba(89, 193, 115, 0.5); }
-          50% { box-shadow: 0 0 25px rgba(89, 193, 115, 0.8); }
-        }
-        .animate-marquee {
-          animation: marquee 30s linear infinite;
-        }
-        .animate-marquee:hover {
-          animation-play-state: paused;
-        }
-        .particle-bg {
-          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 800'%3E%3Cfilter id='a'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.05' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23a)' opacity='.1'/%3E%3Ccircle cx='200' cy='200' r='10' fill='%23FFFFFF' opacity='.3'/%3E%3Ccircle cx='600' cy='600' r='15' fill='%23FFFFFF' opacity='.2'/%3E%3Ccircle cx='400' cy='300' r='8' fill='%23FFFFFF' opacity='.25'/%3E%3C/svg%3E");
-          background-size: cover;
-        }
-        .shadow-glow {
-          box-shadow: 0 0 10px rgba(255, 255, 255, 0.6), 0 0 15px rgba(89, 193, 115, 0.4);
-        }
-        .card-glass {
-          background: rgba(30, 41, 59, 0.5);
-          backdrop-filter: blur(8px);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .shadow-pulse {
-          animation: shadowPulse 1.5s ease-in-out infinite;
-        }
-        .ripple::after {
-          content: '';
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          width: 0;
-          height: 0;
-          background: rgba(255, 255, 255, 0.3);
-          border-radius: 50%;
-          transform: translate(-50%, -50%);
-          transition: width 0.6s, height 0.6s;
-        }
-        .ripple:active::after {
-          width: 300px;
-          height: 300px;
-        }
-        .highlight-outline {
-          -webkit-text-stroke: 0.5px white;
-          text-stroke: 0.5px white;
-          paint-order: stroke fill;
+        html {
+          scroll-behavior: smooth;
         }
       `}</style>
-    </>
+    </div>
   );
 };
 

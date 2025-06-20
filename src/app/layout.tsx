@@ -23,18 +23,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-neutral-950 text-white min-h-screen font-sans`}>
+      <body className={`${inter.className} bg-gradient-to-b from-gray-50 to-white text-gray-900 min-h-screen font-sans`}>
         {/* Header */}
         <Header />
 
         {/* Main Content */}
         <main className="pt-24 px-4 md:px-8 max-w-8xl mx-auto relative">
-          <div className="absolute inset-0 -z-10 opacity-20 bg-gradient-to-br from-blue-900/50 via-purple-900/50 to-fuchsia-900/50 animate-gradient-flow"></div>
+          <div className="absolute inset-0 -z-10 opacity-20 bg-gradient-to-br from-teal-500/50 via-blue-500/50 to-green-500/50 animate-gradient-flow"></div>
           {children}
         </main>
 
         {/* Footer */}
-        <footer className="mt-20 py-12 text-center text-neutral-400 border-t-gradient bg-neutral-950/70 backdrop-blur-lg animate-fade-in">
+        <footer className="mt-20 py-12 text-center text-gray-600 border-t border-gray-200 bg-gray-50/70 backdrop-blur-lg animate-fade-in">
           <div className="max-w-7xl mx-auto px-4">
             {/* Social Media Icons */}
             <div className="flex justify-center gap-6 mb-8">
@@ -48,7 +48,7 @@ export default function RootLayout({
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-neutral-400 hover:text-blue-400 transform hover:scale-125 transition-all duration-300"
+                  className="text-gray-600 hover:text-teal-500 transform hover:scale-125 transition-all duration-300"
                 >
                   <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                     <path d={social.icon} />
@@ -59,13 +59,13 @@ export default function RootLayout({
 
             {/* Footer Links and Copyright */}
             <div className="space-y-4">
-              <div>© 2025 Qubro Consulting · Excellence in GenAI, Agentic Systems, Data Engineering</div>
+              <div>© 2025 Absolute AI · Excellence in GenAI AI, Agentic Systems, Data Engineering</div>
               <div className="space-x-6 text-sm">
-                <Link href="/privacy" className="hover:text-blue-400 underline">
+                <Link href="/privacy" className="text-black hover:text-teal-500 underline">
                   Privacy Policy
                 </Link>
                 <span>|</span>
-                <Link href="/terms" className="hover:text-blue-400 underline">
+                <Link href="/terms" className="text-black hover:text-teal-500 underline">
                   Terms of Service
                 </Link>
               </div>
