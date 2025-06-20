@@ -4,79 +4,27 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 
 export default function Services() {
-  const heroContent = {
-    image: '/images/hero5.png',
-    text: 'Transforming Businesses with AI',
-    description: 'Discover how AbsoluteAI Consulting’s expertise in AI, automation, and data solutions can drive innovation and growth for your business.',
-  };
-
   return (
     <div key="services-page" className="min-h-screen bg-gradient-to-b from-gray-50 to-white font-sans">
-      {/* Hero Section */}
-      <section className="relative h-screen overflow-hidden pt-16">
-        <motion.div
-          className="absolute inset-0 opacity-100 z-10"
-          initial={{ opacity: 0, scale: 1.2 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.2, ease: 'easeInOut' }}
-        >
-          <div className="relative w-full h-full">
-            <motion.img
-              src={heroContent.image}
-              alt={heroContent.text}
-              className="w-full h-full object-cover"
-              style={{ minHeight: '100vh', objectPosition: 'center' }}
-              initial={{ scale: 1.1 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 10, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut' }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/60"></div>
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
-              <motion.h1
-                className="text-4xl sm:text-6xl font-extrabold text-white mb-6 tracking-tight"
-                initial={{ y: 30, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.3, duration: 0.8 }}
-              >
-                {heroContent.text}
-              </motion.h1>
-              <motion.p
-                className="text-xl sm:text-2xl text-gray-100 max-w-3xl mb-8"
-                initial={{ y: 30, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.5, duration: 0.8 }}
-              >
-                {heroContent.description}
-              </motion.p>
-              <motion.div
-                className="flex gap-4"
-                initial={{ y: 30, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.7, duration: 0.8 }}
-              >
-                <Link
-                  href="/contact"
-                  className="bg-teal-500 text-white px-8 py-3 rounded-full hover:bg-teal-600 transition-all duration-300 transform hover:scale-105"
-                >
-                  Contact Us
-                </Link>
-                <Link
-                  href="/about"
-                  className="bg-transparent border-2 border-white text-white px-8 py-3 rounded-full hover:bg-white hover:text-teal-600 transition-all duration-300 transform hover:scale-105"
-                >
-                  Learn More
-                </Link>
-              </motion.div>
-            </div>
-          </div>
-        </motion.div>
+      {/* Logo Section */}
+      <section className="w-full py-12">
+        <div className="max-w-7xl mx-auto text-center">
+          <motion.img
+            src="/logos/absolute logo.jpeg"
+            alt="Absolute AI Logo"
+            className="w-32 h-32 rounded-full mx-auto mb-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8 }}
+          />
+        </div>
       </section>
 
       {/* Services Grid */}
-      <section className="py-20">
-        <div className="container mx-auto px-6">
+      <section className="w-full py-12">
+        <div className="max-w-7xl mx-auto">
           <motion.h2
-            className="text-4xl font-extrabold text-gray-900 text-center mb-4 tracking-tight"
+            className="text-3xl font-extrabold text-gray-900 text-center mb-6 tracking-tight"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -93,7 +41,7 @@ export default function Services() {
           >
             Comprehensive AI services designed to transform your business operations and drive sustainable growth.
           </motion.p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
               {
                 id: 'generative-ai',
@@ -144,7 +92,7 @@ export default function Services() {
               <motion.div
                 key={index}
                 id={item.id}
-                className="bg-white p-8 rounded-2xl shadow-lg hover:bg-teal-50 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+                className="bg-white p-6 rounded-lg shadow-lg hover:bg-teal-50 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -154,10 +102,10 @@ export default function Services() {
                   <img
                     src={item.icon}
                     alt={item.title}
-                    className="w-16 h-16 transition-transform hover:scale-110"
+                    className="w-16 h-auto transition-transform hover:scale-110"
                   />
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">{item.title}</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">{item.title}</h3>
                 <p className="text-gray-600 mb-4">{item.desc}</p>
                 <ul className="text-gray-600 list-disc list-inside mb-4">
                   {item.features.map((feature, i) => (
@@ -172,10 +120,10 @@ export default function Services() {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-gradient-to-br from-teal-800 to-gray-900 text-white py-20">
-        <div className="container mx-auto px-6 text-center">
+      <section className="w-full bg-gradient-to-br from-teal-800 to-gray-900 text-white py-12">
+        <div className="max-w-7xl mx-auto text-center">
           <motion.h2
-            className="text-4xl font-extrabold mb-6 tracking-tight"
+            className="text-3xl font-extrabold mb-6 tracking-tight"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -216,8 +164,21 @@ export default function Services() {
       </section>
 
       <style jsx>{`
-        html {
-          scroll-behavior: smooth;
+        html, body {
+          margin: 0;
+          padding: 0;
+          width: 100%;
+          overflow-x: hidden;
+        }
+        * {
+          box-sizing: border-box;
+        }
+        .w-full {
+          width: 100%;
+        }
+        img {
+          max-width: 100%;
+          height: auto;
         }
       `}</style>
     </div>

@@ -30,64 +30,19 @@ export default function AboutPage() {
 
   return (
     <div key="about-page" className="min-h-screen bg-gradient-to-b from-gray-50 to-white font-sans">
-      {/* Header Section */}
-      <section className="relative h-screen overflow-hidden pt-16">
-        <motion.div
-          className="absolute inset-0"
-          initial={{ opacity: 0, scale: 1.1 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1 }}
-        >
-          <div className="relative w-full h-full">
-            <motion.img
-              src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop"
-              alt="AbsoluteAI Team"
-              className="w-full h-full object-cover"
-              style={{ minHeight: '100vh', objectPosition: 'center' }}
-              initial={{ y: 0 }}
-              animate={{ y: [0, -20, 0] }}
-              transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/60"></div>
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-30">
-              <motion.h1
-                className="text-4xl sm:text-5xl font-extrabold text-white mb-16 tracking-tight"
-                initial={{ y: 20, opacity: 0, letterSpacing: '-0.05em' }}
-                animate={{ y: 0, opacity: 1, letterSpacing: '0em' }}
-                transition={{ delay: 0.2, duration: 0.8 }}
-              >
-                A global team of teams, powered by AI.
-              </motion.h1>
-              <motion.p
-                className="text-xl md:text-2xl text-gray-100 max-w-3xl mt-4"
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.4, duration: 0.8 }}
-              >
-                We unite human expertise with advanced AI capabilities to create extraordinary client outcomes.
-              </motion.p>
-              <motion.div
-                className="mt-8 flex gap-4"
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.6, duration: 0.8 }}
-              >
-                <Link
-                  href="/contact"
-                  className="bg-teal-500 text-white py-3 px-8 rounded-full text-lg font-semibold hover:bg-teal-600 transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
-                >
-                  Get in Touch
-                </Link>
-                <Link
-                  href="/services"
-                  className="bg-transparent border-2 border-white text-white py-3 px-8 rounded-full text-lg font-semibold hover:bg-white hover:text-teal-600 transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
-                >
-                  Explore Services
-                </Link>
-              </motion.div>
-            </div>
-          </div>
-        </motion.div>
+      {/* Logo Section */}
+      <section className="w-full py-8">
+        <div className="max-w-6xl mx-auto text-center">
+          <motion.img
+            src="/logos/absolute logo.jpeg"
+            alt="Absolute AI Logo"
+            className="w-28 h-28 rounded-full mx-auto mb-4 border-2 border-teal-200 shadow-lg hover:shadow-xl transition-shadow duration-300"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1 }}
+            loading="lazy"
+          />
+        </div>
       </section>
 
       {/* AbsoluteAI at a Glance */}

@@ -4,31 +4,7 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Home: React.FC = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
-
-  const slides = [
-    {
-      image: '/images/hero1.png',
-      text: 'Empowering with Generative AI',
-      link: '/services#generative-ai',
-    },
-    {
-      image: '/images/hero2.png',
-      text: 'Excellence in AI Chatbots',
-      link: '/services#ai-chatbots',
-    },
-    {
-      image: '/images/hero3.png',
-      text: 'Innovating Agentic AI Systems',
-      link: '/services#agentic-ai',
-    },
-    {
-      image: '/images/hero4.png',
-      text: 'Insights via Data Science',
-      link: '/services#data-science',
-    },
-  ];
 
   const testimonials = [
     {
@@ -53,100 +29,32 @@ const Home: React.FC = () => {
   ];
 
   useEffect(() => {
-    const slideInterval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 5000);
     const testimonialInterval = setInterval(() => {
       setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
     }, 7000);
     return () => {
-      clearInterval(slideInterval);
       clearInterval(testimonialInterval);
     };
-  }, [slides.length, testimonials.length]);
+  }, [testimonials.length]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white font-sans">
-      {/* Hero Section with Carousel */}
-      <section id="home" className="relative h-screen overflow-hidden">
-        <AnimatePresence>
-          {slides.map((slide, index) => (
-            <motion.div
-              key={index}
-              className={`absolute inset-0 ${
-                index === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
-              }`}
-              initial={{ opacity: 0, scale: 1.2 }}
-              animate={{ opacity: index === currentSlide ? 1 : 0, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.2 }}
-              transition={{ duration: 1.2, ease: 'easeInOut' }}
-            >
-              <div className="relative w-full h-full">
-                <motion.img
-                  src={slide.image}
-                  alt={slide.text}
-                  className="w-full h-full object-cover"
-                  style={{ minHeight: '100vh', objectPosition: 'center' }}
-                  initial={{ scale: 1.1 }}
-                  animate={{ scale: 1 }}
-                  transition={{ duration: 10, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut' }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/60"></div>
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
-                  <motion.h1
-                    className="text-4xl sm:text-6xl font-extrabold text-white mb-6 tracking-tight"
-                    initial={{ y: 30, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.3, duration: 0.8 }}
-                  >
-                    {slide.text}
-                  </motion.h1>
-                  <motion.p
-                    className="text-xl sm:text-2xl text-gray-100 max-w-3xl mb-8"
-                    initial={{ y: 30, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.5, duration: 0.8 }}
-                  >
-                    Absolute AI drives innovation with cutting-edge AI and data solutions.
-                  </motion.p>
-                  <motion.div
-                    className="flex gap-4"
-                    initial={{ y: 30, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.7, duration: 0.8 }}
-                  >
-                    <Link
-                      href={slide.link}
-                      className="bg-teal-500 text-white px-8 py-3 rounded-full hover:bg-teal-600 transition-all duration-300 transform hover:scale-105"
-                    >
-                      Explore This Service
-                    </Link>
-                    <Link
-                      href="/about"
-                      className="bg-transparent border-2 border-white text-white px-8 py-3 rounded-full hover:bg-white hover:text-teal-600 transition-all duration-300 transform hover:scale-105"
-                    >
-                      Learn More
-                    </Link>
-                  </motion.div>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </AnimatePresence>
-        {/* Carousel Navigation */}
-        <div className="absolute bottom-8 left-1/2 transform meaningful-unique-classname-1 flex gap-2 z-20">
-          {slides.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentSlide(index)}
-              className={`w-3 h-3 rounded-full ${
-                index === currentSlide ? 'bg-teal-500' : 'bg-gray-300'
-              } hover:bg-teal-400 transition-colors`}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
+    <div className="min-h-screen bg-white font-sans">
+      {/* Header Section */}
+      <header id="home" className="container mx-auto px-6 py-16">
+        <div className="flex flex-col items-center text-center">
+          <img
+            src="/logos/absolute logo.jpeg"
+            alt="Absolute AI Logo"
+            className="w-24 h-24 rounded-full mb-6"
+          />
+          <h1 className="text-4xl md:text-5xl font-bold text-slate-800 mb-4">
+            Absolute AI: Transforming Businesses With AI
+          </h1>
+          <p className="text-xl text-slate-600 max-w-2xl">
+            Expert AI consulting and development to unlock efficiency, innovation, and growth.
+          </p>
         </div>
-      </section>
+      </header>
 
       {/* About Section */}
       <section id="about" className="container mx-auto px-6 py-20">
@@ -287,7 +195,7 @@ const Home: React.FC = () => {
               {
                 title: 'AI for Diversification',
                 desc: 'Explore new opportunities with AI insights.',
-                icon: '/images/diversification.svg',
+                icon: 'https://ext.same-assets.com/2951873307/3005584452.svg',
                 link: '/services#diversification',
               },
               {
@@ -344,7 +252,7 @@ const Home: React.FC = () => {
           </motion.h2>
           <div className="relative overflow-hidden">
             <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-gray-50 to-transparent z-10"></div>
-            <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-gray-50 to-transparent z-10"></div>
+            <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-gray-400 to-transparent z-10"></div>
             <motion.div
               className="flex whitespace-nowrap"
               animate={{ x: ['0%', '-50%'] }}
@@ -398,136 +306,166 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* AI Insights & Company Updates Section with Featured Projects */}
-      <section id="blog" className="py-20">
+      {/* AI Insights & Company Updates Section */}
+      <section id="blog" className="bg-slate-50 py-16">
         <div className="container mx-auto px-6">
-          <motion.h2
-            className="text-4xl font-extrabold text-gray-900 text-center mb-4 tracking-tight"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            AI Insights, Company Updates & Featured Projects
-          </motion.h2>
-          <motion.p
-            className="text-lg text-gray-600 text-center max-w-3xl mx-auto mb-12"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            Stay updated with the latest trends in artificial intelligence, industry insights, news, and projects from Absolute AI.
-          </motion.p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                title: 'The Future of Agentic AI in Business Operations',
-                desc: 'Explore how autonomous AI agents are revolutionizing...',
-                category: 'AI Trends',
-                date: 'January 15, 2025',
-                gradient: 'from-teal-500 to-blue-600',
-                icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
-              },
-              {
-                title: 'Absolute AI Expands Services to Maritime Industries',
-                desc: 'Announcing our expansion into maritime AI solutions...',
-                category: 'Company News',
-                date: 'January 10, 2025',
-                gradient: 'from-teal-500 to-orange-600',
-                icon: 'M13 10V3L4 14h7v7l9-11h-7z',
-              },
-              {
-                title: 'Building Intelligent Automation',
-                desc: 'Learn the steps to implement AI-driven automation...',
-                category: 'Technology',
-                date: 'January 5, 2025',
-                gradient: 'from-purple-500 to-indigo-600',
-                icon: 'M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10',
-              },
-              {
-                image: '/images/hero1.png',
-                title: 'AI-Driven Customer Support',
-                desc: 'GenAI chatbot improving response times by 70%.',
-                category: 'Featured Project',
-                date: 'December 20, 2024',
-                gradient: 'from-green-500 to-teal-600',
-                link: '/work#project1',
-              },
-              {
-                image: '/images/hero2.png',
-                title: 'Data Pipeline Optimization',
-                desc: 'Scalable pipeline reducing processing time by 50%.',
-                category: 'Featured Project',
-                date: 'December 15, 2024',
-                gradient: 'from-pink-500 to-rose-600',
-                link: '/work#project2',
-              },
-              {
-                image: '/images/hero3.png',
-                title: 'Agentic Workflow Automation',
-                desc: 'Autonomous agents boosting efficiency by 40%.',
-                category: 'Featured Project',
-                date: 'December 10, 2024',
-                gradient: 'from-yellow-500 to-orange-600',
-                link: '/work#project3',
-              },
-            ].map((item, index) => (
-              <motion.article
-                key={index}
-                className="bg-white rounded-2xl shadow-lg overflow-hidden hover:bg-teal-50 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.2, duration: 0.8 }}
-              >
-                <div className={`h-48 bg-gradient-to-br ${item.gradient} flex items-center justify-center`}>
-                  {item.image ? (
-                    <motion.img
-                      src={item.image}
-                      alt={item.title}
-                      className="w-full h-full object-cover"
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ duration: 0.3 }}
-                    />
-                  ) : (
-                    <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={item.icon} />
-                    </svg>
-                  )}
-                </div>
-                <div className="p-6">
-                  <div className="flex items-center gap-2 text-sm text-gray-500 mb-3">
-                    <span>{item.category}</span>
-                    <span>•</span>
-                    <span>{item.date}</span>
-                  </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3">{item.title}</h3>
-                  <p className="text-gray-600 mb-4">{item.desc}</p>
-                  <Link href={item.link || '/blog'} className="text-teal-500 hover:text-teal-600 font-medium transition-colors">
-                    Learn More →
-                  </Link>
-                </div>
-              </motion.article>
-            ))}
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-slate-800 mb-4">
+              AI Insights & Company Updates
+            </h2>
+            <p className="text-lg text-slate-600 max-w-3xl mx-auto">
+              Stay updated with the latest trends in artificial intelligence, industry insights, and news from Absolute AI.
+            </p>
           </div>
-          <motion.div
-            className="text-center mt-12"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <Link
-              href="/blog"
-              className="inline-flex items-center gap-2 bg-teal-500 text-white px-8 py-3 rounded-full hover:bg-teal-600 transition-all duration-300 transform hover:scale-105"
-            >
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Blog Post 1 */}
+            <article className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+              <div className="h-48 bg-gradient-to-br from-teal-500 to-blue-600 flex items-center justify-center">
+                <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div className="p-6">
+                <div className="flex items-center gap-2 text-sm text-slate-500 mb-3">
+                  <span>AI Trends</span>
+                  <span>•</span>
+                  <span>January 15, 2025</span>
+                </div>
+                <h3 className="text-xl font-semibold text-slate-800 mb-3">
+                  The Future of Agentic AI in Business Operations
+                </h3>
+                <p className="text-slate-600 mb-4">
+                  Explore how autonomous AI agents are revolutionizing business processes and decision-making across industries...
+                </p>
+                <a href="#" className="text-teal-600 hover:text-teal-700 font-medium">Read More →</a>
+              </div>
+            </article>
+
+            {/* Blog Post 2 */}
+            <article className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+              <div className="h-48 bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center">
+                <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <div className="p-6">
+                <div className="flex items-center gap-2 text-sm text-slate-500 mb-3">
+                  <span>Company News</span>
+                  <span>•</span>
+                  <span>January 10, 2025</span>
+                </div>
+                <h3 className="text-xl font-semibold text-slate-800 mb-3">
+                  Absolute AI Expands Services to Maritime Industries
+                </h3>
+                <p className="text-slate-600 mb-4">
+                  We're excited to announce our expansion into maritime AI solutions, helping Halifax's shipping industry optimize operations...
+                </p>
+                <a href="#" className="text-teal-600 hover:text-teal-700 font-medium">Read More →</a>
+              </div>
+            </article>
+
+            {/* Blog Post 3 */}
+            <article className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+              <div className="h-48 bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center">
+                <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                </svg>
+              </div>
+              <div className="p-6">
+                <div className="flex items-center gap-2 text-sm text-slate-500 mb-3">
+                  <span>Technology</span>
+                  <span>•</span>
+                  <span>January 5, 2025</span>
+                </div>
+                <h3 className="text-xl font-semibold text-slate-800 mb-3">
+                  Building Intelligent Automation: A Step-by-Step Guide
+                </h3>
+                <p className="text-slate-600 mb-4">
+                  Learn the essential steps to implement AI-driven automation in your business processes for maximum efficiency...
+                </p>
+                <a href="#" className="text-teal-600 hover:text-teal-700 font-medium">Read More →</a>
+              </div>
+            </article>
+
+            {/* Blog Post 4 */}
+            <article className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+              <div className="h-48 bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center">
+                <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+              </div>
+              <div className="p-6">
+                <div className="flex items-center gap-2 text-sm text-slate-500 mb-3">
+                  <span>Case Study</span>
+                  <span>•</span>
+                  <span>December 28, 2024</span>
+                </div>
+                <h3 className="text-xl font-semibold text-slate-800 mb-3">
+                  How AI Reduced Operational Costs by 40% for Local Startup
+                </h3>
+                <p className="text-slate-600 mb-4">
+                  A deep dive into our recent project that helped a Halifax tech startup streamline operations and cut costs significantly...
+                </p>
+                <a href="#" className="text-teal-600 hover:text-teal-700 font-medium">Read More →</a>
+              </div>
+            </article>
+
+            {/* Blog Post 5 */}
+            <article className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+              <div className="h-48 bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center">
+                <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+              </div>
+              <div className="p-6">
+                <div className="flex items-center gap-2 text-sm text-slate-500 mb-3">
+                  <span>Education</span>
+                  <span>•</span>
+                  <span>December 20, 2024</span>
+                </div>
+                <h3 className="text-xl font-semibold text-slate-800 mb-3">
+                  AI Ethics in Business: A Comprehensive Framework
+                </h3>
+                <p className="text-slate-600 mb-4">
+                  Understanding the ethical considerations when implementing AI solutions and building responsible AI systems...
+                </p>
+                <a href="#" className="text-teal-600 hover:text-teal-700 font-medium">Read More →</a>
+              </div>
+            </article>
+
+            {/* Blog Post 6 */}
+            <article className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+              <div className="h-48 bg-gradient-to-br from-yellow-500 to-orange-600 flex items-center justify-center">
+                <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                </svg>
+              </div>
+              <div className="p-6">
+                <div className="flex items-center gap-2 text-sm text-slate-500 mb-3">
+                  <span>Industry Report</span>
+                  <span>•</span>
+                  <span>December 15, 2024</span>
+                </div>
+                <h3 className="text-xl font-semibold text-slate-800 mb-3">
+                  2025 AI Predictions: What's Next for Business Intelligence
+                </h3>
+                <p className="text-slate-600 mb-4">
+                  Our annual report on emerging AI trends and predictions for how they'll shape business intelligence in 2025...
+                </p>
+                <a href="#" className="text-teal-600 hover:text-teal-700 font-medium">Read More →</a>
+              </div>
+            </article>
+          </div>
+
+          <div className="text-center mt-12">
+            <a href="#" className="inline-flex items-center gap-2 bg-slate-800 text-white px-8 py-3 rounded-lg hover:bg-slate-900 transition-colors">
               View All Posts
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
-            </Link>
-          </motion.div>
+            </a>
+          </div>
         </div>
       </section>
 
