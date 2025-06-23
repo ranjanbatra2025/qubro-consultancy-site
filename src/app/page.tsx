@@ -1,22 +1,23 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const Home: React.FC = () => {
+export default function Home() {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
 
   const testimonials = [
     {
-      quote: 'Absolute AI’s solutions doubled our efficiency with real-time insights.',
+      quote: "Absolute AI’s solutions doubled our efficiency with real-time insights.",
       author: 'Jane Doe, CTO, TechStartup',
     },
     {
-      quote: 'Their AI agents streamlined our workflows, saving countless hours.',
+      quote: "Their AI agents streamlined our workflows, saving countless hours.",
       author: 'Mark Wilson, COO, FinCorp',
     },
     {
-      quote: 'Absolute AI transformed our marketing ROI with cutting-edge AI.',
+      quote: "Absolute AI transformed our marketing ROI with cutting-edge AI.",
       author: 'Emily Chen, CMO, BrandX',
     },
   ];
@@ -32,9 +33,7 @@ const Home: React.FC = () => {
     const testimonialInterval = setInterval(() => {
       setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
     }, 7000);
-    return () => {
-      clearInterval(testimonialInterval);
-    };
+    return () => clearInterval(testimonialInterval);
   }, [testimonials.length]);
 
   return (
@@ -42,10 +41,14 @@ const Home: React.FC = () => {
       {/* Header Section */}
       <header id="home" className="container mx-auto px-6 py-16">
         <div className="flex flex-col items-center text-center">
-          <img
+          <Image
             src="/logos/absolute logo.jpeg"
             alt="Absolute AI Logo"
-            className="w-24 h-24 rounded-full mb-6"
+            width={192} // 24 * 8 for retina
+            height={192} // 24 * 8 for retina
+            quality={90}
+            className="w-24 h-24 rounded-full mb-6 object-contain"
+            priority
           />
           <h1 className="text-4xl md:text-5xl font-bold text-slate-800 mb-4">
             Absolute AI: Transforming Businesses With AI
@@ -138,10 +141,13 @@ const Home: React.FC = () => {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.2, duration: 0.8 }}
               >
-                <img
+                <Image
                   src={item.icon}
                   alt={item.title}
-                  className="w-16 h-16 mx-auto mb-4 transition-transform hover:scale-110"
+                  width={64} // 16 * 4
+                  height={64} // 16 * 4
+                  quality={90}
+                  className="w-16 h-16 mx-auto mb-4 transition-transform hover:scale-110 object-contain"
                 />
                 <h4 className="text-xl font-semibold text-gray-900 mb-2">{item.title}</h4>
                 <p className="text-gray-600">{item.desc}</p>
@@ -219,10 +225,13 @@ const Home: React.FC = () => {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.2, duration: 0.8 }}
               >
-                <img
+                <Image
                   src={item.icon}
                   alt={item.title}
-                  className="w-16 h-16 mx-auto mb-6 transition-transform hover:scale-110"
+                  width={64} // 16 * 4
+                  height={64} // 16 * 4
+                  quality={90}
+                  className="w-16 h-16 mx-auto mb-6 transition-transform hover:scale-110 object-contain"
                 />
                 <h3 className="text-xl font-semibold text-gray-900 mb-4">{item.title}</h3>
                 <p className="text-gray-600 mb-4">{item.desc}</p>
@@ -251,21 +260,28 @@ const Home: React.FC = () => {
             Trusted by Leading Brands
           </motion.h2>
           <div className="relative overflow-hidden">
-            <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-gray-50 to-transparent z-10"></div>
-            <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-gray-400 to-transparent z-10"></div>
+            <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-gray-50 to-transparent z-10" />
+            <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-gray-400 to-transparent z-10" />
             <motion.div
               className="flex whitespace-nowrap"
               animate={{ x: ['0%', '-50%'] }}
               transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
             >
               {logos.map((logo, index) => (
-                <motion.img
+                <motion.div
                   key={index}
-                  src={logo.src}
-                  alt={logo.alt}
-                  className="h-20 mx-10 transition-transform hover:scale-110"
+                  className="mx-10"
                   whileHover={{ scale: 1.15 }}
-                />
+                >
+                  <Image
+                    src={logo.src}
+                    alt={logo.alt}
+                    width={80} // 20 * 4
+                    height={80} // 20 * 4
+                    quality={90}
+                    className="h-20 w-auto transition-transform hover:scale-110 object-contain"
+                  />
+                </motion.div>
               ))}
             </motion.div>
           </div>
@@ -320,7 +336,7 @@ const Home: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Blog Post 1 */}
-            <article className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+            <article className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
               <div className="h-48 bg-gradient-to-br from-teal-500 to-blue-600 flex items-center justify-center">
                 <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -338,12 +354,14 @@ const Home: React.FC = () => {
                 <p className="text-slate-600 mb-4">
                   Explore how autonomous AI agents are revolutionizing business processes and decision-making across industries...
                 </p>
-                <a href="#" className="text-teal-600 hover:text-teal-700 font-medium">Read More →</a>
+                <Link href="/blog" className="text-teal-600 hover:text-teal-700 font-medium">
+                  Read More →
+                </Link>
               </div>
             </article>
 
             {/* Blog Post 2 */}
-            <article className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+            <article className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
               <div className="h-48 bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center">
                 <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -359,14 +377,16 @@ const Home: React.FC = () => {
                   Absolute AI Expands Services to Maritime Industries
                 </h3>
                 <p className="text-slate-600 mb-4">
-                  We're excited to announce our expansion into maritime AI solutions, helping Halifax's shipping industry optimize operations...
+                  We’re excited to announce our expansion into maritime AI solutions, helping Halifax’s shipping industry optimize operations...
                 </p>
-                <a href="#" className="text-teal-600 hover:text-teal-700 font-medium">Read More →</a>
+                <Link href="/blog" className="text-teal-600 hover:text-teal-700 font-medium">
+                  Read More →
+                </Link>
               </div>
             </article>
 
             {/* Blog Post 3 */}
-            <article className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+            <article className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
               <div className="h-48 bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center">
                 <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
@@ -384,12 +404,14 @@ const Home: React.FC = () => {
                 <p className="text-slate-600 mb-4">
                   Learn the essential steps to implement AI-driven automation in your business processes for maximum efficiency...
                 </p>
-                <a href="#" className="text-teal-600 hover:text-teal-700 font-medium">Read More →</a>
+                <Link href="/blog" className="text-teal-600 hover:text-teal-700 font-medium">
+                  Read More →
+                </Link>
               </div>
             </article>
 
             {/* Blog Post 4 */}
-            <article className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+            <article className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
               <div className="h-48 bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center">
                 <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
@@ -407,12 +429,14 @@ const Home: React.FC = () => {
                 <p className="text-slate-600 mb-4">
                   A deep dive into our recent project that helped a Halifax tech startup streamline operations and cut costs significantly...
                 </p>
-                <a href="#" className="text-teal-600 hover:text-teal-700 font-medium">Read More →</a>
+                <Link href="/blog" className="text-teal-600 hover:text-teal-700 font-medium">
+                  Read More →
+                </Link>
               </div>
             </article>
 
             {/* Blog Post 5 */}
-            <article className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+            <article className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
               <div className="h-48 bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center">
                 <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
@@ -430,12 +454,14 @@ const Home: React.FC = () => {
                 <p className="text-slate-600 mb-4">
                   Understanding the ethical considerations when implementing AI solutions and building responsible AI systems...
                 </p>
-                <a href="#" className="text-teal-600 hover:text-teal-700 font-medium">Read More →</a>
+                <Link href="/blog" className="text-teal-600 hover:text-teal-700 font-medium">
+                  Read More →
+                </Link>
               </div>
             </article>
 
             {/* Blog Post 6 */}
-            <article className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+            <article className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
               <div className="h-48 bg-gradient-to-br from-yellow-500 to-orange-600 flex items-center justify-center">
                 <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
@@ -448,23 +474,25 @@ const Home: React.FC = () => {
                   <span>December 15, 2024</span>
                 </div>
                 <h3 className="text-xl font-semibold text-slate-800 mb-3">
-                  2025 AI Predictions: What's Next for Business Intelligence
+                  2025 AI Predictions: What’s Next for Business Intelligence
                 </h3>
                 <p className="text-slate-600 mb-4">
-                  Our annual report on emerging AI trends and predictions for how they'll shape business intelligence in 2025...
+                  Our annual report on emerging AI trends and predictions for how they’ll shape business intelligence in 2025...
                 </p>
-                <a href="#" className="text-teal-600 hover:text-teal-700 font-medium">Read More →</a>
+                <Link href="/blog" className="text-teal-600 hover:text-teal-700 font-medium">
+                  Read More →
+                </Link>
               </div>
             </article>
           </div>
 
           <div className="text-center mt-12">
-            <a href="#" className="inline-flex items-center gap-2 bg-slate-800 text-white px-8 py-3 rounded-lg hover:bg-slate-900 transition-colors">
+            <Link href="/blog" className="inline-flex items-center gap-2 bg-slate-800 text-white px-8 py-3 rounded-lg hover:bg-slate-900 transition-colors">
               View All Posts
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -494,7 +522,7 @@ const Home: React.FC = () => {
                   exit={{ opacity: 0, x: -30 }}
                   transition={{ duration: 0.8 }}
                 >
-                  <p className="text-xl text-gray-600 italic">"{testimonial.quote}"</p>
+                  <p className="text-xl text-gray-600 italic">{`"${testimonial.quote}"`}</p>
                   <p className="mt-4 text-gray-500 font-semibold">— {testimonial.author}</p>
                 </motion.div>
               ))}
@@ -534,7 +562,7 @@ const Home: React.FC = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Let's discuss how Absolute AI can tailor intelligent solutions for your unique challenges.
+            Let’s discuss how Absolute AI can tailor intelligent solutions for your unique challenges.
           </motion.p>
           <motion.div
             className="flex flex-col md:flex-row justify-center items-center gap-8"
@@ -548,10 +576,13 @@ const Home: React.FC = () => {
               className="flex items-center gap-4 bg-teal-500 hover:bg-teal-600 px-8 py-4 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
               aria-label="Call Absolute AI"
             >
-              <img
+              <Image
                 src="https://ext.same-assets.com/2951873307/1972640405.svg"
                 alt="Phone"
-                className="w-6 h-6"
+                width={24} // 6 * 4
+                height={24} // 6 * 4
+                quality={90}
+                className="w-6 h-6 object-contain"
               />
               <div className="text-left">
                 <div className="font-semibold">Call Us</div>
@@ -563,10 +594,13 @@ const Home: React.FC = () => {
               className="flex items-center gap-4 bg-teal-500 hover:bg-teal-600 px-8 py-4 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
               aria-label="Email Absolute AI"
             >
-              <img
+              <Image
                 src="https://ext.same-assets.com/2951873307/963509930.svg"
                 alt="Email"
-                className="w-6 h-6"
+                width={24} // 6 * 4
+                height={24} // 6 * 4
+                quality={90}
+                className="w-6 h-6 object-contain"
               />
               <div className="text-left">
                 <div className="font-semibold">Email Us</div>
@@ -578,10 +612,13 @@ const Home: React.FC = () => {
               className="flex items-center gap-4 bg-orange-500 hover:bg-orange-600 px-8 py-4 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
               aria-label="Schedule a Free Consultation"
             >
-              <img
+              <Image
                 src="https://ext.same-assets.com/2951873307/806547137.svg"
                 alt="Schedule"
-                className="w-6 h-6"
+                width={24} // 6 * 4
+                height={24} // 6 * 4
+                quality={90}
+                className="w-6 h-6 object-contain"
               />
               <span className="font-semibold">Schedule a Free Consultation</span>
             </a>
@@ -589,13 +626,11 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      <style jsx>{`
+      <style>{`
         html {
           scroll-behavior: smooth;
         }
       `}</style>
     </div>
   );
-};
-
-export default Home;
+}

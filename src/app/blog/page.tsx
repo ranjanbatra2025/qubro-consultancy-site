@@ -1,65 +1,70 @@
 'use client';
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
+
+interface Post {
+  title: string;
+  desc: string;
+  category: string;
+  date: string;
+  gradient: string;
+  link: string;
+  icon: string;
+}
 
 export default function BlogPage() {
   const [filter, setFilter] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [visiblePosts, setVisiblePosts] = useState(6);
   const [isLoading, setIsLoading] = useState(false);
-  const observerRef = useRef(null);
+  const observerRef = useRef<HTMLDivElement | null>(null);
 
-  const posts = [
+  const posts: Post[] = [
     {
       title: 'The Future of Agentic AI in Business Operations',
       desc: 'Explore how autonomous AI agents are revolutionizing business processes, enhancing efficiency, and driving innovation across industries.',
       category: 'AI Trends',
       date: 'January 15, 2025',
       gradient: 'from-teal-500 to-blue-600',
-      icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
       link: '/blog/future-of-agentic-ai',
-      image: '/images/hero1.png',
+      icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
     },
     {
-      title: 'Absolute AI Expands Services to Maritime Industries',
-      desc: 'Announcing our expansion into maritime AI solutions, bringing intelligent automation to shipping and logistics.',
-      category: 'Company News',
-      date: 'January 10, 2025',
-      gradient: 'from-teal-500 to-orange-600',
-      icon: 'M13 10V3L4 14h7v7l9-11h-7z',
-      link: '/blog/maritime-expansion',
-      image: '/images/hero2.png',
-    },
+        title: 'Absolute AI Expands Services to Maritime Industries',
+        desc: 'Discover our expansion into maritime AI solutions, bringing intelligent automation to shipping and logistics.',
+        category: 'All',
+        date: 'January 7, 2025',
+        gradient: 'from-orange-500 to-orange-700',
+        link: 'M13 10V3L4 14h7v7l9',
+        icon: 'launch',
+      },
     {
       title: 'Building Intelligent Automation',
       desc: 'Learn the steps to implement AI-driven automation for streamlined workflows and improved operational efficiency.',
       category: 'Technology',
       date: 'January 5, 2025',
       gradient: 'from-purple-500 to-indigo-600',
+      link: ' /blog/intelligent-automation',
       icon: 'M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10',
-      link: '/blog/intelligent-automation',
-      image: '/images/hero3.png',
     },
     {
-      title: 'How AI Reduced Operational Costs by 40% for Local Startup',
+      title: 'How AI Reduced Operational Costs by 45% for Local Startup',
       desc: 'A deep dive into our recent project that helped a Halifax tech startup streamline operations and cut costs significantly.',
       category: 'Case Study',
       date: 'December 28, 2024',
       gradient: 'from-green-500 to-teal-600',
-      icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z',
       link: '/blog/cost-reduction-case-study',
-      image: '/images/hero4.png',
+      icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z',
     },
     {
-      title: 'AI Ethics in Business: A Comprehensive Framework',
+      title: 'AI Ethics in Business Operations',
       desc: 'Understanding the ethical considerations when implementing AI solutions and building responsible AI systems.',
       category: 'Education',
       date: 'December 20, 2024',
       gradient: 'from-pink-500 to-rose-600',
-      icon: 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253',
       link: '/blog/ai-ethics-framework',
-      image: '/images/hero5.png',
+      icon: 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253',
     },
     {
       title: '2025 AI Predictions: What’s Next for Business Intelligence',
@@ -67,9 +72,8 @@ export default function BlogPage() {
       category: 'Industry Report',
       date: 'December 15, 2024',
       gradient: 'from-yellow-500 to-orange-600',
-      icon: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6',
       link: '/blog/ai-predictions-2025',
-      image: '/images/hero6.png',
+      icon: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6',
     },
     {
       title: 'AI-Driven Customer Support',
@@ -78,7 +82,7 @@ export default function BlogPage() {
       date: 'December 20, 2024',
       gradient: 'from-green-500 to-teal-600',
       link: '/work/project1',
-      image: '/images/hero1.png',
+      icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
     },
     {
       title: 'Data Pipeline Optimization',
@@ -87,7 +91,7 @@ export default function BlogPage() {
       date: 'December 15, 2024',
       gradient: 'from-pink-500 to-rose-600',
       link: '/work/project2',
-      image: '/images/hero2.png',
+      icon: 'M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10',
     },
     {
       title: 'Agentic Workflow Automation',
@@ -96,21 +100,19 @@ export default function BlogPage() {
       date: 'December 10, 2024',
       gradient: 'from-yellow-500 to-orange-600',
       link: '/work/project3',
-      image: '/images/hero3.png',
+      icon: 'M13 10V3L4 14h7v7l9-11h-7z',
     },
   ];
 
-  const categories = ['All', ...new Set(posts.map((post) => post.category))];
+  const categories = ['All', ...Array.from(new Set(posts.map((post) => post.category)))];
 
   const categoryCounts = categories.reduce((acc, category) => {
     acc[category] = category === 'All' ? posts.length : posts.filter((post) => post.category === category).length;
     return acc;
-  }, {});
+  }, {} as Record<string, number>);
 
   const filteredPosts = posts
-    .filter((post) =>
-      filter === 'All' ? true : post.category === filter,
-    )
+    .filter((post) => (filter === 'All' ? true : post.category === filter))
     .filter((post) =>
       searchQuery
         ? post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -134,7 +136,6 @@ export default function BlogPage() {
     );
 
     const currentRef = observerRef.current;
-
     if (currentRef) {
       observer.observe(currentRef);
     }
@@ -152,7 +153,6 @@ export default function BlogPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white font-sans">
-      {/* Hero Section */}
       <section className="relative py-20 bg-gradient-to-b from-teal-50 to-gray-50">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <motion.h1
@@ -196,13 +196,9 @@ export default function BlogPage() {
           </motion.div>
         </div>
       </section>
-
-      {/* Main Content */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row gap-12">
-          {/* Blog Posts Grid */}
           <div className="lg:w-3/4">
-            {/* Filter Section */}
             <div className="flex flex-wrap gap-3 mb-12">
               {categories.map((category) => (
                 <motion.button
@@ -221,8 +217,6 @@ export default function BlogPage() {
                 </motion.button>
               ))}
             </div>
-
-            {/* Posts Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               <AnimatePresence>
                 {filteredPosts.map((item, index) => (
@@ -235,19 +229,18 @@ export default function BlogPage() {
                     transition={{ delay: index * 0.1, duration: 0.6 }}
                     whileHover={{ scale: 1.03 }}
                   >
-                    <div className="relative h-48">
-                      <motion.img
-                        src={item.image}
-                        alt={item.title}
-                        className="w-full h-full object-cover"
-                        whileHover={{ scale: 1.05 }}
-                        transition={{ duration: 0.3 }}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                    <div className={`relative h-48 bg-gradient-to-br ${item.gradient} flex items-center justify-center`}>
+                      <motion.div whileHover={{ scale: 1.05 }} transition={{ duration: 0.3 }}>
+                        <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={item.icon} />
+                        </svg>
+                      </motion.div>
                     </div>
                     <div className="p-6">
                       <div className="flex items-center gap-2 text-sm text-gray-500 mb-3">
-                        <span className="bg-teal-100 text-teal-700 px-2 py-1 rounded-full text-xs font-semibold">{item.category}</span>
+                        <span className="bg-teal-100 text-teal-700 px-2 py-1 rounded-full text-xs font-semibold">
+                          {item.category}
+                        </span>
                         <span>•</span>
                         <span>{item.date}</span>
                       </div>
@@ -268,8 +261,6 @@ export default function BlogPage() {
                 ))}
               </AnimatePresence>
             </div>
-
-            {/* Loading Indicator */}
             {isLoading && (
               <div className="text-center mt-12">
                 <motion.div
@@ -280,12 +271,8 @@ export default function BlogPage() {
                 />
               </div>
             )}
-
-            {/* Observer for Infinite Scroll */}
-            <div ref={observerRef} className="h-10"></div>
+            <div ref={observerRef} className="h-10" />
           </div>
-
-          {/* Sticky Sidebar */}
           <aside className="lg:w-1/4 lg:sticky lg:top-20 lg:self-start">
             <motion.div
               className="bg-white rounded-2xl shadow-lg p-6 mb-8"
@@ -325,13 +312,15 @@ export default function BlogPage() {
                       className="flex items-start gap-3 group"
                       aria-label={`Read ${post.title}`}
                     >
-                      <img
-                        src={post.image}
-                        alt={post.title}
-                        className="w-12 h-12 rounded-lg object-cover"
-                      />
+                      <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${post.gradient} flex items-center justify-center`}>
+                        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={post.icon} />
+                        </svg>
+                      </div>
                       <div>
-                        <p className="text-sm font-medium text-gray-900 group-hover:text-teal-600 line-clamp-2">{post.title}</p>
+                        <p className="text-sm font-medium text-gray-900 group-hover:text-teal-600 line-clamp-2">
+                          {post.title}
+                        </p>
                         <p className="text-xs text-gray-500">{post.date}</p>
                       </div>
                     </Link>
@@ -342,8 +331,6 @@ export default function BlogPage() {
           </aside>
         </div>
       </section>
-
-      {/* CTA Section */}
       <section className="bg-gradient-to-br from-teal-800 to-gray-900 text-white py-20">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <motion.h2
@@ -388,8 +375,7 @@ export default function BlogPage() {
           </motion.div>
         </div>
       </section>
-
-      <style jsx>{`
+      <style>{`
         html {
           scroll-behavior: smooth;
         }

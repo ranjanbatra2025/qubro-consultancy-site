@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useState } from 'react';
+import Image from 'next/image'; // Added import for Image component
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Header() {
@@ -12,23 +13,23 @@ export default function Header() {
 
   // Animation variants for mobile menu
   const menuVariants = {
-    closed: {
-      opacity: 0,
-      y: -20,
-      transition: {
-        duration: 0.3,
-        ease: 'easeInOut',
-      },
+  closed: {
+    opacity: 0,
+    y: -20,
+    transition: {
+      duration: 0.3,
+      ease: "easeInOut" as const, // Explicitly type as a valid Easing
     },
-    open: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.3,
-        ease: 'easeInOut',
-      },
+  },
+  open: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.3,
+      ease: "easeInOut" as const, // Explicitly type as a valid Easing
     },
-  };
+  },
+};
 
   return (
     <header className="fixed top-0 left-0 z-50 w-full bg-white shadow-lg transition-shadow duration-300">
@@ -36,11 +37,13 @@ export default function Header() {
         <div className="flex items-center justify-between py-4">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3">
-            <img
+            <Image
               src="https://ext.same-assets.com/2951873307/3089535793.jpeg"
               alt="Absolute AI Logo"
+              width={48} // w-12 (12 * 4)
+              height={48} // h-12 (12 * 4)
               className="w-12 h-12 rounded-full object-cover"
-              loading="lazy"
+              priority // For critical header image
             />
             <span className="text-2xl font-bold text-gray-900 tracking-tight">
               Absolute AI

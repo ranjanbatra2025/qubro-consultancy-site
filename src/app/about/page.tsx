@@ -1,6 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function AboutPage() {
@@ -33,15 +34,21 @@ export default function AboutPage() {
       {/* Logo Section */}
       <section className="w-full py-8">
         <div className="max-w-6xl mx-auto text-center">
-          <motion.img
-            src="/logos/absolute logo.jpeg"
-            alt="Absolute AI Logo"
-            className="w-28 h-28 rounded-full mx-auto mb-4 border-2 border-teal-200 shadow-lg hover:shadow-xl transition-shadow duration-300"
+          <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1 }}
-            loading="lazy"
-          />
+          >
+            <Image
+              src="/logos/absolute logo.jpeg"
+              alt="Absolute AI Logo"
+              width={224} // Doubled for retina displays (28 * 8)
+              height={224} // Doubled for retina displays (28 * 8)
+              quality={90} // Higher quality for sharper rendering
+              className="w-28 h-28 rounded-full mx-auto mb-4 border-2 border-teal-200 shadow-lg hover:shadow-xl transition-shadow duration-300 object-contain"
+              priority // For above-the-fold image
+            />
+          </motion.div>
         </div>
       </section>
 
@@ -152,10 +159,13 @@ export default function AboutPage() {
                 transition={{ delay: index * 0.2, duration: 0.8 }}
                 whileHover={{ scale: 1.1 }}
               >
-                <img
+                <Image
                   src={partner.src}
                   alt={partner.alt}
-                  className="h-16 hover:opacity-100 transition duration-300"
+                  width={128} // Doubled for better quality (16 * 8)
+                  height={128} // Doubled for better quality (16 * 8)
+                  quality={90} // Higher quality
+                  className="h-16 w-auto hover:opacity-100 transition duration-300 object-contain"
                 />
               </motion.div>
             ))}
@@ -179,7 +189,6 @@ export default function AboutPage() {
             {[
               { src: '/logos/logo.webp', alt: 'AWS Partner logo' },
               { src: '/logos/logo2.webp', alt: 'Google Cloud Partner logo' },
-              { src: '/images/microsoft-partner.png', alt: 'Microsoft Partner logo' },
             ].map((cert, index) => (
               <motion.div
                 key={index}
@@ -190,10 +199,13 @@ export default function AboutPage() {
                 transition={{ delay: index * 0.2, duration: 0.8 }}
                 whileHover={{ scale: 1.1 }}
               >
-                <img
+                <Image
                   src={cert.src}
                   alt={cert.alt}
-                  className="h-16 hover:opacity-100 transition duration-300"
+                  width={128} // Doubled for better quality (16 * 8)
+                  height={128} // Doubled for better quality (16 * 8)
+                  quality={90} // Higher quality
+                  className="h-16 w-auto hover:opacity-100 transition duration-300 object-contain"
                 />
               </motion.div>
             ))}
@@ -222,7 +234,7 @@ export default function AboutPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
-                When it comes to building software, quality and speed matter. Because let's face it — software can't impact the bottom line if it's not in customers' hands.
+                When it comes to building software, quality and speed matter. Because let’s face it — software can’t impact the bottom line if it’s not in customers’ hands.
               </motion.p>
               <motion.p
                 className="text-xl text-gray-600 mb-6"
@@ -231,7 +243,7 @@ export default function AboutPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
-                AbsoluteAI's small, elite teams ship products faster, period. We minimize the time from ideas to outcomes — without sacrificing quality.
+                AbsoluteAI’s small, elite teams ship products faster, period. We minimize the time from ideas to outcomes — without sacrificing quality.
               </motion.p>
               <motion.p
                 className="text-xl text-gray-600 mb-8"
@@ -260,9 +272,11 @@ export default function AboutPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <img
+              <Image
                 src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop"
                 alt="AbsoluteAI team working on a project"
+                width={672}
+                height={384}
                 className="w-full h-96 object-cover"
               />
             </motion.div>
@@ -294,7 +308,7 @@ export default function AboutPage() {
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.8 }}
               >
-                "{quote.text}"
+                {`"${quote.text}"`}
                 <p className="mt-4 text-gray-900 font-semibold">— {quote.author}</p>
               </motion.blockquote>
             ))}
@@ -344,9 +358,12 @@ export default function AboutPage() {
                 transition={{ delay: index * 0.2, duration: 0.8 }}
                 whileHover={{ scale: 1.05 }}
               >
-                <img
+                <Image
                   src={leader.img}
                   alt={leader.name}
+                  width={256} // Doubled for better quality (32 * 8)
+                  height={256} // Doubled for better quality (32 * 8)
+                  quality={90} // Higher quality
                   className="w-32 h-32 rounded-full mx-auto mb-4 object-cover"
                 />
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">{leader.name}</h3>
@@ -402,7 +419,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <style jsx>{`
+      <style>{`
         html {
           scroll-behavior: smooth;
         }

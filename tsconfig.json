@@ -6,24 +6,20 @@
       "dom.iterable",
       "esnext"
     ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
     "jsx": "preserve",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "downlevelIteration": true // Add this to fix TS2802
+    ,
+    "allowJs": true,
     "incremental": true,
-    "baseUrl": ".",
-    "paths": {
-      "@/*": [
-        "src/*"
-      ]
-    },
+    "resolveJsonModule": true,
     "plugins": [
       {
         "name": "next"
@@ -31,11 +27,9 @@
     ]
   },
   "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    "next-env.d.ts",
+    "src/**/*",
     ".next/types/**/*.ts"
-, "src/app/blog/[slug]"  ],
+  ],
   "exclude": [
     "node_modules"
   ]

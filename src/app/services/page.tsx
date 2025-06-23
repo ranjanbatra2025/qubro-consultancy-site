@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image'; // Added import for Image component
 import { motion } from 'framer-motion';
 
 export default function Services() {
@@ -9,14 +10,20 @@ export default function Services() {
       {/* Logo Section */}
       <section className="w-full py-12">
         <div className="max-w-7xl mx-auto text-center">
-          <motion.img
-            src="/logos/absolute logo.jpeg"
-            alt="Absolute AI Logo"
-            className="w-32 h-32 rounded-full mx-auto mb-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
+          <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
-          />
+          >
+            <Image
+              src="/logos/absolute logo.jpeg"
+              alt="Absolute AI Logo"
+              width={128} // w-32 (32 * 4)
+              height={128} // h-32 (32 * 4)
+              className="rounded-full mx-auto mb-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
+              priority // For above-the-fold image
+            />
+          </motion.div>
         </div>
       </section>
 
@@ -99,9 +106,11 @@ export default function Services() {
                 transition={{ delay: index * 0.2, duration: 0.8 }}
               >
                 <div className="flex justify-center mb-6">
-                  <img
+                  <Image
                     src={item.icon}
                     alt={item.title}
+                    width={64} // w-16 (16 * 4)
+                    height={64} // h-auto, assuming square
                     className="w-16 h-auto transition-transform hover:scale-110"
                   />
                 </div>
@@ -163,7 +172,7 @@ export default function Services() {
         </div>
       </section>
 
-      <style jsx>{`
+      <style>{`
         html, body {
           margin: 0;
           padding: 0;

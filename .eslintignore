@@ -1,7 +1,0 @@
-# .eslintignore
-
-.next/
-.vercel/
-out/
-dist/
-node_modules/

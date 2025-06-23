@@ -1,0 +1,69 @@
+
+'use client';
+import dynamic from 'next/dynamic';
+import { ReactNode } from 'react';
+
+const Header = dynamic(() => import('./Header'), { ssr: false });
+const BackToTopButton = dynamic(() => import('./components/BackToTopButton'), { ssr: false });
+
+interface Props {
+  children: ReactNode;
+}
+
+export default function ClientLayout({ children }: Props) {
+  return (
+    <>
+      <Header />
+      {children}
+      <footer className="mt-20 py-12 text-center text-gray-600 border-t border-gray-200 bg-gray-50/70 backdrop-blur-lg animate-fade-in">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="flex justify-center gap-6 mb-8">
+            {[
+              {
+                name: 'Twitter',
+                href: 'https://twitter.com/AbsoluteAI',
+                icon: 'M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z',
+              },
+              {
+                name: 'LinkedIn',
+                href: 'https://linkedin.com/company/AbsoluteAI',
+                icon: 'M16 8a6 6 0 00-6 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7H0v-7a6 6 0 016-6h10zm-1 0h-3V4a2 2 0 00-4 0v4H5',
+              },
+              {
+                name: 'GitHub',
+                href: 'https://github.com/AbsoluteAI',
+                icon: 'M12 2a10 10 0 00-3.16 19.5c.5.1.66-.22.66-.5v-1.7c-2.72.6-3.3-1.32-3.3-1.32-.45-1.14-1.1-1.44-1.1-1.44-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.54 2.36 1.1 2.94.84.1-.65.35-1.1.63-1.35-2.2-.25-4.5-1.1-4.5-4.9 0-1.08.4-1.97 1-2.66-.1-.25-.5-1.28.1-2.66 0 0 .84-.27 2.75 1.02A9.6 9.6 0 0112 6.8c.85 0 1.7.12 2.5.36 1.9-1.3 2.75-1.02 2.75-1.02.6 1.38.2 2.4.1 2.66.6.7 1 1.58 1 2.66 0 3.8-2.3 4.65-4.5 4.9.35.3.66.9.66 1.8v2.7c0 .28.16.6.66.5A10 10 0 0012 2z',
+              },
+            ].map((social) => (
+              <a
+                key={social.name}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-600 hover:text-teal-500 transform hover:scale-125 transition-all duration-300"
+                aria-label={`Follow us on ${social.name}`}
+              >
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d={social.icon} />
+                </svg>
+              </a>
+            ))}
+          </div>
+          <div className="space-y-4">
+            <div>© 2025 Absolute AI · Excellence in GenAI, Agentic Systems, Data Engineering</div>
+            <div className="space-x-6 text-sm">
+              <a href="/privacy" className="text-black hover:text-teal-500 underline">
+                Privacy Policy
+              </a>
+              <span>|</span>
+              <a href="/terms" className="text-black hover:text-teal-500 underline">
+                Terms of Service
+              </a>
+            </div>
+          </div>
+          <BackToTopButton />
+        </div>
+      </footer>
+    </>
+  );
+}
