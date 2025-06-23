@@ -10,7 +10,8 @@ interface Post {
   date: string;
   gradient: string;
   link: string;
-  icon: string;
+  icon?: string; // Made optional to align with blog/[slug]/page.tsx
+  image: string; // Added to match blog/[slug]/page.tsx
 }
 
 export default function BlogPage() {
@@ -29,24 +30,27 @@ export default function BlogPage() {
       gradient: 'from-teal-500 to-blue-600',
       link: '/blog/future-of-agentic-ai',
       icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
+      image: '/images/hero1.png',
     },
     {
-        title: 'Absolute AI Expands Services to Maritime Industries',
-        desc: 'Discover our expansion into maritime AI solutions, bringing intelligent automation to shipping and logistics.',
-        category: 'All',
-        date: 'January 7, 2025',
-        gradient: 'from-orange-500 to-orange-700',
-        link: 'M13 10V3L4 14h7v7l9',
-        icon: 'launch',
-      },
+      title: 'Absolute AI Expands Services to Maritime Industries',
+      desc: 'Discover our expansion into maritime AI solutions, bringing intelligent automation to shipping and logistics.',
+      category: 'Company News',
+      date: 'January 7, 2025',
+      gradient: 'from-orange-500 to-orange-700',
+      link: '/blog/maritime-expansion',
+      icon: 'M13 10V3L4 14h7v7l9-11h-7z',
+      image: '/images/hero2.png',
+    },
     {
       title: 'Building Intelligent Automation',
       desc: 'Learn the steps to implement AI-driven automation for streamlined workflows and improved operational efficiency.',
       category: 'Technology',
       date: 'January 5, 2025',
       gradient: 'from-purple-500 to-indigo-600',
-      link: ' /blog/intelligent-automation',
+      link: '/blog/intelligent-automation',
       icon: 'M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10',
+      image: '/images/hero3.png',
     },
     {
       title: 'How AI Reduced Operational Costs by 45% for Local Startup',
@@ -56,6 +60,7 @@ export default function BlogPage() {
       gradient: 'from-green-500 to-teal-600',
       link: '/blog/cost-reduction-case-study',
       icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z',
+      image: '/images/hero4.png',
     },
     {
       title: 'AI Ethics in Business Operations',
@@ -65,6 +70,7 @@ export default function BlogPage() {
       gradient: 'from-pink-500 to-rose-600',
       link: '/blog/ai-ethics-framework',
       icon: 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253',
+      image: '/images/hero5.png',
     },
     {
       title: '2025 AI Predictions: What’s Next for Business Intelligence',
@@ -74,6 +80,7 @@ export default function BlogPage() {
       gradient: 'from-yellow-500 to-orange-600',
       link: '/blog/ai-predictions-2025',
       icon: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6',
+      image: '/images/hero6.png',
     },
     {
       title: 'AI-Driven Customer Support',
@@ -81,8 +88,9 @@ export default function BlogPage() {
       category: 'Featured Project',
       date: 'December 20, 2024',
       gradient: 'from-green-500 to-teal-600',
-      link: '/work/project1',
+      link: '/blog/customer-support',
       icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
+      image: '/images/hero7.png',
     },
     {
       title: 'Data Pipeline Optimization',
@@ -90,8 +98,9 @@ export default function BlogPage() {
       category: 'Featured Project',
       date: 'December 15, 2024',
       gradient: 'from-pink-500 to-rose-600',
-      link: '/work/project2',
+      link: '/blog/data-pipeline',
       icon: 'M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10',
+      image: '/images/hero8.png',
     },
     {
       title: 'Agentic Workflow Automation',
@@ -99,8 +108,9 @@ export default function BlogPage() {
       category: 'Featured Project',
       date: 'December 10, 2024',
       gradient: 'from-yellow-500 to-orange-600',
-      link: '/work/project3',
+      link: '/blog/workflow-automation',
       icon: 'M13 10V3L4 14h7v7l9-11h-7z',
+      image: '/images/hero9.png',
     },
   ];
 

@@ -1,7 +1,6 @@
 import { notFound } from 'next/navigation';
 import BlogPostClient from './BlogPostClient';
 
-// Define Post type with optional icon
 interface Post {
   title: string;
   desc: string;
@@ -13,7 +12,6 @@ interface Post {
   image: string;
 }
 
-// Sample posts data
 const posts: Post[] = [
   {
     title: 'The Future of Agentic AI in Business Operations',
@@ -23,14 +21,14 @@ const posts: Post[] = [
     gradient: 'from-teal-600 to-blue-600',
     icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
     link: '/blog/future-of-agentic-ai',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/a/a5/absoluteai.jpg',
+    image: '/images/hero1.png',
   },
   {
     title: 'Absolute AI Expands Services to Maritime Industries',
-    desc: 'Announcing our expansion into maritime AI solutions, bringing intelligent automation to shipping and logistics.',
+    desc: 'Discover our expansion into maritime AI solutions, bringing intelligent automation to shipping and logistics.',
     category: 'Company News',
-    date: 'January 10, 2025',
-    gradient: 'from-orange-600 to-red-600',
+    date: 'January 7, 2025',
+    gradient: 'from-orange-600 to-orange-700',
     icon: 'M13 10V3L4 14h7v7l9-11h-7z',
     link: '/blog/maritime-expansion',
     image: '/images/hero2.png',
@@ -73,7 +71,7 @@ const posts: Post[] = [
     gradient: 'from-yellow-600 to-orange-600',
     icon: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6',
     link: '/blog/ai-predictions-2025',
-    image: '/images/hero5.png',
+    image: '/images/hero6.png',
   },
   {
     title: 'AI-Driven Customer Support',
@@ -81,8 +79,9 @@ const posts: Post[] = [
     category: 'Featured Project',
     date: 'December 20, 2024',
     gradient: 'from-green-600 to-teal-600',
-    link: '/work/project1',
-    image: '/images/hero1.png',
+    icon: 'M9 12l2 2 4l9-2a6 9 0 11-0 0 0 9 9 0 0 18 0 1',
+    link: '/blog/customer-support',
+    image: '/images/hero7.png',
   },
   {
     title: 'Data Pipeline Optimization',
@@ -90,8 +89,9 @@ const posts: Post[] = [
     category: 'Featured Project',
     date: 'December 15, 2024',
     gradient: 'from-pink-600 to-rose-600',
-    link: '/work/project2',
-    image: '/images/hero2.png',
+    icon: 'M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10',
+    link: '/blog/data-pipeline',
+    image: '/images/hero8.png',
   },
   {
     title: 'Agentic Workflow Automation',
@@ -99,29 +99,25 @@ const posts: Post[] = [
     category: 'Featured Project',
     date: 'December 10, 2024',
     gradient: 'from-yellow-600 to-orange-600',
-    link: '/work/project3',
-    image: '/images/hero3.png',
+    icon: 'M13 10V3L4 14h7v7l9-11h-7z',
+    link: '/blog/workflow-automation',
+    image: '/images/hero9.png',
   },
 ];
 
-// Generate static parameters for dynamic routes
 export async function generateStaticParams() {
-  // Simulate async operation to satisfy require-await
   await Promise.resolve();
-  return posts
-    .filter((post) => post.link.startsWith('/blog/'))
-    .map((post) => ({
-      slug: post.link.replace('/blog/', ''),
-    }));
+  return posts.map((post) => ({
+    slug: post.link.replace('/blog/', ''),
+  }));
 }
 
-// Define props type for dynamic route
 interface BlogPostProps {
   params: Promise<{ slug: string }>;
 }
 
 export default async function BlogPost({ params }: BlogPostProps) {
-  const { slug } = await params; // Unwrap params Promise directly in Server Component
+  const { slug } = await params;
   const post = posts.find((p) => p.link === `/blog/${slug}`);
 
   if (!post) {

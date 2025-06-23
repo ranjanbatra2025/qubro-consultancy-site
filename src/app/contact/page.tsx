@@ -1,4 +1,5 @@
 'use client';
+
 import { useState, useRef } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
@@ -88,21 +89,22 @@ export default function ContactPage() {
   return (
     <div className="contact-page min-h-screen bg-gradient-to-b from-gray-50 to-white font-sans">
       {/* Logo Section */}
-      <section className="w-full py-8">
+      <section className="w-full py-12">
         <div className="max-w-7xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1 }}
+            className="relative inline-block bg-gradient-to-br from-teal-100 to-teal-200 p-4 rounded-lg shadow-xl"
           >
             <Image
               src="/logos/absolute logo.jpeg"
               alt="Absolute AI Logo"
-              width={112}
-              height={112}
+              width={200}
+              height={200}
               quality={100}
               priority
-              className="w-28 h-28 rounded-full mx-auto border-2 border-teal-200 shadow-lg hover:shadow-xl transition-shadow duration-300"
+              className="w-[200px] h-[200px] mx-auto border-4 border-teal-300 shadow-2xl hover:shadow-3xl transition-shadow duration-300"
             />
           </motion.div>
         </div>
@@ -125,12 +127,12 @@ export default function ContactPage() {
                   type="text"
                   name="name"
                   placeholder="Your Name"
-                  className="w-full px-3 py-2 rounded-md bg-gray-50 border border-gray-200 text-gray-900 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 focus:outline-none text-base transition-all duration-200 hover:bg-gray-100"
+                  className="w-full px-3 py-2 rounded-md bg-gray-50 border border-gray-200 text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none shadow-sm"
                   required
                   aria-label="Your Name"
                 />
-                <svg className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                <svg className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 2 0 00-7 7h14a7 2 0 00-7-7z" />
                 </svg>
               </div>
               <div className="relative">
@@ -138,11 +140,11 @@ export default function ContactPage() {
                   type="email"
                   name="email"
                   placeholder="Email Address"
-                  className="w-full px-3 py-2 rounded-md bg-gray-50 border border-gray-200 text-gray-900 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 focus:outline-none text-base transition-all duration-200 hover:bg-gray-100"
+                  className="w-full px-3 py-2 rounded-md bg-gray-50 border border-gray-200 text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none shadow-sm"
                   required
                   aria-label="Email Address"
                 />
-                <svg className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeWidth="2" d="M3 8l9-6 9 6v10a2 2 0 01-2 2H5a2 2 0 01-2-2V8z" />
                 </svg>
               </div>
@@ -150,11 +152,11 @@ export default function ContactPage() {
                 <textarea
                   name="message"
                   placeholder="How can we assist you?"
-                  className="w-full px-3 py-2 rounded-md bg-gray-50 border border-gray-200 text-gray-900 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 focus:outline-none text-base min-h-[100px] transition-all duration-200 hover:bg-gray-100"
+                  className="w-full px-3 py-2 rounded-md bg-gray-50 border border-gray-200 text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none shadow-sm min-h-[100px]"
                   required
                   aria-label="Your Message"
                 />
-                <svg className="absolute right-2 top-4 w-4 h-4 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="absolute right-2 top-4 w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeWidth="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
                 </svg>
               </div>
@@ -162,7 +164,7 @@ export default function ContactPage() {
               <button
                 type="submit"
                 disabled={submitting}
-                className={`w-full bg-gradient-to-r from-teal-500 to-teal-600 py-2 rounded-full text-lg font-semibold text-white hover:from-teal-600 hover:to-teal-700 transition-all duration-300 transform hover:scale-[1.02] hover:shadow-md ${
+                className={`w-full bg-gradient-to-r from-blue-500 to-blue-600 py-2 rounded-full text-lg font-semibold text-white hover:from-blue-600 hover:to-blue-700 transition-all duration-300 transform hover:scale-[1.02] hover:shadow-md ${
                   submitting ? 'cursor-not-allowed opacity-70' : 'cursor-pointer'
                 }`}
                 aria-label={submitting ? 'Sending message' : 'Send message'}
@@ -215,7 +217,7 @@ export default function ContactPage() {
             {[
               { href: 'https://instagram.com/AbsoluteAI', src: 'https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png', alt: 'Instagram logo', label: 'Instagram' },
               { href: 'https://facebook.com/AbsoluteAI', src: 'https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg', alt: 'Facebook logo', label: 'Facebook' },
-              { href: 'https://x.com/AbsoluteAI', src: 'https://upload.wikimedia.org/wikipedia/commons/6/60/X_logo_2023_%28white%29.png', alt: 'X logo', label: 'X' },
+              { href: 'https://x.com/AbsoluteAI', src: 'https://abs.twimg.com/favicons/twitter.3.ico', alt: 'X logo', label: 'X' },
               { href: 'mailto:hello@AbsoluteAI.co', src: 'https://upload.wikimedia.org/wikipedia/commons/8/8c/Gmail_Icon_%282013-2020%29.svg', alt: 'Email logo', label: 'Email' },
               { href: 'https://linkedin.com/company/AbsoluteAI', src: 'https://upload.wikimedia.org/wikipedia/commons/8/81/LinkedIn_icon.svg', alt: 'LinkedIn logo', label: 'LinkedIn' },
             ].map((social, index) => (
@@ -247,7 +249,7 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto text-center">
           <motion.h2
             className="text-2xl font-semibold text-gray-900 mb-4 tracking-tight"
-            initial={{ opacity: 0, y: 20 }} // Fixed: Changed '20' to 20
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
@@ -278,11 +280,11 @@ export default function ContactPage() {
                   type="email"
                   name="email"
                   placeholder="Enter your email"
-                  className="w-full px-4 py-2 rounded-full text-gray-800 bg-gray-50 border border-gray-200 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 focus:outline-none text-base transition-all duration-200 hover:bg-gray-100"
+                  className="w-full px-4 py-2 rounded-full text-gray-800 bg-gray-50 border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none shadow-sm"
                   required
                   aria-label="Email Address for Newsletter"
                 />
-                <svg className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeWidth="2" d="M3 8l9-6 9 6v10a2 2 0 01-2 2H5a2 2 0 01-2-2V8z" />
                 </svg>
               </div>
@@ -290,7 +292,7 @@ export default function ContactPage() {
               <button
                 type="submit"
                 disabled={newsletterSubmitting}
-                className={`w-full sm:w-auto px-4 py-2 rounded-full bg-gradient-to-r from-teal-500 to-teal-600 text-base font-semibold text-white hover:from-teal-600 hover:to-teal-700 transition-all duration-300 transform hover:scale-[1.02] hover:shadow-md ${
+                className={`w-full sm:w-auto px-4 py-2 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 text-base font-semibold text-white hover:from-blue-600 hover:to-blue-700 transition-all duration-300 transform hover:scale-[1.02] hover:shadow-md ${
                   newsletterSubmitting ? 'cursor-not-allowed opacity-70' : 'cursor-pointer'
                 }`}
                 aria-label={newsletterSubmitting ? 'Subscribing' : 'Subscribe'}
@@ -316,11 +318,11 @@ export default function ContactPage() {
       </section>
 
       {/* Footer Info */}
-      <section className="w-full py-8 bg-gradient-to-br from-teal-800 to-gray-900 text-white">
+      <section className="w-full py-8 bg-gradient-to-br from-blue-800 to-gray-900 text-white">
         <div className="max-w-7xl mx-auto text-center">
           <div>
             Or email us:{' '}
-            <a href="mailto:hello@AbsoluteAI.co" className="underline text-teal-300 hover:text-teal-400 transition" aria-label="Email Absolute AI">
+            <a href="mailto:hello@AbsoluteAI.co" className="underline text-blue-300 hover:text-blue-400 transition" aria-label="Email Absolute AI">
               hello@AbsoluteAI.co
             </a>
           </div>
@@ -340,6 +342,9 @@ export default function ContactPage() {
         }
         .w-full {
           width: 100%;
+        }
+        .shadow-3xl {
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
         }
       `}</style>
     </div>
