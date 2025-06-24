@@ -54,84 +54,68 @@ export default function AboutPage() {
 
       {/* AbsoluteAI at a Glance */}
       <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4">
-          <motion.h2
-            className="text-4xl font-extrabold text-gray-900 text-center mb-16 tracking-tight"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            Absolute AI at a Glance
-          </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-            {[
-              {
-                icon: 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z',
-                value: '2025',
-                label: 'Founded at the dawn of AI',
-                color: 'text-teal-600',
-                link: null,
-              },
-              {
-                icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2m0-2h10a5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z',
-                value: '10',
-                label: 'Digital experts',
-                color: 'text-teal-600',
-                link: '/careers',
-                linkText: 'Join the team',
-              },
-              {
-                icon: 'M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
-                value: '5+',
-                label: 'Industry-leading client NPS',
-                color: 'text-teal-600',
-                link: '/clients',
-                linkText: 'See our clients',
-              },
-              {
-                icon: 'M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z',
-                value: '3',
-                label: 'Global studios',
-                color: 'text-teal-600',
-                link: '/locations',
-                linkText: 'View our locations',
-              },
-              {
-                icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
-                value: '5+',
-                label: 'Projects successfully delivered',
-                color: 'text-teal-600',
-                link: '/work',
-                linkText: 'Explore our work',
-              },
-            ].map((item, index) => (
-              <motion.div
-                key={index}
-                className="flex flex-col items-center text-center bg-white p-6 rounded-2xl shadow-lg hover:bg-teal-50 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.2, duration: 0.8 }}
-                whileHover={{ scale: 1.05 }}
-              >
-                <svg className={`w-10 h-10 ${item.color} mb-4`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={item.icon} />
-                </svg>
-                <p className={`text-4xl font-bold ${item.color}`}>{item.value}</p>
-                <p className="text-gray-600 mt-2">
-                  {item.label}{' '}
-                  {item.link && (
-                    <Link href={item.link} className="text-teal-600 font-semibold hover:text-teal-700">
-                      {item.linkText}
-                    </Link>
-                  )}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+  <div className="max-w-7xl mx-auto px-4">
+    <motion.h2
+      className="text-4xl font-extrabold text-gray-900 text-center mb-16 tracking-tight"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8 }}
+    >
+      Absolute AI at a Glance
+    </motion.h2>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 justify-items-center">
+      {[
+        {
+          icon: 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z',
+          value: '2025',
+          label: 'Founded at the dawn of AI',
+          color: 'text-teal-600',
+          link: null,
+        },
+        {
+          icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2m0-2h10a5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z',
+          value: '5',
+          label: 'AI & Web Experts',
+          color: 'text-teal-600',
+          link: '/careers',
+          linkText: 'Join the team',
+        },
+        {
+          icon: 'M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+          value: '5+',
+          label: 'Industry-leading client NPS',
+          color: 'text-teal-600',
+          link: '/clients',
+          linkText: 'See our clients',
+        },
+      ].map((item, index) => (
+        <motion.div
+          key={index}
+          className="flex flex-col items-center text-center bg-white p-6 rounded-2xl shadow-lg hover:bg-teal-50 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: index * 0.2, duration: 0.8 }}
+          whileHover={{ scale: 1.05 }}
+        >
+          <svg className={`w-10 h-10 ${item.color} mb-4`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={item.icon} />
+          </svg>
+          <p className={`text-4xl font-bold ${item.color}`}>{item.value}</p>
+          <p className="text-gray-600 mt-2">
+            {item.label}{' '}
+            {item.link && (
+              <Link href={item.link} className="text-teal-600 font-semibold hover:text-teal-700">
+                {item.linkText}
+              </Link>
+            )}
+          </p>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* Trusted Partners */}
       <section className="py-20">
@@ -285,7 +269,7 @@ export default function AboutPage() {
       </section>
 
       {/* Continued Impact */}
-      <section className="py-20">
+      {/* <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <motion.h2
             className="text-4xl font-extrabold text-gray-900 mb-8 tracking-tight"
@@ -314,10 +298,10 @@ export default function AboutPage() {
             ))}
           </AnimatePresence>
         </div>
-      </section>
+      </section> */}
 
       {/* Leadership Section */}
-      <section className="py-20">
+      {/* <section className="py-20">
         <div className="max-w-7xl mx-auto px-4">
           <motion.h2
             className="text-4xl font-extrabold text-gray-900 text-center mb-16 tracking-tight"
@@ -373,7 +357,7 @@ export default function AboutPage() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* CTA Section */}
       <section className="bg-gradient-to-br from-teal-800 to-gray-900 text-white py-20">
@@ -388,7 +372,7 @@ export default function AboutPage() {
             Partner with Absolute AI Today
           </motion.h2>
           <motion.p
-            className="text-xl mb-10 max-w-2xl mx-auto"
+            className="text-xl mb-2 max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -396,7 +380,7 @@ export default function AboutPage() {
           >
             Let’s transform your business with cutting-edge AI, automation, and data solutions.
           </motion.p>
-          <motion.div
+          {/* <motion.div
             className="flex gap-4 justify-center"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -415,7 +399,7 @@ export default function AboutPage() {
             >
               View Our Work
             </Link>
-          </motion.div>
+          </motion.div> */}
         </div>
       </section>
 

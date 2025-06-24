@@ -323,7 +323,7 @@ export default function Home() {
       </section>
 
       {/* AI Insights & Company Updates Section */}
-      <section id="blog" className="bg-slate-50 py-16">
+      {/* <section id="blog" className="bg-slate-50 py-16">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-slate-800 mb-4">
@@ -335,7 +335,7 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Blog Post 1 */}
+    
             <article className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
               <div className="h-48 bg-gradient-to-br from-teal-500 to-blue-600 flex items-center justify-center">
                 <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -360,7 +360,6 @@ export default function Home() {
               </div>
             </article>
 
-            {/* Blog Post 2 */}
             <article className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
               <div className="h-48 bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center">
                 <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -385,7 +384,6 @@ export default function Home() {
               </div>
             </article>
 
-            {/* Blog Post 3 */}
             <article className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
               <div className="h-48 bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center">
                 <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -410,7 +408,6 @@ export default function Home() {
               </div>
             </article>
 
-            {/* Blog Post 4 */}
             <article className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
               <div className="h-48 bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center">
                 <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -435,7 +432,6 @@ export default function Home() {
               </div>
             </article>
 
-            {/* Blog Post 5 */}
             <article className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
               <div className="h-48 bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center">
                 <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -460,7 +456,6 @@ export default function Home() {
               </div>
             </article>
 
-            {/* Blog Post 6 */}
             <article className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
               <div className="h-48 bg-gradient-to-br from-yellow-500 to-orange-600 flex items-center justify-center">
                 <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -495,10 +490,10 @@ export default function Home() {
             </Link>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Testimonial Slider */}
-      <section className="py-20 bg-gradient-to-b from-gray-100 to-gray-50">
+      {/* <section className="py-20 bg-gradient-to-b from-gray-100 to-gray-50">
         <div className="container mx-auto px-6">
           <motion.h2
             className="text-4xl font-extrabold text-gray-900 text-center mb-12 tracking-tight"
@@ -541,7 +536,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Contact Section */}
       <section id="contact" className="bg-gradient-to-br from-teal-800 to-gray-900 text-white py-20">
@@ -573,55 +568,54 @@ export default function Home() {
           >
             <a
               href="tel:9027199908"
-              className="flex items-center gap-4 bg-teal-500 hover:bg-teal-600 px-8 py-4 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+              className="flex items-center justify-center gap-4 bg-orange-600 hover:bg-orange-700 px-8 py-4 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg w-full md:w-80 h-16 text-center"
               aria-label="Call Absolute AI"
             >
               <Image
                 src="https://ext.same-assets.com/2951873307/1972640405.svg"
                 alt="Phone"
-                width={24} // 6 * 4
-                height={24} // 6 * 4
+                width={24}
+                height={24}
                 quality={90}
-                className="w-6 h-6 object-contain"
+                className="w-6 h-6 object-contain filter invert brightness-0"
               />
               <div className="text-left">
-                <div className="font-semibold">Call Us</div>
                 <div>902 719 9908</div>
               </div>
             </a>
             <a
               href="mailto:info@absoluteai.ca"
-              className="flex items-center gap-4 bg-teal-500 hover:bg-teal-600 px-8 py-4 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+              className="flex items-center justify-center gap-4 bg-orange-600 hover:bg-orange-700 px-8 py-4 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg w-full md:w-80 h-16 text-center"
               aria-label="Email Absolute AI"
             >
               <Image
                 src="https://ext.same-assets.com/2951873307/963509930.svg"
                 alt="Email"
-                width={24} // 6 * 4
-                height={24} // 6 * 4
+                width={24}
+                height={24}
                 quality={90}
-                className="w-6 h-6 object-contain"
+                className="w-6 h-6 object-contain filter invert brightness-0"
               />
               <div className="text-left">
-                <div className="font-semibold">Email Us</div>
                 <div>info@absoluteai.ca</div>
               </div>
             </a>
             <a
               href="mailto:info@absoluteai.ca?subject=Free Consultation Request"
-              className="flex items-center gap-4 bg-orange-500 hover:bg-orange-600 px-8 py-4 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+              className="flex items-center justify-center gap-4 bg-orange-600 hover:bg-orange-700 px-6 py-3 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg min-w-[250px] h-14 text-center"
               aria-label="Schedule a Free Consultation"
             >
               <Image
                 src="https://ext.same-assets.com/2951873307/806547137.svg"
                 alt="Schedule"
-                width={24} // 6 * 4
-                height={24} // 6 * 4
+                width={24}
+                height={24}
                 quality={90}
-                className="w-6 h-6 object-contain"
+                className="w-6 h-6 object-contain filter invert brightness-0"
               />
-              <span className="font-semibold">Schedule a Free Consultation</span>
+              <span className="font-semibold whitespace-nowrap">Schedule a Free Consultation</span>
             </a>
+
           </motion.div>
         </div>
       </section>
