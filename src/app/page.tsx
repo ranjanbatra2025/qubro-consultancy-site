@@ -2,11 +2,11 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 export default function Home() {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
-
+  console.log(currentTestimonial);
   const testimonials = [
     {
       quote: "Absolute AI’s solutions doubled our efficiency with real-time insights.",
@@ -39,15 +39,14 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white font-sans">
       {/* Header Section */}
-      <header id="home" className="container mx-auto px-6 py-16">
+      <header id="home" className="container mx-auto px-6 py-8">
         <div className="flex flex-col items-center text-center">
           <Image
             src="/logos/absolute logo.jpeg"
             alt="Absolute AI Logo"
-            width={192} // 24 * 8 for retina
-            height={192} // 24 * 8 for retina
-            quality={90}
-            className="w-24 h-24 rounded-full mb-6 object-contain"
+            width={324}
+            height={324}
+            className="w-34 h-34 mb-6 rounded-[10px] object-contain shadow-xl border border-gray-200"
             priority
           />
           <h1 className="text-4xl md:text-5xl font-bold text-slate-800 mb-4">
@@ -60,7 +59,7 @@ export default function Home() {
       </header>
 
       {/* About Section */}
-      <section id="about" className="container mx-auto px-6 py-20">
+      <section id="about" className="container mx-auto px-6 py-8">
         <div className="max-w-4xl mx-auto text-center space-y-8">
           <motion.h2
             className="text-4xl font-extrabold text-gray-900 tracking-tight"
@@ -99,7 +98,7 @@ export default function Home() {
       </section>
 
       {/* Feature Cards Section */}
-      <section className="bg-gradient-to-b from-gray-100 to-gray-50 py-20">
+      <section className="bg-gradient-to-b from-gray-100 to-gray-50 py-5">
         <div className="container mx-auto px-6">
           <motion.h2
             className="text-4xl font-extrabold text-gray-900 text-center mb-12 tracking-tight"
@@ -118,8 +117,8 @@ export default function Home() {
                 icon: 'https://ext.same-assets.com/2951873307/2178531131.svg',
               },
               {
-                title: 'Strategic Focus',
-                desc: 'Driving measurable business outcomes.',
+                title: 'Product Development',
+                desc: 'Years of experience in developing products.',
                 icon: 'https://ext.same-assets.com/2951873307/2160258571.svg',
               },
               {
@@ -187,8 +186,8 @@ export default function Home() {
                 link: '/services#ai-efficiency',
               },
               {
-                title: 'Process Refinement',
-                desc: 'Optimize processes using AI analytics.',
+                title: 'Venture Studio',
+                desc: 'Patnering to Launch your startup.',
                 icon: 'https://ext.same-assets.com/2951873307/2281295613.svg',
                 link: '/services#process-refinement',
               },
@@ -219,27 +218,28 @@ export default function Home() {
             ].map((item, index) => (
               <motion.div
                 key={index}
-                className="bg-white p-8 rounded-2xl shadow-lg hover:bg-teal-50 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+                className="bg-white px-8 pt-8 pb-4 rounded-2xl shadow-lg hover:bg-teal-50 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.2, duration: 0.8 }}
               >
-                <Image
-                  src={item.icon}
-                  alt={item.title}
-                  width={64} // 16 * 4
-                  height={64} // 16 * 4
-                  quality={90}
-                  className="w-16 h-16 mx-auto mb-6 transition-transform hover:scale-110 object-contain"
-                />
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">{item.title}</h3>
-                <p className="text-gray-600 mb-4">{item.desc}</p>
-                <Link
-                  href={item.link}
-                  className="text-teal-500 hover:text-teal-600 font-medium transition-colors"
-                >
-                  Learn More →
+                <Link href={item.link} className="flex flex-col flex-grow">
+                  <Image
+                    src={item.icon}
+                    alt={item.title}
+                    width={64}
+                    height={64}
+                    quality={90}
+                    className="w-16 h-16 mb-6 transition-transform hover:scale-110 object-contain mx-auto"
+                  />
+                  <h3 className="text-xl font-semibold text-center text-gray-900 mb-4">{item.title}</h3>
+                  <p className="text-gray-600 mb-4 text-center flex-grow">{item.desc}</p>
+                  <span
+                    className="text-teal-500 block text-center hover:text-teal-600 font-medium transition-colors"
+                  >
+                    Learn More →
+                  </span>
                 </Link>
               </motion.div>
             ))}

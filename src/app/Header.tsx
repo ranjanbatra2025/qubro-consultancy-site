@@ -75,7 +75,7 @@ export default function Header() {
 
           {/* Navigation Links */}
           <nav className="hidden md:flex items-center gap-8">
-            {['Home', 'About', 'Services', 'Blog', 'Contact'].map((item) => (
+            {['Home', 'About', 'Services', 'Contact'].map((item) => (
               <Link
                 key={item}
                 href={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
