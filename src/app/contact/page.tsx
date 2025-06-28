@@ -28,7 +28,7 @@ export default function ContactPage() {
       return;
     }
 
-    fetch('https://formspree.io/f/xyyqwyap', {
+    fetch('https://formspree.io/f/{your-form-id}', {
       method: 'POST',
       body: formData,
       headers: { Accept: 'application/json' },
@@ -88,28 +88,6 @@ export default function ContactPage() {
 
   return (
     <div className="contact-page min-h-screen bg-gradient-to-b from-gray-50 to-white font-sans">
-      {/* Logo Section */}
-      <section className="w-full py-12">
-        <div className="max-w-7xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1 }}
-            className="relative inline-block bg-gradient-to-br from-teal-100 to-teal-200 p-4 rounded-lg shadow-xl"
-          >
-            <Image
-              src="/logos/absolute logo.jpeg"
-              alt="Absolute AI Logo"
-              width={200}
-              height={200}
-              quality={100}
-              priority
-              className="w-[200px] h-[200px] mx-auto border-4 border-teal-300 shadow-2xl hover:shadow-3xl transition-shadow duration-300"
-            />
-          </motion.div>
-        </div>
-      </section>
-
       {/* Contact Form Section */}
       <section className="w-full py-8">
         <div className="max-w-7xl mx-auto">
@@ -127,7 +105,7 @@ export default function ContactPage() {
                   type="text"
                   name="name"
                   placeholder="Your Name"
-                  className="w-full px-3 py-2 rounded-md bg-gray-50 border border-gray-200 text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none shadow-sm"
+                  className="w-full px-3 py-2 roundedian bg-gray-50 border border-gray-200 text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none shadow-sm"
                   required
                   aria-label="Your Name"
                 />
@@ -152,7 +130,7 @@ export default function ContactPage() {
                 <textarea
                   name="message"
                   placeholder="How can we assist you?"
-                  className="w-full px-3 py-2 rounded-md bg-gray-50 border border-gray-200 text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none shadow-sm min-h-[100px]"
+                  className="w-full px-3 py-2imaa rounded-md bg-gray-50 border border-gray-200 text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none shadow-sm min-h-[100px]"
                   required
                   aria-label="Your Message"
                 />
@@ -190,7 +168,7 @@ export default function ContactPage() {
       </section>
 
       {/* Social Media Section */}
-      <section className="w-full py-8">
+      <section className="w-full py-3">
         <div className="max-w-7xl mx-auto text-center">
           <motion.h2
             className="text-2xl font-bold text-gray-900 mb-4 tracking-tight"
@@ -218,7 +196,7 @@ export default function ContactPage() {
               { href: 'https://instagram.com/AbsoluteAI', src: 'https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png', alt: 'Instagram logo', label: 'Instagram' },
               { href: 'https://facebook.com/AbsoluteAI', src: 'https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg', alt: 'Facebook logo', label: 'Facebook' },
               { href: 'https://x.com/AbsoluteAI', src: 'https://abs.twimg.com/favicons/twitter.3.ico', alt: 'X logo', label: 'X' },
-              { href: 'mailto:hello@AbsoluteAI.co', src: 'https://upload.wikimedia.org/wikipedia/commons/8/8c/Gmail_Icon_%282013-2020%29.svg', alt: 'Email logo', label: 'Email' },
+              { href: 'mailto:hello@absoluteai.ca', src: 'https://upload.wikimedia.org/wikipedia/commons/8/8c/Gmail_Icon_%282013-2020%29.svg', alt: 'Email logo', label: 'Email' },
               { href: 'https://linkedin.com/company/AbsoluteAI', src: 'https://upload.wikimedia.org/wikipedia/commons/8/81/LinkedIn_icon.svg', alt: 'LinkedIn logo', label: 'LinkedIn' },
             ].map((social, index) => (
               <motion.a
@@ -280,25 +258,18 @@ export default function ContactPage() {
                   type="email"
                   name="email"
                   placeholder="Enter your email"
-                  className="w-full px-4 py-2 rounded-full text-gray-800 bg-gray-50 border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none shadow-sm"
-                  required
-                  aria-label="Email Address for Newsletter"
+                  className="w-full md:max-w-xl px-4 py-3 rounded-full min-h-[48px] text-gray-800 bg-gray-50 border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none shadow-sm"
                 />
-                <svg className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeWidth="2" d="M3 8l9-6 9 6v10a2 2 0 01-2 2H5a2 2 0 01-2-2V8z" />
-                </svg>
-              </div>
-              <input type="text" name="_gotcha" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
-              <button
-                type="submit"
-                disabled={newsletterSubmitting}
-                className={`w-full sm:w-auto px-4 py-2 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 text-base font-semibold text-white hover:from-blue-600 hover:to-blue-700 transition-all duration-300 transform hover:scale-[1.02] hover:shadow-md ${
-                  newsletterSubmitting ? 'cursor-not-allowed opacity-70' : 'cursor-pointer'
+                <button
+                  type="submit"
+                  disabled={newsletterSubmitting}
+                  className={`mt-4 w-[250px] py-2 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 text-base font-semibold text-white hover:from-blue-600 hover:to-blue-700 transition-all duration-300 transform hover:scale-[1.02] hover:shadow-md ${newsletterSubmitting ? 'cursor-not-allowed opacity-70' : 'cursor-pointer'
                 }`}
                 aria-label={newsletterSubmitting ? 'Subscribing' : 'Subscribe'}
-              >
+                >
                 {newsletterSubmitting ? 'Subscribing...' : 'Subscribe'}
-              </button>
+                </button>
+              </div>
             </form>
             {newsletterStatus && (
               <motion.div
@@ -318,12 +289,21 @@ export default function ContactPage() {
       </section>
 
       {/* Footer Info */}
-      <section className="w-full py-8 bg-gradient-to-br from-blue-800 to-gray-900 text-white">
+      <section className="w-full py-8 bg-gradient-to-br from-teal-800 to-gray-900 text-white">
         <div className="max-w-7xl mx-auto text-center">
+        <motion.h2
+            className="text-4xl font-extrabold mb-6 tracking-tight"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            Contact Absolute AI 
+          </motion.h2>
           <div>
-            Or email us:{' '}
-            <a href="mailto:hello@AbsoluteAI.co" className="underline text-blue-300 hover:text-blue-400 transition" aria-label="Email Absolute AI">
-              hello@AbsoluteAI.co
+            email us:{' '}
+            <a href="mailto:hello@absoluteai.ca" className="underline text-blue-300 hover:text-blue-400 transition" aria-label="Email Absolute AI">
+              hello@absoluteai.ca
             </a>
           </div>
           <div className="mt-2 text-sm">Absolute AI, Inc. — Serving global clients</div>

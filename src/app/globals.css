@@ -92,7 +92,6 @@ a:hover {
 
 a:focus {
   outline: none;
-  @apply ring-2 ring-offset-2 ring-teal-custom;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -133,6 +132,15 @@ button:hover, .btn:hover {
 button:focus, .btn:focus {
   outline: none;
   @apply ring-2 ring-offset-2 ring-teal-custom;
+}
+
+.nav-item:focus,
+.nav-item:focus-visible {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  text-decoration: underline;
+  text-decoration-color: #3b82f6; /* Matches Tailwind's blue-600 */
 }
 
 @keyframes float {

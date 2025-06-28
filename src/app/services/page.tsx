@@ -8,34 +8,12 @@ export default function Services() {
   return (
     <div key="services-page" className="min-h-screen bg-gradient-to-b from-gray-50 to-white font-sans">
       {/* Logo Section */}
-      <section className="w-full py-12">
-        <div className="max-w-7xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8 }}
-          >
-            <Image
-              src="/logos/absolute logo.jpeg"
-              alt="Absolute AI Logo"
-              width={128} // w-32 (32 * 4)
-              height={128} // h-32 (32 * 4)
-              className="rounded-full mx-auto mb-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
-              priority // For above-the-fold image
-            />
-          </motion.div>
-        </div>
-      </section>
-
       {/* Services Grid */}
       <section className="w-full py-12">
         <div className="max-w-7xl mx-auto">
           <motion.h2
             className="text-3xl font-extrabold text-gray-900 text-center mb-6 tracking-tight"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+           
           >
             Our Services
           </motion.h2>

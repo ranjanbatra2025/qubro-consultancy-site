@@ -29,31 +29,17 @@ export default function AboutPage() {
     return () => clearInterval(interval);
   }, [quotes.length]);
 
+  const logos = [
+    { src: '/logos/logo.webp', alt: 'SEO Harbour' },
+    { src: '/logos/logo2.webp', alt: 'LaunchPal AI' },
+    { src: '/logos/azorus.png', alt: 'Azorus' },
+    { src: '/logos/overhaulconsulting.png', alt: 'Overhaul Consulting' },
+  ];
+
   return (
     <div key="about-page" className="min-h-screen bg-gradient-to-b from-gray-50 to-white font-sans">
-      {/* Logo Section */}
-      <section className="w-full py-8">
-        <div className="max-w-6xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1 }}
-          >
-            <Image
-              src="/logos/absolute logo.jpeg"
-              alt="Absolute AI Logo"
-              width={224} // Doubled for retina displays (28 * 8)
-              height={224} // Doubled for retina displays (28 * 8)
-              quality={90} // Higher quality for sharper rendering
-              className="w-28 h-28 rounded-full mx-auto mb-4 border-2 border-teal-200 shadow-lg hover:shadow-xl transition-shadow duration-300 object-contain"
-              priority // For above-the-fold image
-            />
-          </motion.div>
-        </div>
-      </section>
-
       {/* AbsoluteAI at a Glance */}
-      <section className="py-20">
+      <section className="py-6">
         <div className="max-w-7xl mx-auto px-4">
           <motion.h2
             className="text-4xl font-extrabold text-gray-900 text-center mb-16 tracking-tight"
@@ -64,7 +50,7 @@ export default function AboutPage() {
           >
             Absolute AI at a Glance
           </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 justify-items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-12 place-items-center">
             {[
               {
                 icon: 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z',
@@ -89,26 +75,45 @@ export default function AboutPage() {
                 link: '/clients',
                 linkText: 'See our clients',
               },
+              {
+                icon: "M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z",
+                value: "100%",
+                label: "Client Satisfaction",
+                color: "text-teal-600",
+                link: "/clients",
+                linkText: "See testimonials"
+              }
             ].map((item, index) => (
               <motion.div
                 key={index}
-                className="flex flex-col items-center text-center bg-white p-6 rounded-2xl shadow-lg hover:bg-teal-50 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+                className="flex flex-col items-center justify-center text-center bg-white p-6 rounded-2xl shadow-lg hover:bg-teal-50 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 w-full max-w-xs"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.2, duration: 0.8 }}
                 whileHover={{ scale: 1.05 }}
               >
-                <svg className={`w-10 h-10 ${item.color} mb-4`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg
+                  className={`w-10 h-10 ${item.color} mb-4 mx-auto`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={item.icon} />
                 </svg>
-                <p className={`text-4xl font-bold ${item.color}`}>{item.value}</p>
-                <p className="text-gray-600 mt-2">
-                  {item.label}{' '}
+                <p className={`text-4xl font-bold ${item.color} mb-2`}>{item.value}</p>
+                <p className="text-gray-600 text-sm max-w-[200px] mx-auto">
+                  {item.label}
                   {item.link && (
-                    <Link href={item.link} className="text-teal-600 font-semibold hover:text-teal-700">
-                      {item.linkText}
-                    </Link>
+                    <>
+                      {' '}
+                      <Link
+                        href={item.link}
+                        className="text-teal-600 font-semibold hover:text-teal-700 block mt-2"
+                      >
+                        {item.linkText}
+                      </Link>
+                    </>
                   )}
                 </p>
               </motion.div>
@@ -130,10 +135,7 @@ export default function AboutPage() {
             Trusted Long-Term Partners
           </motion.h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {[
-              { src: '/logos/logo.webp', alt: 'SEO Harbour logo' },
-              { src: '/logos/logo2.webp', alt: 'LaunchPal AI logo' },
-            ].map((partner, index) => (
+            {logos.map((partner, index) => (
               <motion.div
                 key={index}
                 className="flex justify-center"
@@ -158,7 +160,7 @@ export default function AboutPage() {
       </section>
 
       {/* Partner Certifications */}
-      <section className="py-20">
+      {/* <section className="py-20">
         <div className="max-w-7xl mx-auto px-4">
           <motion.h2
             className="text-4xl font-extrabold text-gray-900 text-center mb-16 tracking-tight"
@@ -195,7 +197,7 @@ export default function AboutPage() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Ideas to Outcome */}
       <section className="py-20">

@@ -23,10 +23,10 @@ export default function Home() {
   ];
 
   const logos = [
-    { src: '/logos/logo.webp', alt: 'Qubro Partner 1 logo' },
-    { src: '/logos/logo2.webp', alt: 'Qubro Partner 2 logo' },
-    { src: '/logos/logo.webp', alt: 'Qubro Partner 3 logo' },
-    { src: '/logos/logo2.webp', alt: 'Qubro Partner 4 logo' },
+    { src: '/logos/logo.webp', alt: 'SEO Harbour' },
+    { src: '/logos/logo2.webp', alt: 'LaunchPal AI' },
+    { src: '/logos/azorus.png', alt: 'Azorus' },
+    { src: '/logos/overhaulconsulting.png', alt: 'Overhaul Consulting' },
   ];
 
   useEffect(() => {
@@ -262,22 +262,18 @@ export default function Home() {
           <div className="relative overflow-hidden">
             <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-gray-50 to-transparent z-10" />
             <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-gray-400 to-transparent z-10" />
-            <motion.div
-              className="flex whitespace-nowrap"
-              animate={{ x: ['0%', '-50%'] }}
-              transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
-            >
+            <motion.div className="flex whitespace-nowrap">
               {logos.map((logo, index) => (
                 <motion.div
                   key={index}
-                  className="mx-10"
+                  className="mx-20"
                   whileHover={{ scale: 1.15 }}
                 >
                   <Image
                     src={logo.src}
                     alt={logo.alt}
-                    width={80} // 20 * 4
-                    height={80} // 20 * 4
+                    width={80}
+                    height={80}
                     quality={90}
                     className="h-20 w-auto transition-transform hover:scale-110 object-contain"
                   />
