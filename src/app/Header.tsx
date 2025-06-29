@@ -116,7 +116,7 @@ export default function Header() {
               variants={menuVariants}
             >
               <div className="flex flex-col items-center gap-4 py-6">
-                {['Home', 'About', 'Services', 'Blog', 'Contact'].map((item) => {
+                {['Home', 'About', 'Services', 'Contact'].map((item) => {
                   const isActive = pathname === (item === 'Home' ? '/' : `/${item.toLowerCase()}`);
                   return (
                     <span

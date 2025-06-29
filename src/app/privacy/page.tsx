@@ -12,7 +12,7 @@ export default function PrivacyPage() {
       <h2 className="text-xl font-semibold mt-8 mb-2">Cookies</h2>
     <p className="mb-4">Our website may use essential cookies for improved experience. You may adjust your browser settings to disable cookies, though some features may not function fully.</p>
       <h2 className="text-xl font-semibold mt-8 mb-2">Contact</h2>
-      <p className="mb-4">For privacy-related questions, contact us at <a href="mailto:info@absoluteai.ca" className="underline">info@absoluteai.ca</a>.</p>
+      <p className="mb-4">For privacy-related questions, contact us at <a href="mailto:jamie@absoluteaiconsulting.com" className="underline">jamie@absoluteaiconsulting.com</a>.</p>
       <div className="mt-12 text-gray-400 text-xs">Last updated: June 2025</div>
     </section>
   );

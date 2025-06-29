@@ -1,4 +1,3 @@
-
 import './globals.css';
 import { Inter } from 'next/font/google';
 import ClientLayout from './ClientLayout';
@@ -20,7 +19,7 @@ export const metadata = {
   openGraph: {
     title: 'Absolute AI',
     description: 'Innovative AI solutions for businesses worldwide.',
-    url: 'https://www.absoluteai.co',
+    url: 'https://www.absoluteai.ca',
     siteName: 'Absolute AI',
     locale: 'en_US',
     type: 'website',
@@ -28,6 +27,9 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     site: '@AbsoluteAI',
+  },
+  icons: {
+    icon: '/favicon.jpeg', // Reference to the favicon in /public
   },
 };
 
@@ -38,6 +40,10 @@ interface Props {
 export default function RootLayout({ children }: Props) {
   return (
     <html lang="en">
+      <head>
+        {/* Optional: Manual favicon link for additional control */}
+        <link rel="icon" href="/favicon.jpeg" type="image/jpeg" />
+      </head>
       <body className={`${inter.className} bg-gradient-to-b from-gray-50 to-white text-gray-900 min-h-screen font-sans`}>
         <ClientLayout>
           <main className="pt-24 px-4 md:px-8 max-w-8xl mx-auto relative">

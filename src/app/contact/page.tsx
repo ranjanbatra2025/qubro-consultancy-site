@@ -28,14 +28,28 @@ export default function ContactPage() {
       return;
     }
 
-    fetch('https://formspree.io/f/{your-form-id}', {
+    // Validation
+    const email = formData.get('email') as string;
+    const message = formData.get('message') as string;
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setStatus('Please enter a valid email address.');
+      setSubmitting(false);
+      return;
+    }
+    if (!message.trim()) {
+      setStatus('Please enter a message.');
+      setSubmitting(false);
+      return;
+    }
+
+    fetch('https://formspree.io/f/mzzgozvd', {
       method: 'POST',
       body: formData,
       headers: { Accept: 'application/json' },
     })
       .then((response) => {
         if (response.ok) {
-          setStatus('Zoom link created! Please check your email.');
+          setStatus('Thank you for your interest. Team AbsoluteAIConsulting will contact you soon.');
           form.reset();
         } else {
           setStatus('Sorry, there was a problem sending your message. Please try again or email us directly.');
@@ -65,7 +79,7 @@ export default function ContactPage() {
       return;
     }
 
-    fetch('https://formspree.io/f/xyyqwyap', {
+    fetch('https://formspree.io/f/mzzgozvd', {
       method: 'POST',
       body: formData,
       headers: { Accept: 'application/json' },
@@ -99,21 +113,39 @@ export default function ContactPage() {
             transition={{ duration: 0.8 }}
           >
             <h2 className="text-2xl font-bold text-gray-900 mb-4 text-center">Send Us a Message</h2>
-            <form ref={formRef} className="space-y-4" onSubmit={handleSubmit} autoComplete="on">
-              <div className="relative">
+            <form
+              ref={formRef}
+              action="https://formspree.io/f/mzzgozvd"
+              method="POST"
+              className="space-y-4"
+              onSubmit={handleSubmit}
+              autoComplete="on"
+            >
+              <label className="block relative">
+                Your name:
                 <input
                   type="text"
                   name="name"
                   placeholder="Your Name"
-                  className="w-full px-3 py-2 roundedian bg-gray-50 border border-gray-200 text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none shadow-sm"
+                  className="w-full px-3 py-2 rounded-md bg-gray-50 border border-gray-200 text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none shadow-sm"
                   required
                   aria-label="Your Name"
                 />
-                <svg className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 2 0 00-7 7h14a7 2 0 00-7-7z" />
+                <svg
+                  className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-blue-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeWidth="2"
+                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 2 0 00-7 7h14a7 2 0 00-7-7z"
+                  />
                 </svg>
-              </div>
-              <div className="relative">
+              </label>
+              <label className="block relative">
+                Your email:
                 <input
                   type="email"
                   name="email"
@@ -122,22 +154,41 @@ export default function ContactPage() {
                   required
                   aria-label="Email Address"
                 />
-                <svg className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeWidth="2" d="M3 8l9-6 9 6v10a2 2 0 01-2 2H5a2 2 0 01-2-2V8z" />
+                <svg
+                  className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-blue-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeWidth="2"
+                    d="M3 8l9-6 9 6v10a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"
+                  />
                 </svg>
-              </div>
-              <div className="relative">
+              </label>
+              <label className="block relative">
+                Your message:
                 <textarea
                   name="message"
                   placeholder="How can we assist you?"
-                  className="w-full px-3 py-2imaa rounded-md bg-gray-50 border border-gray-200 text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none shadow-sm min-h-[100px]"
+                  className="w-full px-3 py-2 rounded-md bg-gray-50 border border-gray-200 text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none shadow-sm min-h-[100px]"
                   required
                   aria-label="Your Message"
                 />
-                <svg className="absolute right-2 top-4 w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeWidth="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+                <svg
+                  className="absolute right-2 top-4 w-4 h-4 text-blue-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeWidth="2"
+                    d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
+                  />
                 </svg>
-              </div>
+              </label>
               <input type="text" name="_gotcha" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
               <button
                 type="submit"
@@ -147,7 +198,7 @@ export default function ContactPage() {
                 }`}
                 aria-label={submitting ? 'Sending message' : 'Send message'}
               >
-                {submitting ? 'Sending...' : 'Send Message'}
+                {submitting ? 'Sending...' : 'Send'}
               </button>
             </form>
             {status && (
@@ -193,11 +244,11 @@ export default function ContactPage() {
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             {[
-              { href: 'https://instagram.com/AbsoluteAI', src: 'https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png', alt: 'Instagram logo', label: 'Instagram' },
-              { href: 'https://facebook.com/AbsoluteAI', src: 'https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg', alt: 'Facebook logo', label: 'Facebook' },
-              { href: 'https://x.com/AbsoluteAI', src: 'https://abs.twimg.com/favicons/twitter.3.ico', alt: 'X logo', label: 'X' },
-              { href: 'mailto:hello@absoluteai.ca', src: 'https://upload.wikimedia.org/wikipedia/commons/8/8c/Gmail_Icon_%282013-2020%29.svg', alt: 'Email logo', label: 'Email' },
-              { href: 'https://linkedin.com/company/AbsoluteAI', src: 'https://upload.wikimedia.org/wikipedia/commons/8/81/LinkedIn_icon.svg', alt: 'LinkedIn logo', label: 'LinkedIn' },
+              { href: '', src: 'https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png', alt: 'Instagram logo', label: 'Instagram' },
+              { href: 'https://www.facebook.com/profile.php?id=61577701083787', src: 'https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg', alt: 'Facebook logo', label: 'Facebook' },
+              { href: 'https://x.com/AbsoluteAICDN', src: 'https://abs.twimg.com/favicons/twitter.3.ico', alt: 'X logo', label: 'X' },
+              { href: 'mailto:hello@absoluteaiconsulting.com', src: 'https://upload.wikimedia.org/wikipedia/commons/8/8c/Gmail_Icon_%282013-2020%29.svg', alt: 'Email logo', label: 'Email' },
+              { href: 'https://www.linkedin.com/company/absolute-ai-consulting/about/?viewAsMember=true', src: 'https://upload.wikimedia.org/wikipedia/commons/8/81/LinkedIn_icon.svg', alt: 'LinkedIn logo', label: 'LinkedIn' },
             ].map((social, index) => (
               <motion.a
                 key={index}
@@ -263,11 +314,12 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={newsletterSubmitting}
-                  className={`mt-4 w-[250px] py-2 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 text-base font-semibold text-white hover:from-blue-600 hover:to-blue-700 transition-all duration-300 transform hover:scale-[1.02] hover:shadow-md ${newsletterSubmitting ? 'cursor-not-allowed opacity-70' : 'cursor-pointer'
-                }`}
-                aria-label={newsletterSubmitting ? 'Subscribing' : 'Subscribe'}
+                  className={`mt-4 w-[250px] py-2 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 text-base font-semibold text-white hover:from-blue-600 hover:to-blue-700 transition-all duration-300 transform hover:scale-[1.02] hover:shadow-md ${
+                    newsletterSubmitting ? 'cursor-not-allowed opacity-70' : 'cursor-pointer'
+                  }`}
+                  aria-label={newsletterSubmitting ? 'Subscribing' : 'Subscribe'}
                 >
-                {newsletterSubmitting ? 'Subscribing...' : 'Subscribe'}
+                  {newsletterSubmitting ? 'Subscribing...' : 'Subscribe'}
                 </button>
               </div>
             </form>
@@ -291,19 +343,23 @@ export default function ContactPage() {
       {/* Footer Info */}
       <section className="w-full py-8 bg-gradient-to-br from-teal-800 to-gray-900 text-white">
         <div className="max-w-7xl mx-auto text-center">
-        <motion.h2
+          <motion.h2
             className="text-4xl font-extrabold mb-6 tracking-tight"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            Contact Absolute AI 
+            Contact Absolute AI
           </motion.h2>
           <div>
             email us:{' '}
-            <a href="mailto:hello@absoluteai.ca" className="underline text-blue-300 hover:text-blue-400 transition" aria-label="Email Absolute AI">
-              hello@absoluteai.ca
+            <a
+              href="mailto:hello@absoluteaiconsulting.com"
+              className="underline text-blue-300 hover:text-blue-400 transition"
+              aria-label="Email Absolute AI"
+            >
+              hello@absoluteaiconsulting.com
             </a>
           </div>
           <div className="mt-2 text-sm">Absolute AI, Inc. — Serving global clients</div>

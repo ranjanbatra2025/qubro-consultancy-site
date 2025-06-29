@@ -580,7 +580,7 @@ export default function Home() {
               </div>
             </a>
             <a
-              href="mailto:info@absoluteai.ca"
+              href="mailto:jamie@absoluteaiconsulting.com"
               className="flex items-center justify-center gap-4 bg-orange-600 hover:bg-orange-700 px-8 py-4 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg w-full md:w-80 h-16 text-center"
               aria-label="Email Absolute AI"
             >
@@ -593,11 +593,11 @@ export default function Home() {
                 className="w-6 h-6 object-contain filter invert brightness-0"
               />
               <div className="text-left">
-                <div>info@absoluteai.ca</div>
+                <div>jamie@absoluteaiconsulting.com</div>
               </div>
             </a>
             <a
-              href="mailto:info@absoluteai.ca?subject=Free Consultation Request"
+              href="mailto:jamie@absoluteaiconsulting.com?subject=Free Consultation Request"
               className="flex items-center justify-center gap-4 bg-orange-600 hover:bg-orange-700 px-6 py-3 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg min-w-[250px] h-14 text-center"
               aria-label="Schedule a Free Consultation"
             >
