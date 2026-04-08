@@ -35,7 +35,7 @@ export default function Header() {
   };
 
   // Navigation items
-  const navItems = ['Home', 'About', 'Services', 'Contact'];
+  const navItems = ['Home', 'About', 'Services', 'Pricing', 'Contact', 'Sign In'];
 
   return (
     <header className="fixed top-0 left-0 z-50 w-full bg-white shadow-lg transition-shadow duration-300">
@@ -44,15 +44,15 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 focus:outline-none">
             <Image
-              src="https://ext.same-assets.com/2951873307/3089535793.jpeg"
-              alt="Absolute AI Logo"
-              width={48}
-              height={48}
-              className="w-12 h-12 rounded-full object-cover"
+              src="/logos/absolute%20logo.jpeg"
+              alt="Absolute AI Consulting Logo"
+              width={64}
+              height={64}
+              className="h-14 w-14 rounded-xl object-contain shadow-sm"
               priority
             />
-            <span className="text-2xl font-bold text-gray-900 tracking-tight">
-              Absolute AI
+            <span className="text-xl font-bold text-gray-900 tracking-tight sm:text-2xl">
+              Absolute AI Consulting
             </span>
           </Link>
 
@@ -82,11 +82,12 @@ export default function Header() {
           {/* Navigation Links (Desktop) */}
           <nav className="hidden md:flex items-center gap-8">
             {navItems.map((item) => {
-              const isActive = pathname === (item === 'Home' ? '/' : `/${item.toLowerCase()}`);
+              const href = item === 'Home' ? '/' : item === 'Sign In' ? '/signin' : `/${item.toLowerCase()}`;
+              const isActive = pathname === href;
               return (
                 <Link
                   key={item}
-                  href={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
+                  href={href}
                   className={`relative text-lg font-medium transition-colors duration-200 group focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-sm ${
                     isActive
                       ? 'text-2xl font-bold text-gray-900 tracking-tight'
@@ -116,13 +117,14 @@ export default function Header() {
               variants={menuVariants}
             >
               <div className="flex flex-col items-center gap-4 py-6">
-                {['Home', 'About', 'Services', 'Contact'].map((item) => {
-                  const isActive = pathname === (item === 'Home' ? '/' : `/${item.toLowerCase()}`);
+                {['Home', 'About', 'Services', 'Pricing', 'Contact', 'Sign In'].map((item) => {
+                  const href = item === 'Home' ? '/' : item === 'Sign In' ? '/signin' : `/${item.toLowerCase()}`;
+                  const isActive = pathname === href;
                   return (
                     <span
                       key={item}
                       onClick={() => {
-                        router.push(item === 'Home' ? '/' : `/${item.toLowerCase()}`);
+                        router.push(href);
                         setIsOpen(false);
                       }}
                       className={`cursor-pointer text-lg font-medium transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-sm ${
@@ -134,7 +136,7 @@ export default function Header() {
                       tabIndex={0}
                       onKeyDown={(e) => {
                         if (e.key === 'Enter' || e.key === ' ') {
-                          router.push(item === 'Home' ? '/' : `/${item.toLowerCase()}`);
+                          router.push(href);
                           setIsOpen(false);
                         }
                       }}

@@ -3,6 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image'; // Added import for Image component
 import { motion } from 'framer-motion';
+import StripeCheckoutButton from '../../components/StripeCheckoutButton';
 
 export default function Services() {
   return (
@@ -32,7 +33,7 @@ export default function Services() {
                 id: 'generative-ai',
                 title: 'Generative AI',
                 desc: 'Harness the power of Generative AI to create dynamic content, personalize customer experiences, and automate complex workflows.',
-                icon: 'https://ext.same-assets.com/2951873307/4107728250.svg',
+                icon: '/images/1.png',
                 features: ['AI-powered content creation', 'Custom model development', 'Workflow automation'],
                 value: 'Accelerate innovation and reduce costs with scalable AI solutions.',
                 color: 'text-teal-600',
@@ -41,7 +42,7 @@ export default function Services() {
                 id: 'agentic-systems',
                 title: 'Agentic Systems',
                 desc: 'Deploy intelligent, autonomous agents that optimize decision-making and streamline operations.',
-                icon: 'https://ext.same-assets.com/2951873307/1913257418.svg',
+                icon: '/images/2.png',
                 features: ['Autonomous decision-making', 'Process optimization', 'Real-time adaptability'],
                 value: 'Boost efficiency and agility with intelligent automation.',
                 color: 'text-teal-600',
@@ -50,7 +51,7 @@ export default function Services() {
                 id: 'data-engineering',
                 title: 'Data Engineering',
                 desc: 'Build scalable data architectures and pipelines to power AI and analytics.',
-                icon: 'https://ext.same-assets.com/2951873307/2281295613.svg',
+                icon: '/images/3.png',
                 features: ['Scalable data pipelines', 'Cloud-native architectures', 'Real-time analytics'],
                 value: 'Unlock data-driven decisions with robust infrastructure.',
                 color: 'text-teal-600',
@@ -59,7 +60,7 @@ export default function Services() {
                 id: 'digital-marketing',
                 title: 'Digital Marketing',
                 desc: 'Amplify your brand’s reach with data-driven digital marketing strategies.',
-                icon: 'https://ext.same-assets.com/2951873307/2330954298.svg',
+                icon: '/images/4.png',
                 features: ['AI-targeted ad campaigns', 'SEO and content strategy', 'Social media marketing'],
                 value: 'Boost brand visibility and ROI with precision marketing.',
                 color: 'text-teal-600',
@@ -68,7 +69,7 @@ export default function Services() {
                 id: 'product-development',
                 title: 'Product Development',
                 desc: 'Transform ideas into market-ready products with our end-to-end development services.',
-                icon: 'https://ext.same-assets.com/2951873307/1922649866.svg',
+                icon: '/images/5.png',
                 features: ['Rapid prototyping', 'Agile development cycles', 'AI-driven product features'],
                 value: 'Launch innovative products faster with seamless development.',
                 color: 'text-teal-600',
@@ -77,23 +78,24 @@ export default function Services() {
               <motion.div
                 key={index}
                 id={item.id}
-                className="bg-white p-6 rounded-lg shadow-lg hover:bg-teal-50 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
+                className="bg-white p-10 rounded-3xl shadow-xl hover:bg-teal-50 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-3"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.2, duration: 0.8 }}
               >
-                <div className="flex justify-center mb-6">
+                <div className="flex justify-center mb-10 h-80 w-full items-center">
                   <Image
                     src={item.icon}
                     alt={item.title}
-                    width={64} // w-16 (16 * 4)
-                    height={64} // h-auto, assuming square
-                    className="w-16 h-auto transition-transform hover:scale-110"
+                    width={500}
+                    height={500}
+                    quality={100}
+                    className="h-full w-full transition-transform duration-500 hover:scale-110 object-contain"
                   />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">{item.title}</h3>
-                <p className="text-gray-600 mb-4">{item.desc}</p>
+                <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">{item.title}</h3>
+                <p className="text-lg text-gray-600 mb-6 text-center">{item.desc}</p>
                 <ul className="text-gray-600 list-disc list-inside mb-4">
                   {item.features.map((feature, i) => (
                     <li key={i}>{feature}</li>
@@ -134,6 +136,12 @@ export default function Services() {
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
+            <StripeCheckoutButton
+              planId="strategy-session"
+              className="bg-slate-950 text-white px-8 py-4 rounded-full hover:bg-slate-800 transition-all duration-300 transform hover:scale-105 hover:shadow-lg w-full md:w-80 h-16"
+            >
+              Subscribe for Strategy Session
+            </StripeCheckoutButton>
             <Link
               href="/contact"
               className="bg-teal-500 text-white px-8 py-4 rounded-full hover:bg-teal-600 transition-all duration-300 transform hover:scale-105 hover:shadow-lg"

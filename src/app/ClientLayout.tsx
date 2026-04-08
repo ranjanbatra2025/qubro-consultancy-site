@@ -50,7 +50,7 @@ export default function ClientLayout({ children }: Props) {
             ))}
           </div>
           <div className="space-y-4">
-            <div>© 2025 Absolute AI · Excellence in GenAI, Agentic Systems, Data Engineering</div>
+            <div>© 2025 Absolute AI Consulting · Excellence in GenAI, Agentic Systems, Data Engineering</div>
             <div className="space-x-6 text-sm">
               <a href="/privacy" className="text-black hover:text-teal-500 underline">
                 Privacy Policy

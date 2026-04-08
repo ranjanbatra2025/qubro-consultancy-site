@@ -3,16 +3,23 @@
 import { useState, useRef } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import StripeCheckoutButton from '../../components/StripeCheckoutButton';
+
+interface FormData {
+  name?: string;
+  email: string;
+  message?: string;
+}
 
 export default function ContactPage() {
   const [status, setStatus] = useState<string | null>(null);
-  const [submitting, setSubmitting] = useState(false);
+  const [submitting, setSubmitting] = useState<boolean>(false);
   const [newsletterStatus, setNewsletterStatus] = useState<string | null>(null);
-  const [newsletterSubmitting, setNewsletterSubmitting] = useState(false);
-  const formRef = useRef<HTMLFormElement | null>(null);
-  const newsletterFormRef = useRef<HTMLFormElement | null>(null);
+  const [newsletterSubmitting, setNewsletterSubmitting] = useState<boolean>(false);
+  const formRef = useRef<HTMLFormElement>(null);
+  const newsletterFormRef = useRef<HTMLFormElement>(null);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus(null);
     setSubmitting(true);
@@ -21,49 +28,53 @@ export default function ContactPage() {
     if (!form) return;
 
     const formData = new FormData(form);
+    const data: FormData = {
+      name: formData.get('name') as string,
+      email: formData.get('email') as string,
+      message: formData.get('message') as string,
+    };
 
+    // Honeypot spam check
     if (formData.get('_gotcha')) {
       setStatus('Submission blocked (spam detected).');
       setSubmitting(false);
       return;
     }
 
-    // Validation
-    const email = formData.get('email') as string;
-    const message = formData.get('message') as string;
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    // Client-side validation
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
       setStatus('Please enter a valid email address.');
       setSubmitting(false);
       return;
     }
-    if (!message.trim()) {
+    if (!data.message?.trim()) {
       setStatus('Please enter a message.');
       setSubmitting(false);
       return;
     }
 
-    fetch('https://formspree.io/f/mzzgozvd', {
-      method: 'POST',
-      body: formData,
-      headers: { Accept: 'application/json' },
-    })
-      .then((response) => {
-        if (response.ok) {
-          setStatus('Thank you for your interest. Team AbsoluteAIConsulting will contact you soon.');
-          form.reset();
-        } else {
-          setStatus('Sorry, there was a problem sending your message. Please try again or email us directly.');
-        }
-      })
-      .catch(() => {
-        setStatus('Sorry, there was a problem sending your message. Please try again or email us directly.');
-      })
-      .finally(() => {
-        setSubmitting(false);
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
       });
+
+      const result = await response.json();
+      if (response.ok) {
+        setStatus('Thank you for your interest. Team Absolute AI Consulting will contact you soon.');
+        form.reset();
+      } else {
+        setStatus(result.message || 'Sorry, there was a problem sending your message. Please try again or email us directly.');
+      }
+    } catch (error) {
+      setStatus('Sorry, there was a problem sending your message. Please try again or email us directly.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
-  const handleNewsletterSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleNewsletterSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setNewsletterStatus(null);
     setNewsletterSubmitting(true);
@@ -72,32 +83,43 @@ export default function ContactPage() {
     if (!form) return;
 
     const formData = new FormData(form);
+    const data: FormData = {
+      email: formData.get('email') as string,
+    };
 
+    // Honeypot spam check
     if (formData.get('_gotcha')) {
       setNewsletterStatus('Submission blocked (spam detected).');
       setNewsletterSubmitting(false);
       return;
     }
 
-    fetch('https://formspree.io/f/mzzgozvd', {
-      method: 'POST',
-      body: formData,
-      headers: { Accept: 'application/json' },
-    })
-      .then((response) => {
-        if (response.ok) {
-          setNewsletterStatus("Thank you! You're now subscribed to our newsletter.");
-          form.reset();
-        } else {
-          setNewsletterStatus('Sorry, there was a problem subscribing. Please try again.');
-        }
-      })
-      .catch(() => {
-        setNewsletterStatus('Sorry, there was a problem subscribing. Please try again.');
-      })
-      .finally(() => {
-        setNewsletterSubmitting(false);
+    // Client-side validation
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+      setNewsletterStatus('Please enter a valid email address.');
+      setNewsletterSubmitting(false);
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
       });
+
+      const result = await response.json();
+      if (response.ok) {
+        setNewsletterStatus("Thank you! You're now subscribed to our newsletter.");
+        form.reset();
+      } else {
+        setNewsletterStatus(result.message || 'Sorry, there was a problem subscribing. Please try again.');
+      }
+    } catch (error) {
+      setNewsletterStatus('Sorry, there was a problem subscribing. Please try again.');
+    } finally {
+      setNewsletterSubmitting(false);
+    }
   };
 
   return (
@@ -115,8 +137,6 @@ export default function ContactPage() {
             <h2 className="text-2xl font-bold text-gray-900 mb-4 text-center">Send Us a Message</h2>
             <form
               ref={formRef}
-              action="https://formspree.io/f/mzzgozvd"
-              method="POST"
               className="space-y-4"
               onSubmit={handleSubmit}
               autoComplete="on"
@@ -204,7 +224,7 @@ export default function ContactPage() {
             {status && (
               <motion.div
                 className={`mt-4 text-center text-base ${
-                  status.includes('Thank you') || status.includes('Zoom link') ? 'text-green-600' : 'text-red-600'
+                  status.includes('Thank you') ? 'text-green-600' : 'text-red-600'
                 }`}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -237,6 +257,14 @@ export default function ContactPage() {
           >
             Follow us on social media for the latest updates on AI, data engineering, and innovation.
           </motion.p>
+          <div className="mb-8 flex justify-center">
+            <StripeCheckoutButton
+              planId="strategy-session"
+              className="rounded-full bg-slate-950 px-8 py-4 text-white hover:bg-slate-800 transition-all duration-300"
+            >
+              Subscribe for a Strategy Session
+            </StripeCheckoutButton>
+          </div>
           <motion.div
             className="flex flex-row gap-6 justify-center items-center flex-wrap"
             initial={{ opacity: 0, y: 20 }}
@@ -310,11 +338,12 @@ export default function ContactPage() {
                   name="email"
                   placeholder="Enter your email"
                   className="w-full md:max-w-xl px-4 py-3 rounded-full min-h-[48px] text-gray-800 bg-gray-50 border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none shadow-sm"
+                  required
                 />
                 <button
                   type="submit"
                   disabled={newsletterSubmitting}
-                  className={`mt-4 w-[250px] py-2 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 text-base font-semibold text-white hover:from-blue-600 hover:to-blue-700 transition-all duration-300 transform hover:scale-[1.02] hover:shadow-md ${
+                  className={`mt-4 w-full sm:w-[250px] py-2 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 text-base font-semibold text-white hover:from-blue-600 hover:to-blue-700 transition-all duration-300 transform hover:scale-[1.02] hover:shadow-md ${
                     newsletterSubmitting ? 'cursor-not-allowed opacity-70' : 'cursor-pointer'
                   }`}
                   aria-label={newsletterSubmitting ? 'Subscribing' : 'Subscribe'}
@@ -322,6 +351,7 @@ export default function ContactPage() {
                   {newsletterSubmitting ? 'Subscribing...' : 'Subscribe'}
                 </button>
               </div>
+              <input type="text" name="_gotcha" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
             </form>
             {newsletterStatus && (
               <motion.div
@@ -350,19 +380,19 @@ export default function ContactPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            Contact Absolute AI
+            Contact Absolute AI Consulting
           </motion.h2>
           <div>
-            email us:{' '}
+            Email us:{' '}
             <a
               href="mailto:hello@absoluteaiconsulting.com"
               className="underline text-blue-300 hover:text-blue-400 transition"
-              aria-label="Email Absolute AI"
+              aria-label="Email Absolute AI Consulting"
             >
               hello@absoluteaiconsulting.com
             </a>
           </div>
-          <div className="mt-2 text-sm">Absolute AI, Inc. — Serving global clients</div>
+          <div className="mt-2 text-sm">Absolute AI Consulting, Inc. — Serving global clients</div>
         </div>
       </section>
 

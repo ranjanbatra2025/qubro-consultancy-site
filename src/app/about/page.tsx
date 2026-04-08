@@ -6,7 +6,6 @@ import { motion } from 'framer-motion';
 
 export default function AboutPage() {
   const [currentQuote, setCurrentQuote] = useState(0);
-  console.log(currentQuote);
   const quotes = [
     {
       text: 'There were 3 people each on iOS and Android, but it felt like there were 2x as many people based on their deliverables.',
@@ -17,7 +16,7 @@ export default function AboutPage() {
       author: 'CEO, CEATI International',
     },
     {
-      text: 'AbsoluteAI’s AI-driven solutions have revolutionized our workflows, enabling us to scale faster than ever before.',
+      text: 'Absolute AI Consulting’s AI-driven solutions have revolutionized our workflows, enabling us to scale faster than ever before.',
       author: 'John Smith, VP of Innovation, IBM',
     },
   ];
@@ -38,7 +37,7 @@ export default function AboutPage() {
 
   return (
     <div key="about-page" className="min-h-screen bg-gradient-to-b from-gray-50 to-white font-sans">
-      {/* AbsoluteAI at a Glance */}
+      {/* Absolute AI Consulting at a Glance */}
       <section className="py-6">
         <div className="max-w-7xl mx-auto px-4">
           <motion.h2
@@ -48,7 +47,7 @@ export default function AboutPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            Absolute AI at a Glance
+            Absolute AI Consulting at a Glance
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-12 place-items-center">
             {[
@@ -229,7 +228,7 @@ export default function AboutPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
-                AbsoluteAI’s small, elite teams ship products faster, period. We minimize the time from ideas to outcomes — without sacrificing quality.
+                Absolute AI Consulting’s small, elite teams ship products faster, period. We minimize the time from ideas to outcomes without sacrificing quality.
               </motion.p>
               <motion.p
                 className="text-xl text-gray-600 mb-8"
@@ -260,7 +259,7 @@ export default function AboutPage() {
             >
               <Image
                 src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop"
-                alt="AbsoluteAI team working on a project"
+                alt="Absolute AI Consulting team working on a project"
                 width={672}
                 height={384}
                 className="w-full h-96 object-cover"
@@ -371,7 +370,7 @@ export default function AboutPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            Partner with Absolute AI Today
+            Partner with Absolute AI Consulting Today
           </motion.h2>
           <motion.p
             className="text-xl mb-2 max-w-2xl mx-auto"

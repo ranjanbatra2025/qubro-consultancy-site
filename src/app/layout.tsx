@@ -1,7 +1,9 @@
 import './globals.css';
 import { Inter } from 'next/font/google';
+import type { Metadata } from 'next';
 import ClientLayout from './ClientLayout';
 import { ReactNode } from 'react';
+import { getSiteUrl, siteConfig } from '../lib/site';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -9,28 +11,50 @@ const inter = Inter({
   display: 'swap',
 });
 
-export const metadata = {
-  title: {
-    default: 'Absolute AI - Excellence in GenAI, Agentic Systems, Data Engineering',
-    template: '%s | Absolute AI',
+export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
+  description: siteConfig.description,
+  keywords: siteConfig.keywords,
+  alternates: {
+    canonical: '/',
   },
-  description: 'Absolute AI delivers cutting-edge AI solutions, specializing in GenAI, agentic systems, and data engineering for global clients.',
-  keywords: ['AI', 'GenAI', 'agentic systems', 'data engineering', 'Absolute AI'],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
+  },
   openGraph: {
-    title: 'Absolute AI',
-    description: 'Innovative AI solutions for businesses worldwide.',
-    url: 'https://www.absoluteai.ca',
-    siteName: 'Absolute AI',
+    title: siteConfig.name,
+    description: siteConfig.description,
+    url: getSiteUrl('/'),
+    siteName: siteConfig.name,
     locale: 'en_US',
     type: 'website',
+    images: [
+      {
+        url: getSiteUrl('/logos/absolute%20logo.jpeg'),
+        width: 1200,
+        height: 630,
+        alt: siteConfig.name,
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
-    site: '@AbsoluteAI',
+    site: siteConfig.twitter,
+    creator: siteConfig.twitter,
   },
   icons: {
-    icon: '/favicon.jpeg', // Reference to the favicon in /public
+    icon: '/favicon.jpeg',
   },
+  authors: [{ name: siteConfig.name }],
+  category: 'AI Consulting',
 };
 
 interface Props {
@@ -38,11 +62,30 @@ interface Props {
 }
 
 export default function RootLayout({ children }: Props) {
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: siteConfig.name,
+    url: siteConfig.url,
+    logo: getSiteUrl('/logos/absolute%20logo.jpeg'),
+    email: siteConfig.email,
+    sameAs: [
+      'https://twitter.com/AbsoluteAI',
+      'https://linkedin.com/company/AbsoluteAI',
+      'https://github.com/AbsoluteAI',
+      'https://www.stripe.com',
+    ],
+    description: siteConfig.description,
+  };
+
   return (
     <html lang="en">
       <head>
-        {/* Optional: Manual favicon link for additional control */}
         <link rel="icon" href="/favicon.jpeg" type="image/jpeg" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
       </head>
       <body className={`${inter.className} bg-gradient-to-b from-gray-50 to-white text-gray-900 min-h-screen font-sans`}>
         <ClientLayout>
