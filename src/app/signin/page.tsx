@@ -1,8 +1,9 @@
-'use client';
+"use client";
+export const dynamic = 'force-dynamic';
 
 import { useEffect, useState, type FormEvent } from 'react';
 import Link from 'next/link';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { supabaseBrowserClient } from '../../lib/supabase/browser';
 import { upsertUserProfile } from '../../lib/auth';
@@ -11,8 +12,13 @@ type Mode = 'signin' | 'signup';
 
 export default function SignInPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const nextPath = searchParams.get('next') ?? '/';
+  const [nextPath, setNextPath] = useState('/');
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const sp = new URLSearchParams(window.location.search);
+    setNextPath(sp.get('next') ?? '/');
+  }, []);
 
   const [mode, setMode] = useState<Mode>('signin');
   const [email, setEmail] = useState('');
@@ -31,7 +37,7 @@ export default function SignInPage() {
 
     let mounted = true;
 
-    supabaseBrowserClient.auth.getSession().then(async ({ data }) => {
+    void supabaseBrowserClient.auth.getSession().then(async ({ data }) => {
       if (!mounted) {
         return;
       }
@@ -203,7 +209,7 @@ export default function SignInPage() {
 
               <motion.button
                 type="button"
-                onClick={handleGoogleSignIn}
+                onClick={() => void handleGoogleSignIn()}
                 disabled={loading || !isConfigured}
                 className="flex w-full items-center justify-center gap-3 rounded-2xl border border-slate-300 bg-white px-5 py-4 text-sm font-semibold text-slate-900 transition hover:border-slate-400 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-60"
                 whileHover={{ y: -1 }}
@@ -221,7 +227,7 @@ export default function SignInPage() {
                 <span className="h-px flex-1 bg-slate-200" />
               </div>
 
-              <form className="space-y-4" onSubmit={handlePasswordAuth}>
+              <form className="space-y-4" onSubmit={(e) => void handlePasswordAuth(e)}>
                 {mode === 'signup' && (
                   <label className="block text-sm font-medium text-slate-700">
                     Full name

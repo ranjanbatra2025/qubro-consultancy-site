@@ -39,14 +39,27 @@ export default function StripePortalButton({ className = '', children }: StripeP
         body: JSON.stringify({ userId: user.id }),
       });
 
-      const result = await response.json();
+      const result: unknown = await response.json();
 
-      if (!response.ok) {
-        throw new Error(result.message || 'Unable to open billing portal.');
+      function isRecord(v: unknown): v is Record<string, unknown> {
+        return typeof v === 'object' && v !== null;
       }
 
-      if (result.url) {
-        window.location.href = result.url;
+      if (!response.ok) {
+        if (isRecord(result)) {
+          const maybeMessage = result['message'];
+          if (typeof maybeMessage === 'string') {
+            throw new Error(maybeMessage);
+          }
+        }
+        throw new Error('Unable to open billing portal.');
+      }
+
+      if (isRecord(result)) {
+        const maybeUrl = result['url'];
+        if (typeof maybeUrl === 'string') {
+          window.location.href = maybeUrl;
+        }
       }
     } catch (error) {
       console.error(error);
@@ -58,7 +71,7 @@ export default function StripePortalButton({ className = '', children }: StripeP
   return (
     <motion.button
       type="button"
-      onClick={handleClick}
+      onClick={() => void handleClick()}
       disabled={loading}
       className={className}
       whileHover={{ y: -1 }}

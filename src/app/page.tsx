@@ -1,24 +1,9 @@
 'use client';
-
-import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
-const testimonials = [
-  {
-    quote: 'Absolute AI’s solutions doubled our efficiency with real-time insights.',
-    author: 'Jane Doe, CTO, TechStartup',
-  },
-  {
-    quote: 'Their AI agents streamlined our workflows, saving countless hours.',
-    author: 'Mark Wilson, COO, FinCorp',
-  },
-  {
-    quote: 'Absolute AI transformed our marketing ROI with cutting-edge AI.',
-    author: 'Emily Chen, CMO, BrandX',
-  },
-];
+
 
 const logos = [
   { src: '/logos/logo.webp', alt: 'SEO Harbour' },
@@ -67,15 +52,7 @@ const services = [
 ];
 
 export default function Home() {
-  const [currentTestimonial, setCurrentTestimonial] = useState(0);
-
-  useEffect(() => {
-    const testimonialInterval = setInterval(() => {
-      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
-    }, 7000);
-
-    return () => clearInterval(testimonialInterval);
-  }, []);
+  // Testimonial rotation removed (not used in current markup)
 
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900">
@@ -84,7 +61,7 @@ export default function Home() {
           <div className="relative mb-8 h-48 w-64 overflow-hidden rounded-xl bg-[#030310] shadow-2xl md:h-56 md:w-80">
             <Image
               src="/logos/absolute%20logo.jpeg"
-              alt="Absolute AI Consulting Logo"
+              alt="Absolute AI Logo"
               fill
               className="object-contain"
               priority
@@ -102,7 +79,7 @@ export default function Home() {
               Pioneering AI for Your Success
             </h2>
             <p className="mx-auto max-w-4xl text-lg leading-relaxed text-gray-600 md:text-xl">
-              Absolute AI Consulting, based in Halifax, NS, specializes in helping organizations and startups leverage
+              Absolute AI, based in Halifax, NS, specializes in helping organizations and startups leverage
               artificial intelligence for enhanced efficiency, process optimization, cost reduction, and business diversification.
             </p>
           </div>

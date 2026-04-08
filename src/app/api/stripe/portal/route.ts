@@ -22,8 +22,12 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ message: 'Stripe is not configured yet.' }, { status: 500 });
     }
 
-    const body = await request.json();
-    const { userId } = body as { userId?: string };
+    const body: unknown = await request.json();
+    if (typeof body !== 'object' || body === null) {
+      return NextResponse.json({ message: 'Invalid request body.' }, { status: 400 });
+    }
+    const b = body as Record<string, unknown>;
+    const userId = typeof b.userId === 'string' ? b.userId : undefined;
 
     if (!userId) {
       return NextResponse.json({ message: 'User is required.' }, { status: 400 });
@@ -39,14 +43,17 @@ export async function POST(request: NextRequest) {
       .eq('id', userId)
       .maybeSingle();
 
-    if (!profile?.stripe_customer_id) {
+    const profileRecord = profile as Record<string, unknown> | null;
+    const stripeCustomerId = profileRecord && typeof profileRecord['stripe_customer_id'] === 'string' ? profileRecord['stripe_customer_id'] : null;
+
+    if (!stripeCustomerId) {
       return NextResponse.json({ message: 'No Stripe customer found for this account.' }, { status: 400 });
     }
 
     const returnUrl = process.env.NEXT_PUBLIC_STRIPE_PORTAL_RETURN_URL ?? getSiteUrl('/pricing');
 
     const session = await stripe.billingPortal.sessions.create({
-      customer: profile.stripe_customer_id,
+      customer: stripeCustomerId,
       return_url: returnUrl,
     });
 

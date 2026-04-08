@@ -14,7 +14,7 @@ export default function TermsPage() {
       <h2 className="text-xl font-semibold mt-8 mb-2">Limitation of Liability</h2>
       <p className="mb-4">Absolute AI Consulting is not liable for damages arising from use of this website.</p>
       <h2 className="text-xl font-semibold mt-8 mb-2">Payments</h2>
-      <p className="mb-4">Payments are processed securely by Stripe and are subject to Stripe's terms and your selected service agreement.</p>
+      <p className="mb-4">Payments are processed securely by Stripe and are subject to Stripe&apos;s terms and your selected service agreement.</p>
       <div className="mt-12 text-gray-600 text-xs">Last updated: June 2025</div>
     </section>
   );

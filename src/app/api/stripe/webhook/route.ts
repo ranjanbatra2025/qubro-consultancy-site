@@ -47,7 +47,16 @@ async function saveStripePayment(session: Stripe.Checkout.Session) {
     if (session.subscription) {
       const subscription = await stripe?.subscriptions.retrieve(session.subscription as string);
 
-      if (subscription) {
+            if (subscription) {
+        const priceItem = subscription.items.data[0]?.price;
+        let productId: string | null = null;
+        const prod = priceItem?.product;
+        if (typeof prod === 'string') {
+          productId = prod;
+        } else if (prod && typeof prod === 'object') {
+          const maybeId = (prod as unknown as Record<string, unknown>)['id'];
+          if (typeof maybeId === 'string') productId = maybeId;
+        }
         await serviceClient.from('subscriptions').upsert(
           {
             stripe_subscription_id: subscription.id,
@@ -55,10 +64,8 @@ async function saveStripePayment(session: Stripe.Checkout.Session) {
             supabase_user_id: userId,
             email: session.customer_details?.email ?? session.customer_email ?? null,
             status: subscription.status,
-            price_id: subscription.items.data[0]?.price.id ?? null,
-            product_id: typeof subscription.items.data[0]?.price.product === 'string'
-              ? subscription.items.data[0]?.price.product
-              : subscription.items.data[0]?.price.product?.id ?? null,
+            price_id: priceItem?.id ?? null,
+            product_id: productId,
             current_period_start: new Date(subscription.current_period_start * 1000).toISOString(),
             current_period_end: new Date(subscription.current_period_end * 1000).toISOString(),
             cancel_at_period_end: subscription.cancel_at_period_end,
@@ -93,6 +100,14 @@ async function upsertSubscription(subscription: Stripe.Subscription) {
 
   const customerId = typeof subscription.customer === 'string' ? subscription.customer : subscription.customer?.id ?? null;
   const price = subscription.items.data[0]?.price;
+  let productId: string | null = null;
+  const prod = price?.product;
+  if (typeof prod === 'string') {
+    productId = prod;
+  } else if (prod && typeof prod === 'object') {
+    const maybeId = (prod as unknown as Record<string, unknown>)['id'];
+    if (typeof maybeId === 'string') productId = maybeId;
+  }
   const userId = subscription.metadata?.supabase_user_id || null;
 
   await serviceClient.from('subscriptions').upsert(
@@ -100,10 +115,9 @@ async function upsertSubscription(subscription: Stripe.Subscription) {
       stripe_subscription_id: subscription.id,
       stripe_customer_id: customerId,
       supabase_user_id: userId,
-      email: subscription.customer_email ?? null,
       status: subscription.status,
       price_id: price?.id ?? null,
-      product_id: typeof price?.product === 'string' ? price.product : price?.product?.id ?? null,
+      product_id: productId,
       current_period_start: new Date(subscription.current_period_start * 1000).toISOString(),
       current_period_end: new Date(subscription.current_period_end * 1000).toISOString(),
       cancel_at_period_end: subscription.cancel_at_period_end,
@@ -166,21 +180,21 @@ export async function POST(request: NextRequest) {
 
   try {
     if (event.type === 'checkout.session.completed') {
-      await saveStripePayment(event.data.object as Stripe.Checkout.Session);
+      await saveStripePayment(event.data.object);
     }
 
     if (event.type === 'customer.subscription.created' || event.type === 'customer.subscription.updated') {
-      await upsertSubscription(event.data.object as Stripe.Subscription);
+      await upsertSubscription(event.data.object);
     }
 
     if (event.type === 'customer.subscription.deleted') {
-      const subscription = event.data.object as Stripe.Subscription;
+      const subscription = event.data.object;
 
       await upsertSubscription(subscription);
     }
 
     if (event.type === 'invoice.payment_succeeded') {
-      await saveInvoicePayment(event.data.object as Stripe.Invoice);
+      await saveInvoicePayment(event.data.object);
     }
 
     return NextResponse.json({ received: true });

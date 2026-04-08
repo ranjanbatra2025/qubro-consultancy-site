@@ -1,32 +1,10 @@
 'use client';
-import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 export default function AboutPage() {
-  const [currentQuote, setCurrentQuote] = useState(0);
-  const quotes = [
-    {
-      text: 'There were 3 people each on iOS and Android, but it felt like there were 2x as many people based on their deliverables.',
-      author: 'Product Owner, Leading North American Bank',
-    },
-    {
-      text: 'Extremely impressive that we were able to get so many value-add features out the door on time. It’s clear we made the right choice in partners.',
-      author: 'CEO, CEATI International',
-    },
-    {
-      text: 'Absolute AI Consulting’s AI-driven solutions have revolutionized our workflows, enabling us to scale faster than ever before.',
-      author: 'John Smith, VP of Innovation, IBM',
-    },
-  ];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentQuote((prev) => (prev + 1) % quotes.length);
-    }, 8000);
-    return () => clearInterval(interval);
-  }, [quotes.length]);
+  // Quote rotation removed (not used in current markup)
 
   const logos = [
     { src: '/logos/logo.webp', alt: 'SEO Harbour' },

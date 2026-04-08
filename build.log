@@ -1,0 +1,22 @@
+
+> nextjs-shadcn@0.1.0 build
+> next build
+
+   Γû▓ Next.js 15.3.4
+
+   Creating an optimized production build ...
+ Γ£ô Compiled successfully in 10.0s
+   Linting and checking validity of types ...
+Failed to compile.
+
+./src/lib/stripe/server.ts:7:7
+Type error: Type '"2025-03-31.basil"' is not assignable to type '"2024-06-20"'.
+
+   5 | export const stripe = stripeSecretKey
+   6 |   ? new Stripe(stripeSecretKey, {
+>  7 |       apiVersion: '2025-03-31.basil',
+     |       ^
+   8 |     })
+   9 |   : null;
+  10 |
+Next.js build worker exited with code: 1 and signal: null

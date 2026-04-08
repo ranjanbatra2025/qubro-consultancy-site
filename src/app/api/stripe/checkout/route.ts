@@ -23,12 +23,14 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ message: 'Stripe is not configured yet.' }, { status: 500 });
     }
 
-    const body = await request.json();
-    const { planId, userId, email } = body as {
-      planId?: string;
-      userId?: string;
-      email?: string;
-    };
+    const body: unknown = await request.json();
+    if (typeof body !== 'object' || body === null) {
+      return NextResponse.json({ message: 'Invalid request body.' }, { status: 400 });
+    }
+    const b = body as Record<string, unknown>;
+    const planId = typeof b.planId === 'string' ? b.planId : undefined;
+    const userId = typeof b.userId === 'string' ? b.userId : undefined;
+    const email = typeof b.email === 'string' ? b.email : undefined;
 
     if (!planId) {
       return NextResponse.json({ message: 'Plan is required.' }, { status: 400 });
@@ -57,7 +59,12 @@ export async function POST(request: NextRequest) {
         console.error('Profile lookup failed:', profileError);
       }
 
-      customerId = profile?.stripe_customer_id ?? null;
+      const profileRecord = profile as Record<string, unknown> | null;
+      if (profileRecord && typeof profileRecord['stripe_customer_id'] === 'string') {
+        customerId = profileRecord['stripe_customer_id'];
+      } else {
+        customerId = null;
+      }
     }
 
     const session = await stripe.checkout.sessions.create({

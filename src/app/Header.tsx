@@ -45,14 +45,14 @@ export default function Header() {
           <Link href="/" className="flex items-center gap-3 focus:outline-none">
             <Image
               src="/logos/absolute%20logo.jpeg"
-              alt="Absolute AI Consulting Logo"
+              alt="Absolute AI Logo"
               width={64}
               height={64}
               className="h-14 w-14 rounded-xl object-contain shadow-sm"
               priority
             />
             <span className="text-xl font-bold text-gray-900 tracking-tight sm:text-2xl">
-              Absolute AI Consulting
+              Absolute AI
             </span>
           </Link>
 

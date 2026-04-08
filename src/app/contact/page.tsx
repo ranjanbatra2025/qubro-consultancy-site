@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import StripeCheckoutButton from '../../components/StripeCheckoutButton';
 
-interface FormData {
+interface ContactInputs {
   name?: string;
   email: string;
   message?: string;
@@ -28,10 +28,13 @@ export default function ContactPage() {
     if (!form) return;
 
     const formData = new FormData(form);
-    const data: FormData = {
-      name: formData.get('name') as string,
-      email: formData.get('email') as string,
-      message: formData.get('message') as string,
+    const rawName = formData.get('name');
+    const rawEmail = formData.get('email');
+    const rawMessage = formData.get('message');
+    const data: ContactInputs = {
+      name: typeof rawName === 'string' ? rawName : undefined,
+      email: typeof rawEmail === 'string' ? rawEmail : '',
+      message: typeof rawMessage === 'string' ? rawMessage : undefined,
     };
 
     // Honeypot spam check
@@ -60,14 +63,24 @@ export default function ContactPage() {
         body: JSON.stringify(data),
       });
 
-      const result = await response.json();
+      const result: unknown = await response.json();
+
       if (response.ok) {
         setStatus('Thank you for your interest. Team Absolute AI Consulting will contact you soon.');
         form.reset();
       } else {
-        setStatus(result.message || 'Sorry, there was a problem sending your message. Please try again or email us directly.');
+        if (typeof result === 'object' && result !== null) {
+          const maybeMessage = (result as Record<string, unknown>)['message'];
+          if (typeof maybeMessage === 'string') {
+            setStatus(maybeMessage);
+          } else {
+            setStatus('Sorry, there was a problem sending your message. Please try again or email us directly.');
+          }
+        } else {
+          setStatus('Sorry, there was a problem sending your message. Please try again or email us directly.');
+        }
       }
-    } catch (error) {
+    } catch {
       setStatus('Sorry, there was a problem sending your message. Please try again or email us directly.');
     } finally {
       setSubmitting(false);
@@ -83,8 +96,9 @@ export default function ContactPage() {
     if (!form) return;
 
     const formData = new FormData(form);
-    const data: FormData = {
-      email: formData.get('email') as string,
+    const rawEmail = formData.get('email');
+    const data: ContactInputs = {
+      email: typeof rawEmail === 'string' ? rawEmail : '',
     };
 
     // Honeypot spam check
@@ -108,14 +122,24 @@ export default function ContactPage() {
         body: JSON.stringify(data),
       });
 
-      const result = await response.json();
+      const result: unknown = await response.json();
+
       if (response.ok) {
         setNewsletterStatus("Thank you! You're now subscribed to our newsletter.");
         form.reset();
       } else {
-        setNewsletterStatus(result.message || 'Sorry, there was a problem subscribing. Please try again.');
+        if (typeof result === 'object' && result !== null) {
+          const maybeMessage = (result as Record<string, unknown>)['message'];
+          if (typeof maybeMessage === 'string') {
+            setNewsletterStatus(maybeMessage);
+          } else {
+            setNewsletterStatus('Sorry, there was a problem subscribing. Please try again.');
+          }
+        } else {
+          setNewsletterStatus('Sorry, there was a problem subscribing. Please try again.');
+        }
       }
-    } catch (error) {
+    } catch {
       setNewsletterStatus('Sorry, there was a problem subscribing. Please try again.');
     } finally {
       setNewsletterSubmitting(false);
@@ -138,7 +162,7 @@ export default function ContactPage() {
             <form
               ref={formRef}
               className="space-y-4"
-              onSubmit={handleSubmit}
+              onSubmit={(e) => void handleSubmit(e)}
               autoComplete="on"
             >
               <label className="block relative">
@@ -329,7 +353,7 @@ export default function ContactPage() {
             <form
               ref={newsletterFormRef}
               className="flex flex-col sm:flex-row gap-3"
-              onSubmit={handleNewsletterSubmit}
+              onSubmit={(e) => void handleNewsletterSubmit(e)}
               autoComplete="on"
             >
               <div className="relative flex-1">

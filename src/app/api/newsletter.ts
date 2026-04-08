@@ -8,7 +8,14 @@ const subscribersFile = path.join(process.cwd(), 'data', 'subscribers.json');
 
 export async function POST(request: NextRequest) {
   try {
-    const { email } = await request.json();
+    const body: unknown = await request.json();
+
+    if (typeof body !== 'object' || body === null) {
+      return NextResponse.json({ message: 'Invalid request body' }, { status: 400 });
+    }
+
+    const b = body as Record<string, unknown>;
+    const email = typeof b.email === 'string' ? b.email : null;
 
     // Server-side validation
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -19,13 +26,13 @@ export async function POST(request: NextRequest) {
     let subscribers: string[] = [];
     try {
       const data = await fs.readFile(subscribersFile, 'utf-8');
-      subscribers = JSON.parse(data);
-    } catch (error) {
+      subscribers = JSON.parse(data) as string[];
+    } catch {
       // File doesn't exist yet, create it
       await fs.mkdir(path.dirname(subscribersFile), { recursive: true });
     }
 
-    if (subscribers.includes(email)) {
+    if (email && subscribers.includes(email)) {
       return NextResponse.json({ message: 'Email already subscribed' }, { status: 400 });
     }
 

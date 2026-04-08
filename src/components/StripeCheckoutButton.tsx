@@ -47,14 +47,27 @@ export default function StripeCheckoutButton({ planId, disabled = false, classNa
         }),
       });
 
-      const result = await response.json();
+      const result: unknown = await response.json();
 
-      if (!response.ok) {
-        throw new Error(result.message || 'Unable to start checkout.');
+      function isRecord(v: unknown): v is Record<string, unknown> {
+        return typeof v === 'object' && v !== null;
       }
 
-      if (result.url) {
-        window.location.href = result.url;
+      if (!response.ok) {
+        if (isRecord(result)) {
+          const maybeMessage = result['message'];
+          if (typeof maybeMessage === 'string') {
+            throw new Error(maybeMessage);
+          }
+        }
+        throw new Error('Unable to start checkout.');
+      }
+
+      if (isRecord(result)) {
+        const maybeUrl = result['url'];
+        if (typeof maybeUrl === 'string') {
+          window.location.href = maybeUrl;
+        }
       }
     } catch (error) {
       console.error(error);
@@ -66,7 +79,7 @@ export default function StripeCheckoutButton({ planId, disabled = false, classNa
   return (
     <motion.button
       type="button"
-      onClick={handleClick}
+      onClick={() => void handleClick()}
       disabled={disabled || loading}
       className={className}
       whileHover={{ y: -1 }}
